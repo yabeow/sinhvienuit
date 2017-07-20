@@ -1,5 +1,4 @@
 export const ADD_COURSE = 'ADD_COURSE';
-export const SET_COURSE_ROOM = 'SET_COURSE_ROOM';
 export const REMOVE_COURSE = 'REMOVE_COURSE';
 export const REMOVE_ALL_COURSES = 'REMOVE_ALL_COURSES';
 export const GET_COURSE = 'GET_COURSE';
@@ -25,13 +24,6 @@ export function removeCourse(code) {
 export function removeAllCourses() {
     return {
         type: REMOVE_ALL_COURSES
-    }
-}
-//Set dữ liệu phòng cho môn học.
-export function setCourseRoom(course) {
-    return {
-        type: SET_COURSE_ROOM,
-        course: course
     }
 }
 //Hàm fetch dữ liệu môn học.
