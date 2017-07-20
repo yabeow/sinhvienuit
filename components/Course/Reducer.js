@@ -21,16 +21,6 @@ export class CourseListReducer extends CourseList {
         listCourses = this.set('listCourses', listCourses);
         return listCourses;
     }
-    //Set giá trị phòng cho một môn học.
-    SET_COURSE_ROOM({ course }) {
-        let listCourses = this.listCourses.map(function(item) {
-            if (item.getCode() === course.getCode()) {
-                return item.set('room', course.room);
-            }
-            return item;
-        });
-        return this.set('listCourses', listCourses);
-    }
     //Xóa một môn học.
     REMOVE_COURSE({ code }) {
         return this.listCourses.filter(function(item) {

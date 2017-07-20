@@ -1,117 +1,67 @@
-const $ = require('cheerio-without-node-native');
 import { Course } from './Object';
+import { betweenTwoSubString } from '../../utils';
 
 //Lấy thông tin môn học từ: https://daa.uit.edu.vn/ajax-block/tkb/ajax
 export function parseCourseFromHtml(data) {
-    data = $.load(data);
     let returnArray = [];
-    data('tr').each(function () {
-        let children = $(this).children();
+    let regexRow = /<tr class=([\s\S]*?)(?=<\/tr>)/gm;
+    let row;
+    while ((row = regexRow.exec(data)) !== null) {
+        let regexColumn = /<td>([\s\S]*?)(?=<\/td>)/gm;
+        let matchArray = [];
+        let column;
+        while ((column = regexColumn.exec(row[1])) !== null) {
+            matchArray.push(column[1]);
+        }
         //Tên môn học.
-        let name = "";
-        if (typeof children[1].children[0] !== 'undefined') {
-            name = children[1].children[0].data.trim();
-        }
+        let name = matchArray[1].trim();
         //Mã môn học.
-        let code = "";
-        if (typeof children[2].children[0] !== 'undefined') {
-            code = children[2].children[0].data.trim();
-        }
+        let code = matchArray[2].trim();
         //Ngày học trong tuần.
-        let dayOfWeek = 0;
-        if (typeof children[3].children[0] !== 'undefined') {
-            dayOfWeek = parseInt(children[3].children[0].data.trim());
-        }
-        //Giảng viên.
-        let teacher = "";
-        if (typeof children[6].children[0] !== 'undefined') {
-            teacher = children[6].children[0].data.trim();
-        }
+        let dayOfWeek = matchArray[3].trim();
         //Tiết bắt đầu và tiết kết thúc.
+        let lesson = matchArray[4];
         let lessonStart = 0;
         let lessonEnd = 0;
-        if (typeof children[4].children[0] !== 'undefined') {
-            let lesson = children[4].children[0].data.trim();
-            lessonEnd = parseInt(lesson % 10);
-            if (lessonEnd === 0) lessonEnd = 10;
-            lessonStart = lesson / 10;
-            while (lessonStart > 10) {
-                lessonStart = lessonStart / 10;
-            }
-            lessonStart = parseInt(lessonStart);
+        lessonEnd = parseInt(lesson % 10);
+        if (lessonEnd === 0) lessonEnd = 10;
+        lessonStart = lesson / 10;
+        while (lessonStart > 10) {
+            lessonStart = lessonStart / 10;
         }
-        //Thời gian bắt đầu và thời gian kết thúc.
-        let timeRangeStart = 0;
-        let timeRangeEnd = 0;
-        if (typeof children[7].children[0] !== 'undefined') {
-            let timeRange = children[7].children[0].data.trim();
-            timeRange = timeRange.split('-');
-            let temp = timeRange[0].trim();
-            temp = temp.split('/');
-            timeRangeStart = new Date("20" + temp[2], temp[1] - 1, temp[0]);
-            temp = timeRange[1].trim();
-            temp = temp.split('/');
-            timeRangeEnd = new Date("20" + temp[2], temp[1] - 1, temp[0]);
-        }
+        lessonStart = parseInt(lessonStart);
+        //Giảng viên.
+        let teacher = matchArray[6].trim();
+        //Phòng học.
+        let temp = matchArray[7].trim();
+        let room = betweenTwoSubString(temp, 'P', '<br />');
+        //Ngày bắt đầu.
+        let startTime = betweenTwoSubString(temp, 'BĐ:', '<br />').trim();
+        startTime = startTime.split('/');
+        startTime = new Date("20" + startTime[2], startTime[1] - 1, startTime[0]);
+        //Ngày kết thúc.
+        let endTime = betweenTwoSubString(temp + '---', 'KT:', '---').trim();
+        endTime = endTime.split('/');
+        endTime = new Date("20" + endTime[2], endTime[1] - 1, endTime[0]);
         if ((name !== "") && (typeof code !== 'undefined') && (name !== "Môn học")) {
             let course = {
                 code: code,
                 name: name,
                 dayOfWeek: dayOfWeek,
+                room: room,
                 teacher: teacher,
                 lessonStart: lessonStart,
                 lessonEnd: lessonEnd,
-                startTime: timeRangeStart,
-                endTime: timeRangeEnd,
+                startTime: startTime,
+                endTime: endTime,
             };
             course = new Course(course);
             returnArray.push(course);
         }
-    });
+    }
     return returnArray;
 }
 
-//Lấy thông tin phòng của các lớp học từ: https://daa.uit.edu.vn/sinhvien/thoikhoabieu
-export function parseCoursesRoomFromHtml(data) {
-    let returnArray = [];
-    data = $.load(data);
-    data = data(".rowspan_data");
-    if (typeof data === 'undefined') {
-        return false;
-    }
-    data.each(function () {
-        let children = $(this).children();
-        if ((typeof children[0].children[0] !== 'undefined') && (typeof children[4] !== 'undefined')) {
-            if (typeof children[4].next !== 'undefined') {
-                let code = children[0].children[0].data;
-                code = code.split('-');
-                code = code[0].trim();
-                if (typeof code !== 'undefined') {
-                    let i = 0;
-                    let room = false;
-                    while (!room) {
-                        room = children[i].next.data;
-                        let Reg = new RegExp("P [ABCDEFGH]([0-9.]*)");
-                        room = Reg.exec(room);
-                        i++;
-                        if (i > children.length) {
-                            break;
-                        }
-                    }
-                    room = room[0].split(' ');
-                    room = room[1];
-                    let course = {
-                        code: code,
-                        room: room
-                    };
-                    course = new Course(course);
-                    returnArray.push(course);
-                }
-            }
-        }
-    });
-    return returnArray;
-}
 //Hàm trả về giờ học theo tiết học.
 export function getCourseTimeByLesson(lessonNumber, string = false) {
     let time = new Date();
