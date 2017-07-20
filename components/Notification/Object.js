@@ -1,6 +1,9 @@
 const { Record, List } = require('immutable');
 import { getTimeFormat } from '../../utils';
-
+import {
+    DAA_COURSE_NOTIFICATION_LINK_TEMPLATE,
+    OEP_COURSE_NOTIFICATION_LINK_TEMPLATE
+} from '../../config/config';
 /*
     source: Nguồn thông báo. VD: DAA, OEP,...
     id: Id thông báo.
@@ -48,6 +51,7 @@ export class GeneralNotification extends InitGeneralNotification {
     source: Nguồn thông báo.
     id: Mã thông báo.
     code: Mã môn học.
+    title: Tiêu đề thông báo.
     startTime: Thời gian bắt đầu.
     endTime: Thời gian kết thúc.
     room: Phòng học.
@@ -58,6 +62,7 @@ const InitCourseNotification = Record({
     source: false,
     id: false,
     code: false,
+    title: false,
     startTime: false,
     endTime: false,
     room: false,
@@ -79,6 +84,9 @@ export class CourseNotification extends InitCourseNotification {
     getCode() {
         return this.code;
     }
+    getTitle() {
+        return this.title;
+    }
     getStartTime(format = false) {
         return getTimeFormat(this.startTime, format);
     }
@@ -90,6 +98,14 @@ export class CourseNotification extends InitCourseNotification {
     }
     getCreateTime(format = false) {
         return getTimeFormat(this.createTime, format);
+    }
+    getLink() {
+        if (this.source === "DAA") {
+            return DAA_COURSE_NOTIFICATION_LINK_TEMPLATE + this.id;
+        }
+        if (this.source === "OEP") {
+            return OEP_COURSE_NOTIFICATION_LINK_TEMPLATE + this.id;
+        }
     }
 }
 
@@ -110,13 +126,30 @@ export default class ListNotifications extends InitListNotification {
         super(data);
     }
     getAllNotifications() {
-        return this.listGeneralNotifications.merge(this.listCourseNotifications);
+        return this.listGeneralNotifications.merge(this.listCourseNotifications).toArray();
     }
     getGeneralNotifications() {
-        return this.listGeneralNotifications;
+        return this.listGeneralNotifications.toArray();
     }
-    getCourseNotifications() {
+    getCourseNotifications(code = false) {
+        if (code) {
+            return this.listCourseNotifications.filter(function(item) {
+               return item.getCode() === code;
+            }).toArray();
+        }
         return this.listCourseNotifications;
+    }
+    getNumberOfCourseNotificationsList() {
+        let returnList = {};
+        this.listCourseNotifications.map(function(item) {
+           if (returnList.hasOwnProperty(item.getCode())) {
+               returnList[item.getCode()]++;
+           }
+           else {
+               returnList[item.getCode()] = 1;
+           }
+        });
+        return returnList;
     }
     getLoading() {
         return this.loading;

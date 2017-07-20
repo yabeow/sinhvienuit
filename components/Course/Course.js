@@ -16,6 +16,8 @@ class Course extends React.Component {
         return (
             <ListScreen
                 courses = { this.props.courses.getAllCourses().toArray() }
+                numberOfCourseNotificationsList = { this.props.numberOfCourseNotificationsList }
+                numberOfDeadlinesList = {{ }}
                 refreshing = { this.props.courses.getLoading() }
                 onRefresh = { this.props.getCourse }
                 navigation = { navigation }
