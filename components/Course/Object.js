@@ -106,7 +106,7 @@ export default class CourseList extends InitCourseList {
         super(data);
     }
     getAllCourses() {
-        return this.listCourses;
+        return this.listCourses.toArray();
     }
     getNumberOfCourses() {
         return this.listCourses.size;

@@ -8,7 +8,7 @@ class Item extends React.Component {
                 <CardItem
                     button
                     onPress={
-                        () => this.props.navigation.navigate('CourseDetails', {course: this.props.course})
+                        () => this.props.navigation.navigate('CourseDetails', { course: this.props.course })
                     }
                 >
                     <Text>{ this.props.course.getName() }</Text>
