@@ -1,26 +1,10 @@
 import React from 'react';
-import { Content } from 'native-base';
+import { StackNavigator } from 'react-navigation';
 import ListScreen from './compoments/List';
-import styles from '../../Style';
+import DetailsScreen from './compoments/Details/indexNavigation';
 
-class Course extends React.Component {
-    static navigationOptions = {
-        title: 'Môn học',
-        ...styles.Header
-    };
-    render() {
-        let navigation = false;
-        if (typeof this.props.navigation !== 'undefined') {
-            navigation = this.props.navigation;
-        }
-        return (
-            <ListScreen
-                courses = { this.props.courses.getAllCourses().toArray() }
-                refreshing = { this.props.courses.getLoading() }
-                onRefresh = { this.props.getCourse }
-                navigation = { navigation }
-            />
-        )
-    }
-}
-export default Course;
+const CourseNavigator = StackNavigator({
+    CourseList: { screen: ListScreen },
+    CourseDetails: { screen: DetailsScreen }
+});
+export default CourseNavigator;
