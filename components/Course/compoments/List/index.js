@@ -7,7 +7,9 @@ import { getCourse } from '../../Action';
 function mapStateToProps(state) {
     return {
         courses: state.courses.getAllCourses(),
-        refreshing: state.courses.loading
+        refreshing: state.courses.loading,
+        numberOfCourseNotificationsList: state.notifications.getNumberOfCourseNotificationsList(),
+        numberOfDeadlinesList: {},
     }
 }
 

@@ -138,6 +138,6 @@ function* getCourseOepNotification(action) {
 
 export default function* () {
     yield takeLatest(GET_NOTIFICATION, getNotification);
-    yield takeLatest(GET_GENERAL_NOTIFICATION, getGeneralNotification());
-    yield takeLatest(GET_COURSE_NOTIFICATION, getCourseNotification());
+    yield takeLatest(GET_GENERAL_NOTIFICATION, getGeneralNotification);
+    yield takeLatest(GET_COURSE_NOTIFICATION, getCourseNotification);
 }

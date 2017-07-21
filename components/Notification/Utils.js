@@ -116,7 +116,7 @@ export function parseDaaCourseNotificationFromHtml(html) {
             type: type,
             source: "DAA",
             id: id,
-            code: "EN004.H31",
+            code: code,
             title: title,
             startTime: startTime,
             endTime: endTime,
@@ -124,7 +124,6 @@ export function parseDaaCourseNotificationFromHtml(html) {
             createTime: createTime
         });
         returnArray.push(notification);
-        break;
     }
     return returnArray;
 }
