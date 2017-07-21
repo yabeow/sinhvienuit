@@ -7,7 +7,7 @@ class Notification extends React.Component {
         super(props);
     }
     render() {
-        this.notification = this.props.notifications.getGeneralNotifications().toArray();
+        this.notification = this.props.notifications.getAllNotifications();
         //Sắp xếp theo thứ tự thời gian đăng giảm dần.
         this.notification.sort(function(a, b) {
             let timeA, timeB;

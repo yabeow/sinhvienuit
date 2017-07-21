@@ -27,7 +27,14 @@ class List extends React.Component {
                     refreshing={ this.props.refreshing }
                     onRefresh={ () => this.props.onRefresh() }
                     keyExtractor={ course => course.getCode() + course.getDayOfWeek() + course.getLessonStart()  }
-                    renderItem={ ({item}) => <ListItem course={ item } navigation={ this.props.navigation }/> }
+                    renderItem={ ({item}) => 
+                        <ListItem
+                            course={ item }
+                            navigation={ this.props.navigation }
+                            numberNotifications={ this.props.numberOfCourseNotificationsList[item.getCode()] }
+                            numberDeadlines={ this.props.numberOfDeadlinesList[item.getCode()] }
+                        /> 
+                    }
                 />
             </Container>
         )
@@ -35,6 +42,9 @@ class List extends React.Component {
 }
 List.propsType = {
     courses: PropTypes.array.isRequired,
+    listOfDeadLines: PropTypes.object,
+    numberOfCourseNotificationsList: PropTypes.object,
+    numberOfDeadlinesList: PropTypes.object,
     refreshing: PropTypes.bool,
     onRefresh: PropTypes.func
 };

@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { CardItem, Right, Text, Card, Icon } from 'native-base';
+import CountNotification from './CountNotification';
 
 class Item extends React.Component {
     render() {
@@ -31,11 +32,14 @@ class Item extends React.Component {
                     <Icon name="home"/>
                     <Text>Phòng học: { this.props.course.getRoom() }</Text>
                 </CardItem>
+                <CountNotification numberNotifications = { this.props.numberNotifications } numberDeadlines = { this.props.numberDeadlines }/>
             </Card>
         )
     }
 }
 Item.propTypes = {
-    course: PropTypes.object.isRequired
+    course: PropTypes.object.isRequired,
+    numberNotifications: PropTypes.number,
+    numberDeadlines: PropTypes.number
 };
 export default Item;

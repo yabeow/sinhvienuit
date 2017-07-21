@@ -3,6 +3,8 @@ export const ADD_GENERAL_NOTIFICATION = 'ADD_GENERAL_NOTIFICATION';
 export const ADD_COURSE_NOTIFICATION = 'ADD_COURSE_NOTIFICATION';
 export const REMOVE_NOTIFICATION = 'REMOVE_NOTIFICATION';
 export const GET_NOTIFICATION = 'GET_NOTIFICATION';
+export const GET_GENERAL_NOTIFICATION = 'GET_GENERAL_NOTIFICATION';
+export const GET_COURSE_NOTIFICATION = 'GET_COURSE_NOTIFICATION';
 export const GET_NOTIFICATION_RESULT = 'GET_NOTIFICATION_RESULT';
 export const SET_NOTIFICATION_LOADING = 'SET_NOTIFICATION_LOADING';
 export const SET_NOTIFICATION_ERROR = 'SET_NOTIFICATION_ERROR';
@@ -37,6 +39,18 @@ export function removeNotification(id) {
 export function getNotification() {
     return {
         type: GET_NOTIFICATION
+    }
+}
+///Cập nhật thông báo chung.
+export function getGeneralNotification() {
+    return {
+        type: GET_GENERAL_NOTIFICATION
+    }
+}
+//Cập nhật thông báo môn học.
+export function getCourseNotification() {
+    return {
+        type: GET_COURSE_NOTIFICATION
     }
 }
 //Hàm nhận kết quả request.

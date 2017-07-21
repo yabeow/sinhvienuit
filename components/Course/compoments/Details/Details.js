@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Container, Content, Card, CardItem, Text, Icon } from 'native-base';
+import ListNotifications from '../../../Notification/compoments/List';
 
 class Details extends React.Component {
     render() {
@@ -44,6 +45,9 @@ class Details extends React.Component {
                             </Text>
                         </CardItem>
                     </Card>
+                    <ListNotifications
+                        notifications = { this.props.notifications.getCourseNotifications(this.props.course.getCode()) }
+                    />
                 </Content>
             </Container>
         )
