@@ -1,15 +1,11 @@
 import React, { PropTypes } from "react";
+import { Container, Header, Left, Button, Icon, Body, Title, Right, View } from 'native-base';
 import NotificationList from './compoments/List';
-import styles from '../../Style';
 
 class Notification extends React.Component {
     constructor(props) {
         super(props);
     }
-    static navigationOptions = {
-        title: 'Thông báo',
-        ...styles.Header
-    };
     render() {
         this.notification = this.props.notifications.getAllNotifications();
         //Sắp xếp theo thứ tự thời gian đăng giảm dần.
@@ -22,11 +18,26 @@ class Notification extends React.Component {
             return 0;
         });
         return (
-            <NotificationList
-                notifications = { this.notification }
-                refreshing = { this.props.notifications.getLoading() }
-                onRefresh = { this.props.getNotification }
-            />
+            <Container>
+                <Header>
+                    <Left>
+                        <Button onPress={ () => this.props.navigation.navigate('DrawerOpen') } transparent>
+                            <Icon name='menu' />
+                        </Button>
+                    </Left>
+                    <Body>
+                    <Title>Thông báo</Title>
+                    </Body>
+                    <Right />
+                </Header>
+                <View style={{flex: 1}}>
+                    <NotificationList
+                        notifications = { this.notification }
+                        refreshing = { this.props.notifications.getLoading() }
+                        onRefresh = { this.props.getNotification }
+                    />
+                </View>
+            </Container>
         );
     }
 }

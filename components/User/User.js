@@ -1,7 +1,6 @@
 import React, { PropTypes } from "react";
 import { Alert } from 'react-native';
-import { Body, Text, Button, Container, Icon, Toast, Content, Separator, ListItem, Switch, Left, Right, Card, CardItem } from "native-base";
-import styles from '../../Style';
+import { Header, Title, Body, View, Text, Button, Container, Icon, Toast, Content, ListItem, Left, Right, Card, CardItem } from "native-base";
 import Spinner from 'react-native-loading-spinner-overlay';
 
 class User extends React.Component {
@@ -31,10 +30,6 @@ class User extends React.Component {
             }
         }
     }
-    static navigationOptions = {
-        title: 'Tài khoản',
-        ...styles.Header
-    };
     logout() {
         Alert.alert(
             'Xác nhận',
@@ -57,8 +52,23 @@ class User extends React.Component {
     }
     render() {
         return (
-            <Container style={{backgroundColor: '#FFF'}}>
-                <Spinner visible={ this.props.user.getLoading() } textContent={"Loading..."} textStyle={{color: '#FFF'}} />
+            <Container>
+                <Header>
+                    <Left>
+                        <Button onPress={ () => this.props.navigation.navigate('DrawerOpen') } transparent>
+                            <Icon name='menu'/>
+                        </Button>
+                    </Left>
+                    <Body>
+                        <Title>Tài khoản</Title>
+                    </Body>
+                    <Right />
+                </Header>
+                <Spinner
+                    visible={ this.props.user.getLoading() }
+                    textContent={"Loading..."}
+                    textStyle={{color: '#FFF'}}
+                />
                 <Content>
                     <Card>
                         <CardItem>
@@ -77,7 +87,7 @@ class User extends React.Component {
                     <ListItem button onPress={ this.updateInformation.bind(this) } icon>
                         <Left>
                             <Button onPress={ this.updateInformation.bind(this) } info>
-                                <Icon active name="refresh" />
+                                <Icon active name="refresh"/>
                             </Button>
                         </Left>
                         <Body>
@@ -89,7 +99,7 @@ class User extends React.Component {
                     <ListItem button onPress={ this.logout.bind(this) } last icon>
                         <Left>
                             <Button onPress={ this.logout.bind(this) } danger>
-                                <Icon active name="log-out" />
+                                <Icon active name="log-out"/>
                             </Button>
                         </Left>
                         <Body>
