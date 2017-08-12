@@ -19,6 +19,7 @@ export default class extends React.Component {
         let itemStyles = {
             'Dashboard': Styles.inactiveItem,
             'Notification': Styles.inactiveItem,
+            'Deadline': Styles.inactiveItem,
             'Course': Styles.inactiveItem,
             'User': Styles.inactiveItem
         };
@@ -45,6 +46,17 @@ export default class extends React.Component {
                                 <Text style={ itemStyles.Notification.textColor }>
                                     Thông báo
                                 </Text>
+                            </Left>
+                        </ListItem>
+                    </View>
+                    <View style={ itemStyles.Deadline.backgroundColor }>
+                        <ListItem button noBorder onPress={() => this.props.navigation.navigate("Deadline")}>
+                            <Left>
+                                <Icon active name="list-box" style={{ color: "#777", fontSize: 26, width: 20 }} />
+                                <Text style={{ ...Styles.textWithBadge, ...itemStyles.Deadline.textColor }}>
+                                    Deadline
+                                </Text>
+                                <Badge danger><Text>{ this.props.numberOfDeadlines }</Text></Badge>
                             </Left>
                         </ListItem>
                     </View>

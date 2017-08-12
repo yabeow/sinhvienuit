@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Container, Content, Card, CardItem, Text, Icon } from 'native-base';
-import ListNotifications from '../../../Notification/compoments/List';
+import ListNotifications from '../../../Notification/components/List';
 
 class Details extends React.Component {
     render() {
