@@ -30,7 +30,7 @@ class Notification extends React.Component {
                     </Body>
                     <Right />
                 </Header>
-                <View style={{flex: 1}}>
+                <View padder style={{ flex: 1 }}>
                     <NotificationList
                         notifications = { this.notification }
                         refreshing = { this.props.notifications.getLoading() }

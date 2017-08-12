@@ -4,7 +4,7 @@
  */
 export default {
     textWithBadge: {
-        paddingRight: 10
+        paddingRight: 5
     },
     activeItem: {
         textColor: {

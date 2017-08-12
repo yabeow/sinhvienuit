@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
-import { FlatList } from 'react-native';
-import { Container, Header, Left, Button, Icon, Body, Title, Right, Content } from 'native-base';
+import { FlatList, RefreshControl } from 'react-native';
+import { Container, Header, Left, Button, Icon, Body, Title, Right, View, Text } from 'native-base';
 import ListItem from './Item';
 
 class List extends React.Component {
@@ -17,25 +17,36 @@ class List extends React.Component {
                         </Button>
                     </Left>
                     <Body>
-                    <Title>Môn học</Title>
+                        <Title>Môn học</Title>
                     </Body>
                     <Right />
                 </Header>
-                <FlatList
-                    data={ this.props.courses }
-                    horizontal={ false }
-                    refreshing={ this.props.refreshing }
-                    onRefresh={ () => this.props.onRefresh() }
-                    keyExtractor={ course => course.getCode() + course.getDayOfWeek() + course.getLessonStart()  }
-                    renderItem={ ({item}) => 
-                        <ListItem
-                            course={ item }
-                            navigation={ this.props.navigation }
-                            numberNotifications={ this.props.numberOfCourseNotificationsList[item.getCode()] }
-                            numberDeadlines={ this.props.numberOfDeadlinesList[item.getCode()] }
-                        /> 
+                <View padder style={{ flex: 1 }}>
+                    {
+                        (this.props.courses.length !== 0) ?
+                            (
+                                <FlatList
+                                data={ this.props.courses }
+                                horizontal={ false }
+                                refreshing={ this.props.refreshing }
+                                onRefresh={ () => this.props.onRefresh() }
+                                keyExtractor={ course => course.getCode() + course.getDayOfWeek() + course.getLessonStart()  }
+                                renderItem={ ({item}) =>
+                                    <ListItem
+                                        course={ item }
+                                        navigation={ this.props.navigation }
+                                        numberNotifications={ this.props.numberOfCourseNotificationsList[item.getCode()] }
+                                        numberDeadlines={ this.props.numberOfDeadlinesList[item.getCode()] }
+                                    />
+                                }
+                                />
+                            )
+                            :
+                            (
+                                <Text>Không có môn học nào! Kéo xuống để cập nhật.</Text>
+                            )
                     }
-                />
+                </View>
             </Container>
         )
     }

@@ -69,7 +69,7 @@ class User extends React.Component {
                     textContent={"Loading..."}
                     textStyle={{color: '#FFF'}}
                 />
-                <Content>
+                <Content padder>
                     <Card>
                         <CardItem>
                             <Text>Họ tên: { this.props.user.getName() }</Text>
@@ -84,30 +84,32 @@ class User extends React.Component {
                             <Text>Hệ đào tạo: { this.props.user.getTrainType() }</Text>
                         </CardItem>
                     </Card>
-                    <ListItem button onPress={ this.updateInformation.bind(this) } icon>
-                        <Left>
-                            <Button onPress={ this.updateInformation.bind(this) } info>
-                                <Icon active name="refresh"/>
-                            </Button>
-                        </Left>
-                        <Body>
-                        <Text>Cập nhật thông tin</Text>
-                        </Body>
-                        <Right>
-                        </Right>
-                    </ListItem>
-                    <ListItem button onPress={ this.logout.bind(this) } last icon>
-                        <Left>
-                            <Button onPress={ this.logout.bind(this) } danger>
-                                <Icon active name="log-out"/>
-                            </Button>
-                        </Left>
-                        <Body>
-                        <Text>Đăng xuất</Text>
-                        </Body>
-                        <Right>
-                        </Right>
-                    </ListItem>
+                    <Card>
+                        <ListItem button onPress={ this.updateInformation.bind(this) } icon>
+                            <Left>
+                                <Button onPress={ this.updateInformation.bind(this) } info>
+                                    <Icon active name="refresh"/>
+                                </Button>
+                            </Left>
+                            <Body>
+                            <Text>Cập nhật thông tin</Text>
+                            </Body>
+                            <Right>
+                            </Right>
+                        </ListItem>
+                        <ListItem button onPress={ this.logout.bind(this) } last icon>
+                            <Left>
+                                <Button onPress={ this.logout.bind(this) } danger>
+                                    <Icon active name="log-out"/>
+                                </Button>
+                            </Left>
+                            <Body>
+                            <Text>Đăng xuất</Text>
+                            </Body>
+                            <Right>
+                            </Right>
+                        </ListItem>
+                    </Card>
                 </Content>
             </Container>
         )
