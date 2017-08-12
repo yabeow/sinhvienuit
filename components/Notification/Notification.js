@@ -1,6 +1,6 @@
 import React, { PropTypes } from "react";
 import { Container, Header, Left, Button, Icon, Body, Title, Right, View } from 'native-base';
-import NotificationList from './compoments/List';
+import NotificationList from './components/List';
 
 class Notification extends React.Component {
     constructor(props) {
