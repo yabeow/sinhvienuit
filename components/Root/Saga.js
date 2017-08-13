@@ -2,6 +2,7 @@ import { fork, all } from 'redux-saga/effects';
 //Import Saga
 import loginSaga from '../Login/Saga';
 import notificationSaga from '../Notification/Saga';
+import deadlineSaga from '../Deadline/Saga';
 import courseSaga from '../Course/Saga';
 import userSaga from '../User/Saga';
 
@@ -10,6 +11,7 @@ export default function* () {
     yield all([
         fork(loginSaga),
         fork(notificationSaga),
+        fork(deadlineSaga),
         fork(courseSaga),
         fork(userSaga)
     ]);

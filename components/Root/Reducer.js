@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 //Reducers
 import loginReducer from '../Login/Reducer';
 import notificationReducer from '../Notification/Reducer';
+import deadlineReducer from '../Deadline/Reducer';
 import courseReducer from '../Course/Reducer';
 import userReducer from '../User/Reducer';
 
@@ -9,6 +10,7 @@ import userReducer from '../User/Reducer';
 const appReducer = combineReducers({
     login: loginReducer,
     notifications: notificationReducer,
+    deadlines: deadlineReducer,
     courses: courseReducer,
     user: userReducer
 });

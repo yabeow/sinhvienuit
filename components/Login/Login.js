@@ -29,6 +29,7 @@ class LoginForm extends React.Component {
         //Fetch dữ liệu sau khi đăng nhập.
         this.props.getUserInformation();
         this.props.getCourse();
+        this.props.getDeadline();
         this.props.getNotification();
     }
     Login() {

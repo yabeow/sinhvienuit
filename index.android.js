@@ -17,6 +17,8 @@ import { Course } from './components/Course/Object';
 import { CourseListReducer } from './components/Course/Reducer';
 import { GeneralNotification, CourseNotification } from './components/Notification/Object';
 import { NotificationListReducer } from './components/Notification/Reducer';
+import { Deadline } from './components/Deadline/Object';
+import { DeadlineListReducer } from './components/Deadline/Reducer';
 import { UserReducer } from './components/User/Reducer';
 //Config
 import { APP_STATE_SAVE_KEY } from './config/config';
@@ -89,6 +91,22 @@ class App extends React.Component {
                             notifications.error   = false;
                             initialStore.notifications = new NotificationListReducer(notifications);
                         }
+
+                        //Deadline.
+                        let deadlines = {};
+                        let listDeadlines = [];
+                        if (typeof initialStore.deadlines !== 'undefined') {
+                            deadlines = initialStore.deadlines;
+                            if (typeof deadlines.listDeadlines !== 'undefined') {
+                                for (let deadline of deadlines.listDeadlines) {
+                                    listDeadlines.push(new Deadline(deadline));
+                                }
+                            }
+                        }
+                        deadlines.listDeadlines = new List(listDeadlines);
+                        deadlines.loading = false;
+                        deadlines.error = false;
+                        initialStore.deadlines = new DeadlineListReducer(deadlines);
                         //Người dùng.
                         let user = {};
                         if (typeof initialStore.user !== 'undefined') {

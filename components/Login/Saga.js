@@ -12,14 +12,15 @@ function* loginSaga(action) {
         yield put(setLoginLoading(true));
         //Đăng nhập vào Moodle.
         if (action.source === "MOODLE") {
-            response = yield call(request, action.source, '');
+            let postData = `username=${ encodeURIComponent(action.username) }&password=${ encodeURIComponent(action.password) }`;
+            response = yield call(request, action.source, '/login/index.php', postData);
             if (response.status < 200 && response.status > 300) {
                 yield put(setLoginLoading(false));
                 return yield put(setLoginError(errors.networkError));
             }
             response = yield apply(response, response.text);
             if (response.contains("loginform")) {
-                yield put(setLoginError(errors.credentialsError));
+                return yield put(setLoginError(errors.credentialsError));
             }
         }
         //Đăng nhập vào DAA và OEP.
