@@ -53,19 +53,19 @@ class LoginForm extends React.Component {
     }
     render() {
         return (
-            <Container style={{ ...styles.Container, ...styles.HCenter }}>
+            <Container style = { styles.Container }>
                 <View style={ styles.LogoView }>
-                    <Image style={ styles.Logo } source={ require('../../assets/logo.png') }/>
+                    <Image resizeMode="contain" style={ styles.Logo } source={ require('../../assets/logo.png') }/>
                 </View>
-                <Item regular label="Username" error={ this.state.errorUsername }>
+                <Item rounded label="Username" error={ this.state.errorUsername }>
                     <Icon active name='person'/>
                     <Input placeholder='Mã số sinh viên' onChangeText={ (username) => this.setState({ username }) }/>
                 </Item>
-                <Item regular label="Password" error={this.state.errorPassword}>
+                <Item style = {{ marginTop: 5 }} rounded label="Password" error={ this.state.errorPassword }>
                     <Icon active name='lock'/>
                     <Input placeholder='Mật khẩu chứng thực' secureTextEntry onChangeText={ (password) => this.setState({password}) }/>
                 </Item>
-                <View style={{ ...styles.Button, ...styles.HCenter }}>
+                <View style={{ ...styles.Button }}>
                     <Button title="Đăng nhập" onPress={ this.Login.bind(this) } disabled={(this.props.loading === true) ? true : null}>
                         {(this.props.loading === true) ? <Spinner color='white'/> : null}
                         <Text style={{ textAlign: 'center' }}> Đăng nhập </Text>

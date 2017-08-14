@@ -5,7 +5,8 @@ import Details from './Details';
 
 function mapStateToProps(state) {
     return {
-        notifications: state.notifications
+        notifications: state.notifications,
+        deadlines: state.deadlines
     }
 }
 

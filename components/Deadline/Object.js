@@ -2,6 +2,15 @@ const { Record, List } = require('immutable');
 import { getTimeFormat } from '../../utils';
 import { MOODLE_HOMEPAGE, MOODLE_DEADLINE_LINK_TEMPLATE } from '../../config/config';
 
+/*
+    id: Id deadline.
+    code: Mã môn học có deadline.
+    title: Tiêu đề.
+    content: Nội dung deadline.
+    time: Hạn chót.
+    status: Tình trạng deadline (-1: Đã hết hạn, 0: chưa nộp, 1: đã nộp).
+ */
+
 const InitDeadline = Record({
     id: false,
     code: false,
@@ -45,7 +54,12 @@ export default class DeadlineList extends InitDeadlineList {
     constructor(data) {
         super(data);
     }
-    getAllDeadlines() {
+    getDeadlines(code) {
+        if (code) {
+            return this.listDeadlines.filter(function(item) {
+                return item.getCode() === code;
+            }).toArray();
+        }
         return this.listDeadlines.toArray();
     }
     getListId() {
@@ -55,8 +69,42 @@ export default class DeadlineList extends InitDeadlineList {
         });
         return returnList;
     }
-    getNumberOfDeadlines() {
-        return this.listDeadlines.size;
+    getNumberOfDeadlines(code = false, data = false) {
+        let count = 0;
+        let countData;
+        if (data) {
+            countData = data;
+        }
+        else {
+            countData = this.listDeadlines;
+        }
+        countData.forEach(function(item) {
+            if (item.status === 0) {
+                if (code) {
+                    if (code === item.getCode()) {
+                        count++;
+                    }
+                }
+                else {
+                    count++;
+                }
+            }
+        });
+        return count;
+    }
+    getNumberOfDeadlinesList() {
+        let returnList = {};
+        this.listDeadlines.map(function(item) {
+            if (item.status === 0) {
+                if (returnList.hasOwnProperty(item.getCode())) {
+                    returnList[item.getCode()]++;
+                }
+                else {
+                    returnList[item.getCode()] = 1;
+                }
+            }
+        });
+        return returnList;
     }
     getLoading() {
         return this.loading;

@@ -9,7 +9,7 @@ function mapStateToProps(state) {
         courses: state.courses.getAllCourses(),
         refreshing: state.courses.loading,
         numberOfCourseNotificationsList: state.notifications.getNumberOfCourseNotificationsList(),
-        numberOfDeadlinesList: {},
+        numberOfDeadlinesList: state.deadlines.getNumberOfDeadlinesList(),
     }
 }
 

@@ -54,8 +54,10 @@ function* getSingleDeadline(action) {
             return yield put(setDeadlineError(data.error));
         }
         let deadline = parseDeadlineFromHtml(data.data);
-        deadline = deadline.set('id', action.id);
-        yield put(addDeadline(deadline));
+        if (deadline) {
+            deadline = deadline.set('id', action.id);
+            yield put(addDeadline(deadline));
+        }
     }
     catch(e) {
         yield put(setDeadlineError(e.message));

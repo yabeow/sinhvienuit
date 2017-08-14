@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { FlatList, RefreshControl } from 'react-native';
+import { FlatList, Image } from 'react-native';
 import { Container, Header, Left, Button, Icon, Body, Title, Right, View, Text } from 'native-base';
 import ListItem from './Item';
 
@@ -23,9 +23,25 @@ class List extends React.Component {
                 </Header>
                 <View padder style={{ flex: 1 }}>
                     {
-                        (this.props.courses.length !== 0) ?
-                            (
+                        (this.props.courses.length === 0) ?
+                            <Image
+                                resizeMode="contain"
+                                style={{flex: 1, height: undefined, width: undefined}}
+                                source={ require('../../../../assets/pull-to-refresh.gif')}
+                            >
                                 <FlatList
+                                    data={ {} }
+                                    horizontal={ false }
+                                    refreshing={ this.props.refreshing }
+                                    onRefresh={ () => this.props.onRefresh() }
+                                    keyExtractor={ item => 1 }
+                                    renderItem={ ({item}) =>
+                                        null
+                                    }
+                                />
+                            </Image>
+                            :
+                            <FlatList
                                 data={ this.props.courses }
                                 horizontal={ false }
                                 refreshing={ this.props.refreshing }
@@ -39,12 +55,7 @@ class List extends React.Component {
                                         numberDeadlines={ this.props.numberOfDeadlinesList[item.getCode()] }
                                     />
                                 }
-                                />
-                            )
-                            :
-                            (
-                                <Text>Không có môn học nào! Kéo xuống để cập nhật.</Text>
-                            )
+                            />
                     }
                 </View>
             </Container>

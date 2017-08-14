@@ -133,20 +133,48 @@ export default class ListNotifications extends InitListNotification {
     }
     getCourseNotifications(code = false) {
         if (code) {
-            return this.listCourseNotifications.filter(function(item) {
-               return item.getCode() === code;
+            return this.listCourseNotifications.filter(function (item) {
+                return item.getCode() === code;
             }).toArray();
         }
-        return this.listCourseNotifications;
+        return this.listCourseNotifications.toArray();
+    }
+    //Trả về số lượng thông báo nghỉ/bù chưa học.
+    getNumberOfCoursesNotifications(code = false, data = false) {
+        let count     = 0;
+        let countData;
+        if (data) {
+            countData = data;
+        }
+        else {
+            countData = this.listCourseNotifications;
+        }
+        let currentTime = new Date();
+        countData.forEach(function(item) {
+            if (item.getEndTime() > currentTime) {
+                if (code) {
+                    if (item.getCode() === code) {
+                        count++;
+                    }
+                }
+                else {
+                    count++;
+                }
+            }
+        });
+        return count;
     }
     getNumberOfCourseNotificationsList() {
         let returnList = {};
+        let currentTime = new Date();
         this.listCourseNotifications.map(function(item) {
-           if (returnList.hasOwnProperty(item.getCode())) {
-               returnList[item.getCode()]++;
-           }
-           else {
-               returnList[item.getCode()] = 1;
+           if (item.getEndTime() >= currentTime) {
+               if (returnList.hasOwnProperty(item.getCode())) {
+                   returnList[item.getCode()]++;
+               }
+               else {
+                   returnList[item.getCode()] = 1;
+               }
            }
         });
         return returnList;
