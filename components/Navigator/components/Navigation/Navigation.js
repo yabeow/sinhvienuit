@@ -21,6 +21,7 @@ export default class extends React.Component {
             'Notification': Styles.inactiveItem,
             'Deadline': Styles.inactiveItem,
             'Course': Styles.inactiveItem,
+            'StudentPoint': Styles.inactiveItem,
             'User': Styles.inactiveItem
         };
         //Thay đổi styles của menu đang active.
@@ -68,6 +69,17 @@ export default class extends React.Component {
                                     Môn học
                                 </Text>
                                 <Badge success><Text>{ this.props.numberOfCourses }</Text></Badge>
+                            </Left>
+                        </ListItem>
+                    </View>
+                    <View style={ itemStyles.StudentPoint.backgroundColor }>
+                        <ListItem button noBorder onPress={() => this.props.navigation.navigate("StudentPoint")}>
+                            <Left>
+                                <Icon active name="body" style={{ color: "#777", fontSize: 26, width: 20 }} />
+                                <Text style={{ ...Styles.textWithBadge, ...itemStyles.StudentPoint.textColor }}>
+                                    Điểm rèn luyện
+                                </Text>
+                                <Badge info><Text>{ this.props.finalStudentPoint }</Text></Badge>
                             </Left>
                         </ListItem>
                     </View>

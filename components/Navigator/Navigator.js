@@ -6,6 +6,7 @@ import Dashboard from '../Dashboard';
 import Notification from '../Notification';
 import Deadline from '../Deadline';
 import Course from '../Course';
+import StudentPoint from '../StudentPoint';
 import User from '../User';
 
 const RootNavigator = DrawerNavigator (
@@ -14,7 +15,8 @@ const RootNavigator = DrawerNavigator (
         Notification: { screen: Notification },
         Deadline: { screen: Deadline },
         Course: { screen: Course },
-        User: { screen: User },
+        StudentPoint: { screen: StudentPoint },
+        User: { screen: User }
     },
     {
         drawerWidth: 250,

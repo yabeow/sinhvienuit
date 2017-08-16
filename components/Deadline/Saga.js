@@ -10,7 +10,7 @@ import {
     GET_DEADLINE_INFORMATION
 } from './Action';
 import { getPage } from '../Login/Action';
-import { parseListDeadlineIdFromHtml, parseDeadlineFromHtml, getDeadlineStatusFromHtml } from './Utils';
+import { parseListDeadlineIdFromHtml, parseDeadlineFromHtml } from './Utils';
 import { MOODLE_DEADLINE_LINK_TEMPLATE } from '../../config/config';
 
 function* getListDeadline() {

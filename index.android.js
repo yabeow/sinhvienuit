@@ -19,6 +19,8 @@ import { GeneralNotification, CourseNotification } from './components/Notificati
 import { NotificationListReducer } from './components/Notification/Reducer';
 import { Deadline } from './components/Deadline/Object';
 import { DeadlineListReducer } from './components/Deadline/Reducer';
+import { StudentPoint } from './components/StudentPoint/Object';
+import { PointListReducer } from './components/StudentPoint/Reducer';
 import { UserReducer } from './components/User/Reducer';
 //Config
 import { APP_STATE_SAVE_KEY } from './config/config';
@@ -107,6 +109,21 @@ class App extends React.Component {
                         deadlines.loading = false;
                         deadlines.error = false;
                         initialStore.deadlines = new DeadlineListReducer(deadlines);
+                        //Điểm rèn luyện.
+                        let studentPoints = {};
+                        let listPoints = [];
+                        if (typeof initialStore.studentPoints !== 'undefined') {
+                            studentPoints = initialStore.studentPoints;
+                            if (typeof studentPoints.listPoints !== 'undefined') {
+                                for (let point of studentPoints.listPoints) {
+                                    listPoints.push(new StudentPoint(point));
+                                }
+                            }
+                        }
+                        studentPoints.listPoints = new List(listPoints);
+                        studentPoints.loading = false;
+                        studentPoints.error = false;
+                        initialStore.studentPoints = new PointListReducer(studentPoints);
                         //Người dùng.
                         let user = {};
                         if (typeof initialStore.user !== 'undefined') {

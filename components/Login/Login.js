@@ -27,10 +27,11 @@ class LoginForm extends React.Component {
     }
     componentWillUnmount() {
         //Fetch dữ liệu sau khi đăng nhập.
-        this.props.getUserInformation();
         this.props.getCourse();
         this.props.getDeadline();
         this.props.getNotification();
+        this.props.getStudentPoint();
+        this.props.getUserInformation();
     }
     Login() {
         if (this.state.username && this.state.password) {
