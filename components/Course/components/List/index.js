@@ -2,11 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import List from './List';
-import { getCourse } from '../../Action';
+import { getCourse, setCourseError } from '../../Action';
 
 function mapStateToProps(state) {
     return {
         courses: state.courses.getAllCourses(),
+        error: state.courses.error,
         refreshing: state.courses.loading,
         numberOfCourseNotificationsList: state.notifications.getNumberOfCourseNotificationsList(),
         numberOfDeadlinesList: state.deadlines.getNumberOfDeadlinesList(),
@@ -15,7 +16,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        onRefresh: bindActionCreators(getCourse, dispatch)
+        onRefresh: bindActionCreators(getCourse, dispatch),
+        setError: bindActionCreators(setCourseError, dispatch)
     }
 
 }

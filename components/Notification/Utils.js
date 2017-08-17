@@ -1,6 +1,6 @@
 import { GeneralNotification, CourseNotification } from './Object';
 import { getCourseTimeByLesson } from '../Course/Utils';
-import { betweenTwoSubString, parseDateTimeFromString } from '../../utils';
+import { betweenTwoSubString, parseDateTimeFromString, htmlEntityDecode } from '../../utils';
 import { DAA_HOMEPAGE, OEP_HOMEPAGE } from '../../config/config';
 
 //Lấy dữ liệu thông báo chung từ: https://daa.uit.edu.vn/thong-bao-chung
@@ -15,6 +15,7 @@ export function parseDaaGeneralNotificationFromHtml(html) {
             link = DAA_HOMEPAGE + link;
             let id = betweenTwoSubString(match, 'id="node-', '"');
             let title = betweenTwoSubString(match, 'property="dc:title" content="', '"');
+            title = htmlEntityDecode(title);
             let createTime = betweenTwoSubString(match, 'property="dc:date dc:created" content="', '"');
             createTime = new Date(Date.parse(createTime));
             let notification = {
@@ -51,6 +52,7 @@ export function parseOepGeneralNotificationFromHtml(html) {
             link = OEP_HOMEPAGE + link;
             let title = betweenTwoSubString(match, '<a', 'a>');
             title = betweenTwoSubString(title, '">', '</');
+            title = htmlEntityDecode(title);
             let createTime = betweenTwoSubString(match, '<span class="date">(', ')');
             createTime = createTime.split('/');
             let time  = new Date();
@@ -91,7 +93,8 @@ export function parseDaaCourseNotificationFromHtml(html) {
         //Id thông báo.
         let id = betweenTwoSubString(data, "node/", '"');
         //Tiêu đề thông báo.
-        let title = betweenTwoSubString(data, 'property="dc:title" content="', '"');
+        let title = betweenTwoSubString(data, 'property="dc:title" content="', '"')
+        title = htmlEntityDecode(title);
         //Ngày thông báo.
         let day = betweenTwoSubString(data, "ngày", "</a>").trim();
         day = day.split('/');
@@ -143,6 +146,7 @@ export function parseOepCourseNotificationFromHtml(html) {
         let id = betweenTwoSubString(data, "node/", '"');
         //Tiêu đề.
         let title = betweenTwoSubString(data, 'rel="tag" title="', '"');
+        title = htmlEntityDecode(title);
         //Phòng học.
         let room = betweenTwoSubString(data, "Phòng :", "Thời gian").trim();
         //Ngày

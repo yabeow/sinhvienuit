@@ -1,5 +1,6 @@
-import { betweenTwoSubString } from '../../utils';
+import { betweenTwoSubString, htmlEntityDecode } from '../../utils';
 import { Deadline } from './Object';
+
 export function parseListDeadlineIdFromHtml(html) {
     let regex = /<table class="event">([\s\S]*?)(?=<\/table>)/gm;
     let match;
@@ -17,6 +18,7 @@ export function parseDeadlineFromHtml(html) {
     let code = betweenTwoSubString(html, 'https://courses.uit.edu.vn/course/view.php?id=', '</li>');
     code = betweenTwoSubString(code, '>', '</a>').trim();
     let title = betweenTwoSubString(html, '<h2>', '</h2>').trim();
+    title = htmlEntityDecode(title);
     let content = betweenTwoSubString(html, '<div class="no-overflow">', '</div>').trim();
     let time = betweenTwoSubString(html, 'Due date', '</tr>');
     time = betweenTwoSubString(time, '">', '</td>');

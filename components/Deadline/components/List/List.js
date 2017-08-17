@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { FlatList } from 'react-native';
 import { View } from 'native-base';
 import Deadline from './Item';
+import EmptyList from '../../../EmptyList';
 
 class List extends React.Component {
     render() {
@@ -24,6 +25,7 @@ class List extends React.Component {
         if ((typeof this.props.onRefresh !== 'undefined') && (typeof this.props.refreshing !== 'undefined')) {
             return (
                 <FlatList
+                    ListEmptyComponent = { <EmptyList/> }
                     data={ this.props.deadlines }
                     horizontal={ false }
                     refreshing={ this.props.refreshing }

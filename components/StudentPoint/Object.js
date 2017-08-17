@@ -1,5 +1,11 @@
 const { Record, List } = require('immutable');
-import { DRL_STUDENT_POINT_LINK_TEMPLATE } from '../../config/config'
+import { DRL_STUDENT_POINT_LINK_TEMPLATE } from '../../config/config';
+
+/*
+    id: Mã hoạt động.
+    title: Tên hoạt động.
+    point: Điểm được cộng/trừ.
+ */
 
 const InitStudentPoint = Record({
     id: false,

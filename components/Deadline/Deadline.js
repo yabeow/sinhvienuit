@@ -1,6 +1,5 @@
 import React, { PropTypes } from "react";
-import { Image } from 'react-native';
-import { Container, Header, Left, Button, Icon, Body, Title, Right, View } from 'native-base';
+import { Container, Header, Left, Button, Icon, Body, Title, Right, View, Toast } from 'native-base';
 import DeadlineList from './components/List';
 
 class Notification extends React.Component {
@@ -10,6 +9,29 @@ class Notification extends React.Component {
     static navigationOptions = {
         header: null
     };
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.error) {
+            Toast.show({
+                text: nextProps.error,
+                position: 'bottom',
+                buttonText: 'Bỏ qua',
+                type: 'warning',
+                duration: 10000
+            });
+            this.props.setError(false);
+        }
+        else {
+            if ((nextProps.refreshing === false) && (this.props.refreshing === true)) {
+                Toast.show({
+                    text: 'Cập nhật thông tin thành công.',
+                    position: 'bottom',
+                    buttonText: 'Bỏ qua',
+                    type: 'success',
+                    duration: 10000
+                });
+            }
+        }
+    }
     render() {
         return (
             <Container>
@@ -25,32 +47,19 @@ class Notification extends React.Component {
                     <Right />
                 </Header>
                 <View padder style={{ flex: 1 }}>
-                    {
-                        (this.props.deadlines.length === 0) ?
-                            <Image
-                                resizeMode="contain"
-                                style={{flex: 1, height: undefined, width: undefined}}
-                                source={ require('../../assets/pull-to-refresh.gif')}
-                            >
-                                <DeadlineList
-                                    deadlines={ this.props.deadlines }
-                                    refreshing={ this.props.refreshing }
-                                    onRefresh={ this.props.onRefresh }
-                                />
-                            </Image>
-                            :
-                            <DeadlineList
-                                deadlines={ this.props.deadlines }
-                                refreshing={ this.props.refreshing }
-                                onRefresh={ this.props.onRefresh }
-                            />
-                    }
+                    <DeadlineList
+                        deadlines={ this.props.deadlines }
+                        refreshing={ this.props.refreshing }
+                        onRefresh={ this.props.onRefresh }
+                    />
                 </View>
             </Container>
         );
     }
 }
 Notification.propsType = {
-    notifications: PropTypes.object.isRequired
+    notifications: PropTypes.object.isRequired,
+    refreshing: PropTypes.boolean,
+    onRefresh: PropTypes.func
 };
 export default Notification;

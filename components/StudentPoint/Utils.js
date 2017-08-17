@@ -1,5 +1,5 @@
 import { StudentPoint } from './Object';
-import { betweenTwoSubString } from '../../utils'
+import { betweenTwoSubString, htmlEntityDecode } from '../../utils'
 
 //Lấy dữ liệu tổng điểm từ: https://drl.uit.edu.vn/sinhvien/renluyensinhvien/diemrenluyen
 export function parseFinalStudentPointFromHtml(html) {
@@ -36,6 +36,7 @@ export function parseStudentPointFromHtml(html) {
                     let id = betweenTwoSubString(pointData[0], 'thongtinhoatdong/', '"');
                     let title = betweenTwoSubString(pointData[0], '<a', '</a>');
                     title = betweenTwoSubString(title + '</a>', '">', '</a>');
+                    title = htmlEntityDecode(title);
                     let point = betweenTwoSubString(pointData[4] + '</td>', '">', '</td>');
                     let studentPoint = new StudentPoint({
                         id: id,

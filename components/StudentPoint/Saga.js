@@ -1,4 +1,4 @@
-import { put, take, select, takeLatest } from 'redux-saga/effects';
+import { put, take, takeLatest } from 'redux-saga/effects';
 import {
     addPoint,
     setFinalPoint,

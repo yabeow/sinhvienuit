@@ -2,18 +2,20 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import List from './Deadline';
-import { getDeadline } from './Action';
+import { getDeadline, setDeadlineError } from './Action';
 
 function mapStateToProps(state) {
     return {
         deadlines: state.deadlines.getDeadlines(),
+        error: state.deadlines.error,
         refreshing: state.deadlines.loading,
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        onRefresh: bindActionCreators(getDeadline, dispatch)
+        onRefresh: bindActionCreators(getDeadline, dispatch),
+        setError: bindActionCreators(setDeadlineError, dispatch)
     }
 
 }

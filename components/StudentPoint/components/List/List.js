@@ -3,6 +3,7 @@ import { FlatList, ScrollView } from 'react-native';
 import { Container } from 'native-base';
 import StudentPoint from './Item';
 import FinalPoint from '../Final';
+import EmptyList from '../../../EmptyList';
 
 class List extends React.Component {
     constructor(props) {
@@ -14,6 +15,7 @@ class List extends React.Component {
                 <Container>
                     <FlatList
                         ListHeaderComponent = { <FinalPoint/> }
+                        ListEmptyComponent = { <EmptyList/> }
                         data={ this.props.studentPoints }
                         refreshing={ this.props.refreshing }
                         onRefresh={ () => this.props.onRefresh() }
@@ -28,7 +30,7 @@ class List extends React.Component {
                 <View>
                     {
                         this.props.studentPoints.map(function (item) {
-                            return <StudentPoint studentPoint={ item } key={ item.getCode() }/>
+                            return <StudentPoint studentPoint={ item } key={ item.getId() }/>
                         })
                     }
                 </View>
