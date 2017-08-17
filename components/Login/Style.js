@@ -11,11 +11,16 @@ export default {
     },
     Container: {
         backgroundColor: '#F5FCFF',
-        padding: 50,
+        flex: 1,
+        height: null,
+        width: null,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 45,
     },
     Logo: {
         width:  180,
-        height: 123,
+        height: 123
     },
     LogoView: {
         padding: 20,

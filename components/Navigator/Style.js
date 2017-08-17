@@ -1,16 +1,25 @@
+/*
+    Material design specs
+    -> https://material.io/guidelines/patterns/navigation-drawer.html#navigation-drawer-specs
+ */
 export default {
-    VCenter: {
-        flex: 1,
-        alignItems: 'center',
-        flexDirection: 'row',
+    textWithBadge: {
+        paddingRight: 5
     },
-    HCenter: {
-        flex: 1,
-        alignItems: 'center',
-        flexDirection: 'column',
+    activeItem: {
+        textColor: {
+            color: '#1578c6'
+        },
+        backgroundColor: {
+            backgroundColor: 'rgba(0, 0, 0, 0.15)'
+        }
     },
-    Container: {
-        backgroundColor: '#F5FCFF',
-        padding: 50,
+    inactiveItem: {
+        textColor: {
+            color: 'rgba(0, 0, 0, .85)'
+        },
+        backgroundColor: {
+            backgroundColor: 'transparent'
+        }
     }
 }

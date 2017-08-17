@@ -1,11 +1,12 @@
 const fetchObject = require('fetch');
-import { DAA_HOMEPAGE, OEP_HOMEPAGE, MOODLE_HOMEPAGE } from '../config/config';
+import { DAA_HOMEPAGE, OEP_HOMEPAGE, MOODLE_HOMEPAGE, DRL_HOMEPAGE } from '../config/config';
 
 export default function (source = false, endPoint = '', postData = false, credentials = true) {
     switch(source) {
         case 'DAA': endPoint = DAA_HOMEPAGE + endPoint; break;
         case 'OEP': endPoint = OEP_HOMEPAGE + endPoint; break;
         case 'MOODLE': endPoint = MOODLE_HOMEPAGE + endPoint; break;
+        case 'DRL': endPoint = DRL_HOMEPAGE + endPoint; break;
         default: break;
     }
     if (postData) {

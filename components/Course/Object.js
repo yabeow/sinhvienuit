@@ -106,7 +106,15 @@ export default class CourseList extends InitCourseList {
         super(data);
     }
     getAllCourses() {
-        return this.listCourses;
+        return this.listCourses.toArray();
+    }
+    //Hàm trả về một object chứa các thành phần là các mã môn học.
+    getListOfCoursesCode() {
+        let returnList = {};
+        this.listCourses.forEach(function(item) {
+            returnList[item.getCode()] = true;
+        });
+        return returnList;
     }
     getNumberOfCourses() {
         return this.listCourses.size;
