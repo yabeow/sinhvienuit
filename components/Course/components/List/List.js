@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { FlatList } from 'react-native';
 import { Container, Header, Left, Button, Icon, Body, Title, Right, View, Toast } from 'native-base';
+import { backAction } from '../../../../config/config';
 import ListItem from './Item';
 import EmptyList from '../../../EmptyList';
 
@@ -8,6 +9,9 @@ class List extends React.Component {
     static navigationOptions = {
         header: null
     };
+    constructor(data) {
+        super(data);
+    }
     componentWillReceiveProps(nextProps) {
         if (nextProps.error) {
             Toast.show({
@@ -36,8 +40,8 @@ class List extends React.Component {
             <Container>
                 <Header>
                     <Left>
-                        <Button onPress={ () => this.props.navigation.navigate('DrawerOpen') } transparent>
-                            <Icon name='menu'/>
+                        <Button onPress={ () => this.props.navigation.dispatch(backAction) } transparent>
+                            <Icon name='arrow-back'/>
                         </Button>
                     </Left>
                     <Body>

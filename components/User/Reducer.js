@@ -14,5 +14,8 @@ export class UserReducer extends User {
         newUser = newUser.set('trainType', user.getTrainType());
         return newUser;
     }
+    SET_USER_PICTURE({ picture }) {
+        return this.set('picture', picture);
+    }
 }
 export default reducerFromClass(UserReducer);

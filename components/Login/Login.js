@@ -31,7 +31,7 @@ class LoginForm extends React.Component {
         this.props.getDeadline();
         this.props.getNotification();
         this.props.getStudentPoint();
-        this.props.getUserInformation();
+        this.props.getUser();
     }
     Login() {
         if (this.state.username && this.state.password) {

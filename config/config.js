@@ -23,3 +23,7 @@ export const STUDENT_POINT_RANK_COLOR = {
     5: 'success',
     6: 'success'
 };
+export const backAction = {
+    type: 'Navigation/BACK',
+    key: null
+};

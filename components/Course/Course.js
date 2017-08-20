@@ -7,4 +7,7 @@ const CourseNavigator = StackNavigator({
     CourseList: { screen: ListScreen },
     CourseDetails: { screen: DetailsScreen }
 });
+CourseNavigator.navigationOptions = {
+    header: null
+};
 export default CourseNavigator;

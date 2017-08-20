@@ -60,6 +60,10 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
+andlog@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/andlog/-/andlog-1.0.0.tgz#25b39047ac9c1e5f6b2c8e4cdb5e7bf9e65e534b"
+
 ansi-escapes@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/ansi-escapes/-/ansi-escapes-1.4.0.tgz#d3a8a83b319aa67793662b13e761c7911422306e"
@@ -908,6 +912,12 @@ boom@2.x.x:
   resolved "https://registry.yarnpkg.com/boom/-/boom-2.10.1.tgz#39c8918ceff5799f83f9492a848f625add0c766f"
   dependencies:
     hoek "2.x.x"
+
+bows@^1.6.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/bows/-/bows-1.7.0.tgz#a3598ed9cef61a7a0cab1a7240f291654865ec76"
+  dependencies:
+    andlog "^1.0.0"
 
 bplist-creator@0.0.7:
   version "0.0.7"
@@ -3175,6 +3185,10 @@ react-devtools-core@2.3.1:
     shell-quote "^1.6.1"
     ws "^2.0.3"
 
+react-native-background-task@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/react-native-background-task/-/react-native-background-task-0.2.1.tgz#9d110ed14b245e0d8b9ec8114ce24b33ddda65de"
+
 react-native-cookies@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/react-native-cookies/-/react-native-cookies-3.1.0.tgz#7816a60be1ae0484c9ddd47380d77f98ec0ffaca"
@@ -3208,6 +3222,13 @@ react-native-easy-grid@0.1.9:
   resolved "https://registry.yarnpkg.com/react-native-easy-grid/-/react-native-easy-grid-0.1.9.tgz#41b00b2fa02c3fab125cb80ef90429bfb3d698cc"
   dependencies:
     lodash "^4.11.1"
+
+react-native-firebase@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/react-native-firebase/-/react-native-firebase-2.1.2.tgz#bfa8b562e15f7e0fa212e57121acef0da2ac8125"
+  dependencies:
+    bows "^1.6.0"
+    prop-types "^15.5.10"
 
 react-native-keyboard-aware-scroll-view@0.2.9:
   version "0.2.9"

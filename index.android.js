@@ -28,6 +28,13 @@ import { APP_STATE_SAVE_KEY } from './config/config';
 import styles from './Style';
 const sagaMiddleware = createSagaMiddleware();
 
+import BackgroundTask from 'react-native-background-task';
+
+BackgroundTask.define(() => {
+    console.log('Hello from a background task');
+    BackgroundTask.finish()
+});
+
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -35,6 +42,9 @@ class App extends React.Component {
             isStoreLoading: false,
             store: {}
         }
+    }
+    componentDidMount() {
+        BackgroundTask.schedule();
     }
     componentWillMount() {
         let self = this;

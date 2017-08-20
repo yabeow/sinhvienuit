@@ -1,11 +1,15 @@
 import React, { PropTypes } from "react";
 import { Container, Header, Left, Button, Icon, Body, Title, Right, View, Toast } from 'native-base';
+import { backAction } from '../../config/config';
 import ListStudentPoint from './components/List';
 
 class StudentPoint extends React.Component {
     constructor(data) {
         super(data);
     }
+    static navigationOptions = {
+        header: null
+    };
     componentWillReceiveProps(nextProps) {
         if (nextProps.error) {
             Toast.show({
@@ -34,8 +38,8 @@ class StudentPoint extends React.Component {
             <Container>
                 <Header>
                     <Left>
-                        <Button onPress={ () => this.props.navigation.navigate('DrawerOpen') } transparent>
-                            <Icon name='menu' />
+                        <Button onPress={ () => this.props.navigation.dispatch(backAction) } transparent>
+                            <Icon name='arrow-back' />
                         </Button>
                     </Left>
                     <Body>

@@ -1,12 +1,16 @@
 import React, { PropTypes } from "react";
 import { Alert } from 'react-native';
 import { Header, Title, Body, View, Text, Button, Container, Icon, Toast, Content, ListItem, Left, Right, Card, CardItem } from "native-base";
+import { backAction } from '../../config/config';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 class User extends React.Component {
     constructor(props) {
         super(props);
     }
+    static navigationOptions = {
+        header: null
+    };
     componentWillReceiveProps(nextProps) {
         if (nextProps.user.getError()) {
             Toast.show({
@@ -48,15 +52,15 @@ class User extends React.Component {
         )
     }
     updateInformation() {
-        this.props.getUserInformation();
+        this.props.getUser();
     }
     render() {
         return (
             <Container>
                 <Header>
                     <Left>
-                        <Button onPress={ () => this.props.navigation.navigate('DrawerOpen') } transparent>
-                            <Icon name='menu'/>
+                        <Button onPress={ () => this.props.navigation.dispatch(backAction) } transparent>
+                            <Icon name='arrow-back' />
                         </Button>
                     </Left>
                     <Body>

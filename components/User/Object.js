@@ -4,6 +4,7 @@ import { Record } from 'immutable';
     faculty: Khoa đang học.
     birthDay: Ngày tháng năm sinh.
     trainType: Hệ đào tạo (CQĐT, TN,...).
+    picture: Ảnh sinh viên.
     loading: Trạng thái chạy.
     error: Thông tin lỗi.
  */
@@ -12,6 +13,7 @@ const InitUser = Record({
     faculty: false,
     birthDay: false,
     trainType: false,
+    picture: false,
     loading: false,
     error: false
 });
@@ -27,6 +29,9 @@ export default class User extends InitUser {
     }
     getTrainType() {
         return this.trainType;
+    }
+    getPiture() {
+        return this.picture;
     }
     getLoading() {
         return this.loading;
