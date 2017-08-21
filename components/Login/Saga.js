@@ -22,6 +22,7 @@ function* loginSaga(action) {
                 yield put(setLoginError(errors.credentialsError));
                 return false;
             }
+            return true;
         }
         //Đăng nhập vào drl.uit.edu.vn
         else if (action.source === "DRL") {

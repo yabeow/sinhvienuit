@@ -20,7 +20,7 @@ function* getUser() {
 
 function* getUserInformation(data = false) {
     try {
-        if (!data) {
+        if (typeof data.endPoint === 'undefined') {
             yield put(setUserLoading(true));
             return yield put(getPage('DAA', '/sinhvien/bang-dieu-khien', true, getUserResult()));
         }
@@ -40,7 +40,7 @@ function* getUserInformation(data = false) {
 }
 function* getUserPicture(data = false) {
     try {
-        if (!data) {
+        if (typeof data.endPoint === 'undefined') {
             yield put(setUserLoading(true));
             return yield put(getPage('DAA', '/khaibaolylich', true, getUserResult()));
         }

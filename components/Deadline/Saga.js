@@ -1,4 +1,4 @@
-import { put, take, select, takeLatest, takeEvery } from 'redux-saga/effects';
+import { put, fork, select, takeLatest, takeEvery } from 'redux-saga/effects';
 import {
     getDeadlineInformation,
     addDeadline,
@@ -13,18 +13,21 @@ import { getPage } from '../Login/Action';
 import { parseListDeadlineIdFromHtml, parseDeadlineFromHtml } from './Utils';
 import { MOODLE_DEADLINE_LINK_TEMPLATE } from '../../config/config';
 
-function* getListDeadline() {
+function* getListDeadline(data = false) {
     try {
-        yield put(setDeadlineLoading(true));
-        yield put(getPage('MOODLE', '/calendar/view.php', true, getDeadlineResult()));
-        let data = yield take(GET_DEADLINE_RESULT);
-        if (data.endPoint !== '/calendar/view.php') return;
+        if (typeof data.endPoint === 'undefined') {
+            yield put(setDeadlineLoading(true));
+            return yield put(getPage('MOODLE', '/calendar/view.php', true, getDeadlineResult()));
+        }
         //Xảy ra lỗi khi request.
         if (data.error !== false) {
             yield put(setDeadlineLoading(false));
             return yield put(setDeadlineError(data.error));
         }
         let listId = parseListDeadlineIdFromHtml(data.data);
+        if (listId.length === 0) {
+            return yield put(setDeadlineLoading(false));
+        }
         let listDeadlines = yield select((state) => state.deadlines.getListId());
         for(let id of listId) {
             if (typeof listDeadlines[id] === 'undefined') {
@@ -35,37 +38,41 @@ function* getListDeadline() {
     catch(e) {
         yield put(setDeadlineError(e.message));
     }
-    yield put(setDeadlineLoading(false));
 }
 
-function* getSingleDeadline(action) {
+function* getSingleDeadline(data = false) {
     try {
-        yield put(setDeadlineLoading(true));
-        let deadlineLink = MOODLE_DEADLINE_LINK_TEMPLATE + action.id + '&lang=en';
-        yield put(getPage('MOODLE', deadlineLink, true, getDeadlineResult()));
-        let data;
-        do {
-            data = yield take(GET_DEADLINE_RESULT);
+        if (typeof data.endPoint === 'undefined') {
+            yield put(setDeadlineLoading(true));
+            let deadlineLink = MOODLE_DEADLINE_LINK_TEMPLATE + data.id + '&lang=en';
+            return yield put(getPage('MOODLE', deadlineLink, true, getDeadlineResult()));
         }
-        while (data.endPoint !== deadlineLink);
-        //Xảy ra lỗi khi request.
         if (data.error !== false) {
             yield put(setDeadlineLoading(false));
             return yield put(setDeadlineError(data.error));
         }
         let deadline = parseDeadlineFromHtml(data.data);
         if (deadline) {
-            deadline = deadline.set('id', action.id);
             yield put(addDeadline(deadline));
         }
+        return yield put(setDeadlineLoading(false));
     }
     catch(e) {
         yield put(setDeadlineError(e.message));
     }
-    yield put(setDeadlineLoading(false));
+}
+
+function* watchRequests(data) {
+    if (data.endPoint === '/calendar/view.php') {
+        return yield fork(getListDeadline, data);
+    }
+    else {
+        return yield fork(getSingleDeadline, data);
+    }
 }
 
 export default function* mySaga() {
     yield takeLatest(GET_DEADLINE, getListDeadline);
     yield takeEvery(GET_DEADLINE_INFORMATION, getSingleDeadline);
+    yield takeEvery(GET_DEADLINE_RESULT, watchRequests);
 }
