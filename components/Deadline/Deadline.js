@@ -3,7 +3,7 @@ import { Container, Header, Left, Button, Icon, Body, Title, Right, View, Toast 
 import { backAction } from '../../config/config';
 import DeadlineList from './components/List';
 
-class Notification extends React.Component {
+class Deadline extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -58,9 +58,9 @@ class Notification extends React.Component {
         );
     }
 }
-Notification.propsType = {
-    notifications: PropTypes.object.isRequired,
+Deadline.propsType = {
+    deadlines: PropTypes.object.isRequired,
     refreshing: PropTypes.boolean,
     onRefresh: PropTypes.func
 };
-export default Notification;
+export default Deadline;
