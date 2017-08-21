@@ -6,6 +6,7 @@ import Notification from '../Notification';
 import Deadline from '../Deadline';
 import Course from '../Course';
 import StudentPoint from '../StudentPoint';
+import Exam from '../Exam';
 import User from '../User';
 
 const RootNavigator = StackNavigator (
@@ -15,6 +16,7 @@ const RootNavigator = StackNavigator (
         Deadline: { screen: Deadline },
         Course: { screen: Course },
         StudentPoint: { screen: StudentPoint },
+        Exam: { screen: Exam },
         User: { screen: User }
     }
 );

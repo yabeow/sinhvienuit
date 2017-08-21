@@ -85,7 +85,9 @@ export default class HomeScreen extends React.Component {
                         </Row>
                         <Row>
                             <Col>
-                                <MenuItem backgroundColor='#607D8B' icon='school' text='Lịch thi'/>
+                                <TouchableOpacity onPress={ () => this.props.navigation.navigate("Exam") }>
+                                    <MenuItem backgroundColor='#607D8B' icon='school' text='Lịch thi'/>
+                                </TouchableOpacity>
                             </Col>
                             <Col>
                                 <TouchableOpacity onPress={ () => this.props.navigation.navigate("User") }>

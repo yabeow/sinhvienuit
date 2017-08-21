@@ -5,6 +5,7 @@ import notificationReducer from '../Notification/Reducer';
 import deadlineReducer from '../Deadline/Reducer';
 import courseReducer from '../Course/Reducer';
 import studentPointReducer from '../StudentPoint/Reducer';
+import examReducer from '../Exam/Reducer';
 import userReducer from '../User/Reducer';
 
 //Kết hợp các reducers.
@@ -14,6 +15,7 @@ const appReducer = combineReducers({
     deadlines: deadlineReducer,
     courses: courseReducer,
     studentPoints: studentPointReducer,
+    exams: examReducer,
     user: userReducer
 });
 

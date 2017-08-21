@@ -21,19 +21,14 @@ import { Deadline } from './components/Deadline/Object';
 import { DeadlineListReducer } from './components/Deadline/Reducer';
 import { StudentPoint } from './components/StudentPoint/Object';
 import { PointListReducer } from './components/StudentPoint/Reducer';
+import { Exam } from './components/Exam/Object';
+import { ExamListReducer } from './components/Exam/Reducer';
 import { UserReducer } from './components/User/Reducer';
 //Config
 import { APP_STATE_SAVE_KEY } from './config/config';
 //Style
 import styles from './Style';
 const sagaMiddleware = createSagaMiddleware();
-
-import BackgroundTask from 'react-native-background-task';
-
-BackgroundTask.define(() => {
-    console.log('Hello from a background task');
-    BackgroundTask.finish()
-});
 
 class App extends React.Component {
     constructor(props) {
@@ -42,9 +37,6 @@ class App extends React.Component {
             isStoreLoading: false,
             store: {}
         }
-    }
-    componentDidMount() {
-        BackgroundTask.schedule();
     }
     componentWillMount() {
         let self = this;
@@ -134,6 +126,21 @@ class App extends React.Component {
                         studentPoints.loading = false;
                         studentPoints.error = false;
                         initialStore.studentPoints = new PointListReducer(studentPoints);
+                        //Lịch thi
+                        let exams = {};
+                        let listExams = [];
+                        if (typeof initialStore.exams !== 'undefined') {
+                            exams = initialStore.exams;
+                            if (typeof exams.listExams !== 'undefined') {
+                                for (let exam of exams.listExams) {
+                                    listExams.push(new Exam(exam));
+                                }
+                            }
+                        }
+                        exams.listExams = new List(listExams);
+                        exams.loading = false;
+                        exams.error = false;
+                        initialStore.exams = new ExamListReducer(exams);
                         //Người dùng.
                         let user = {};
                         if (typeof initialStore.user !== 'undefined') {
