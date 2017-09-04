@@ -31,7 +31,7 @@ export default class HomeScreen extends React.Component {
                             (this.props.studentPicture) ?
                                 <Image style={ styles.Logo } source={{ uri : this.props.studentPicture }}/>
                                 :
-                                <Image style={ styles.Logo } source={ require('../../assets/noavatar.png') }/>
+                                <Image style={ styles.Logo } source={ require('../../assets/noavatar.jpg') }/>
                         }
                         {
                             (this.props.studentName) ?
