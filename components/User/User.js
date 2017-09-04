@@ -25,7 +25,7 @@ class User extends React.Component {
         else {
             if ((nextProps.user.getLoading() === false) && (this.props.user.getLoading() === true)) {
                 Toast.show({
-                    text: 'Cập nhật thông tin thành công.',
+                    text: 'Cập nhật thông tin thành công',
                     position: 'bottom',
                     buttonText: 'Bỏ qua',
                     type: 'success',

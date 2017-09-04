@@ -24,7 +24,7 @@ class Exam extends React.Component {
         else {
             if ((nextProps.refreshing === false) && (this.props.refreshing === true)) {
                 Toast.show({
-                    text: 'Cập nhật thông tin thành công.',
+                    text: 'Cập nhật thông tin thành công',
                     position: 'bottom',
                     buttonText: 'Bỏ qua',
                     type: 'success',

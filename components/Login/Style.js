@@ -16,16 +16,16 @@ export default {
         width: null,
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 45,
+        padding: 45
     },
     Logo: {
         width:  180,
         height: 123
     },
     LogoView: {
-        padding: 20,
+        paddingBottom: 20,
     },
     Button: {
-        padding: 10,
+        paddingTop: 10,
     },
 }

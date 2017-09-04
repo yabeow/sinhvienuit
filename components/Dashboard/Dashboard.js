@@ -1,6 +1,6 @@
 import React from "react";
 import { Image, TouchableOpacity } from 'react-native';
-import { Button, Container, Icon, Body, Content, Header, Title, H3, Left, Right, View } from "native-base";
+import { Button, Container, Icon, Content, Header, Title, H3, Left, Right, View } from "native-base";
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import MenuItem from './MenuItem';
 
@@ -13,18 +13,7 @@ export default class HomeScreen extends React.Component {
     }
     render() {
         return (
-            <Container>
-                <Header>
-                    <Left>
-                        <Button onPress={ () => this.props.navigation.dispatch('DrawerOpen') } transparent>
-                            <Icon name='menu' />
-                        </Button>
-                    </Left>
-                    <Body>
-                    <Title>Trang chủ</Title>
-                    </Body>
-                    <Right />
-                </Header>
+            <Container style = {{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                 <Content padder>
                     <View style={ styles.LogoView }>
                         {
@@ -105,7 +94,7 @@ styles = {
     LogoView: {
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 15
+        paddingBottom: 15
     },
     Logo: {
         height: 150,
