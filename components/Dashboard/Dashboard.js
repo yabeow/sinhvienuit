@@ -3,6 +3,7 @@ import { Image, TouchableOpacity } from 'react-native';
 import { Button, Container, Icon, Content, Header, Title, H3, Left, Right, View } from "native-base";
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import MenuItem from './MenuItem';
+import bgImage from '../../assets/background-uit.png';
 
 export default class HomeScreen extends React.Component {
     static navigationOptions = {
@@ -13,7 +14,8 @@ export default class HomeScreen extends React.Component {
     }
     render() {
         return (
-            <Container style = {{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+            <Image style={{ flex: 1, width: null, height: null, resizeMode: 'cover', }} source={ bgImage }>
+            <Container style = {{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.3)' }}>
                 <Content padder>
                     <View style={ styles.LogoView }>
                         {
@@ -24,9 +26,9 @@ export default class HomeScreen extends React.Component {
                         }
                         {
                             (this.props.studentName) ?
-                                <H3 style = {{ color:"grey", marginTop: 10 }}>{ this.props.studentName }</H3>
+                                <H3 style = {{ color:"white", marginTop: 10 }}>{ this.props.studentName }</H3>
                                 :
-                                <H3 style = {{ color:"grey", marginTop: 10 }}>Sinh viên</H3>
+                                <H3 style = {{ color:"white", marginTop: 10 }}>Sinh viên</H3>
                         }
                     </View>
                     <Grid>
@@ -87,6 +89,7 @@ export default class HomeScreen extends React.Component {
                     </Grid>
                 </Content>
             </Container>
+            </Image>
         );
     }
 }

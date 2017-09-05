@@ -1,7 +1,9 @@
 import React, { PropTypes } from 'react';
 import styles from './Style';
-import { Image, View } from 'react-native';
+import { Image, View, TouchableOpacity, Linking } from 'react-native';
 import { Root, Container, Spinner, Button, Text, Toast, Icon, Item, Input } from 'native-base';
+import { FORGOT_PASSWORD_RESET_PAGE } from '../../config/config';
+import bgSrc from '../../assets/background-uit.png';
 
 class LoginForm extends React.Component {
     constructor(props) {
@@ -54,25 +56,36 @@ class LoginForm extends React.Component {
     }
     render() {
         return (
-            <Container style = { styles.Container }>
-                <View style={ styles.LogoView }>
-                    <Image resizeMode="contain" style={ styles.Logo } source={ require('../../assets/logo.png') }/>
-                </View>
-                <Item rounded label="Username" error={ this.state.errorUsername }>
-                    <Icon active name='person'/>
-                    <Input placeholder='Mã số sinh viên' onChangeText={ (username) => this.setState({ username }) }/>
-                </Item>
-                <Item style = {{ marginTop: 5 }} rounded label="Password" error={ this.state.errorPassword }>
-                    <Icon active name='lock'/>
-                    <Input placeholder='Mật khẩu chứng thực' secureTextEntry onChangeText={ (password) => this.setState({password}) }/>
-                </Item>
-                <View style={{ ...styles.Button }}>
-                    <Button title="Đăng nhập" onPress={ this.Login.bind(this) } disabled={(this.props.loading === true) ? true : null}>
-                        {(this.props.loading === true) ? <Spinner color='white'/> : null}
-                        <Text style={{ textAlign: 'center' }}> Đăng nhập </Text>
-                    </Button>
-                </View>
-            </Container>
+            <Image style={{ flex: 1, width: null, height: null, resizeMode: 'cover', }} source={bgSrc}>
+                <Container style = { styles.Container }>
+                    <View style={ styles.LogoView }>
+                        <Image resizeMode="contain" style={ styles.Logo } source={ require('../../assets/logo.png') }/>
+                    </View>
+                    <Text style={{ color: 'white', fontSize: 23, paddingBottom: 20 }}>SINH VIÊN UIT</Text>
+                    <Item style={{ backgroundColor: 'white' }} regular label="Username" error={ this.state.errorUsername }>
+                        <Icon active name='person' style={{ color: 'grey' }}/>
+                        <Input placeholder='Mã số sinh viên' onChangeText={ (username) => this.setState({ username }) }/>
+                    </Item>
+                    <Item style={{ backgroundColor: 'white' }} regular label="Password" error={ this.state.errorPassword }>
+                        <Icon active name='lock' style={{ color: 'grey' }}/>
+                        <Input placeholder='Mật khẩu chứng thực' secureTextEntry onChangeText={ (password) => this.setState({password}) }/>
+                    </Item>
+                    <View style={{ ...styles.Button }}>
+                        <Button title="Đăng nhập" onPress={ this.Login.bind(this) } disabled={(this.props.loading === true) ? true : null}>
+                            {(this.props.loading === true) ? <Spinner color='white'/> : null}
+                            <Text style={{ textAlign: 'center' }}> Đăng nhập </Text>
+                        </Button>
+                    </View>
+                    <View style={{ top: 40, justifyContent: 'center', alignItems: 'center' }}>
+                        <TouchableOpacity onPress={ () => Linking.openURL() }>
+                            <Text style={ styles.Text }>Chính sách & Điều khoản</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={ () => Linking.openURL(FORGOT_PASSWORD_RESET_PAGE) }>
+                            <Text style={ styles.Text }>Quên mật khẩu?</Text>
+                        </TouchableOpacity>
+                    </View>
+                </Container>
+            </Image>
         );
     }
 }
