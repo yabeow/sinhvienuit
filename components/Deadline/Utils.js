@@ -25,11 +25,11 @@ export function parseDeadlineFromHtml(html) {
     time = betweenTwoSubString(time, '">', '</td>');
     time = Date.parse(time);
     let status;
-    if (html.contains("overdue")) {
+    if (html.includes("overdue")) {
         //Deadline is overdue, so sad :(
         status =  -1;
     }
-    else if (html.contains("submissionstatussubmitted")) {
+    else if (html.includes("submissionstatussubmitted")) {
         //Yeah yeah, not a deadline anymore!
         status =  1;
     }
