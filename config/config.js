@@ -7,6 +7,7 @@ export const DAA_COURSE_NOTIFICATION_LINK_TEMPLATE = DAA_HOMEPAGE + '/node/';
 export const OEP_COURSE_NOTIFICATION_LINK_TEMPLATE = OEP_HOMEPAGE + '/node/';
 export const MOODLE_DEADLINE_LINK_TEMPLATE = '/mod/assign/view.php?id=';
 export const DRL_STUDENT_POINT_LINK_TEMPLATE = DRL_HOMEPAGE+ '/sinhvien/renluyensinhvien/thongtinhoatdong/';
+export const FORGOT_PASSWORD_RESET_PAGE = 'https://chungthuc.uit.edu.vn/ForgotPassword.aspx';
 export const STUDENT_POINT_RANK_NAME = {
     1: 'Kém',
     2: 'Yếu',

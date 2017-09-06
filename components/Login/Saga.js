@@ -18,7 +18,7 @@ function* loginSaga(action) {
                 return false;
             }
             response = yield apply(response, response.text);
-            if (response.contains("loginform")) {
+            if (response.includes("loginform")) {
                 yield put(setLoginError(errors.credentialsError));
                 return false;
             }
