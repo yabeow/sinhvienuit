@@ -36,6 +36,15 @@ class List extends React.Component {
         }
     }
     render() {
+        let courses = this.props.courses.sort(function(a, b) {
+            let timeA = a.getCurrentTimeStart();
+            let timeB = b.getCurrentTimeStart();
+            let currentTime = new Date();
+            if (timeA > currentTime) timeA -= 999999;
+            if (timeB > currentTime) timeB -= 999999;
+            if (timeA > timeB) return 1;
+            else return -1;
+        });
         return (
             <Container>
                 <Header>
@@ -52,7 +61,7 @@ class List extends React.Component {
                 <View padder style={{ flex: 1 }}>
                     <FlatList
                         ListEmptyComponent = { <EmptyList/> }
-                        data={ this.props.courses }
+                        data={ courses }
                         horizontal={ false }
                         refreshing={ this.props.refreshing }
                         onRefresh={ () => this.props.onRefresh() }
