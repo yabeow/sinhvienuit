@@ -30,7 +30,7 @@ export default class User extends InitUser {
     getTrainType() {
         return this.trainType;
     }
-    getPiture() {
+    getPicture() {
         return this.picture;
     }
     getLoading() {

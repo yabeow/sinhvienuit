@@ -1,6 +1,6 @@
 import React from "react";
 import { Image, TouchableOpacity } from 'react-native';
-import { Button, Container, Icon, Content, Header, Title, H3, Left, Right, View } from "native-base";
+import { Button, Container, Icon, Content, Header, Title, Text, Left, Right, View } from "native-base";
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import MenuItem from './MenuItem';
 import bgImage from '../../assets/background-uit.png';
@@ -18,18 +18,8 @@ export default class HomeScreen extends React.Component {
                 <Container style = {{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
                     <Content padder>
                         <View style={ styles.LogoView }>
-                            {
-                                (this.props.studentPicture) ?
-                                    <Image style={ styles.Logo } source={{ uri : this.props.studentPicture }}/>
-                                    :
-                                    <Image style={ styles.Logo } source={ require('../../assets/noavatar.jpg') }/>
-                            }
-                            {
-                                (this.props.studentName) ?
-                                    <H3 style = {{ color:"white", marginTop: 10 }}>{ this.props.studentName }</H3>
-                                    :
-                                    <H3 style = {{ color:"white", marginTop: 10 }}>Sinh viên</H3>
-                            }
+                            <Image resizeMode="contain" style={ styles.Logo } source={ require('../../assets/logo.png') }/>
+                            <Text style={{ color: 'white', textShadowColor:'grey', textShadowOffset: { height: 2, width: 2 }, fontSize: 25, fontWeight: 'bold', top: 10, paddingBottom: 30 }}>SINH VIÊN UIT</Text>
                         </View>
                         <Grid>
                             <Row>
@@ -100,9 +90,9 @@ styles = {
         paddingBottom: 15
     },
     Logo: {
-        height: 150,
-        width: 150,
-        borderRadius: 75,
+        height: 140,
+        width: 140,
+        borderRadius: 70,
         borderColor: 'rgba(0, 0, 0, 0.2)',
         borderWidth: 6
     },
