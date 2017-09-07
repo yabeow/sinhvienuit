@@ -61,7 +61,7 @@ class LoginForm extends React.Component {
                     <View style={ styles.LogoView }>
                         <Image resizeMode="contain" style={ styles.Logo } source={ require('../../assets/logo.png') }/>
                     </View>
-                    <Text style={{ color: 'white', fontSize: 23, fontWeight: 'bold', paddingBottom: 20 }}>SINH VIÊN UIT</Text>
+                    <Text style={{ color: 'white', textShadowColor:'grey', textShadowOffset: { height: 2, width: 2 }, fontSize: 25, fontWeight: 'bold', top: 10, paddingBottom: 40 }}>SINH VIÊN UIT</Text>
                     <Item style={{ backgroundColor: 'white' }} regular label="Username" error={ this.state.errorUsername }>
                         <Icon active name='person' style={{ color: 'grey' }}/>
                         <Input placeholder='Mã số sinh viên' onChangeText={ (username) => this.setState({ username }) }/>
