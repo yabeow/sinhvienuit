@@ -3,7 +3,6 @@ package com.yabeow.sinhvienuit;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.jamesisaac.rnbackgroundtask.BackgroundTaskPackage;
 import com.psykar.cookiemanager.CookieManagerPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -25,8 +24,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new CookieManagerPackage(),
-		new BackgroundTaskPackage()
+          new CookieManagerPackage()
       );
     }
   };
@@ -40,6 +38,5 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
-    BackgroundTaskPackage.useContext(this);
   }
 }
