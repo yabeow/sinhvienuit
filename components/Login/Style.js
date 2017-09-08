@@ -19,11 +19,8 @@ export default {
         backgroundColor: 'rgba(0, 0, 0, 0.3)'
     },
     Logo: {
-        width:  140,
-        height: 140,
-        borderRadius: 70,
-        borderColor: 'rgba(0, 0, 0, 0.2)',
-        borderWidth: 6
+        width:  160,
+        height: 160
     },
     LogoView: {
         paddingBottom: 2,

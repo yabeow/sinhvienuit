@@ -18,7 +18,7 @@ export default class HomeScreen extends React.Component {
                 <Container style = {{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
                     <Content padder>
                         <View style={ styles.LogoView }>
-                            <Image resizeMode="contain" style={ styles.Logo } source={ require('../../assets/logo.png') }/>
+                            <Image style={ styles.Logo } source={ require('../../assets/logo.png') }/>
                             <Text style={{ color: 'white', textShadowColor:'grey', textShadowOffset: { height: 2, width: 2 }, fontSize: 25, fontWeight: 'bold', top: 10, paddingBottom: 30 }}>SINH VIÊN UIT</Text>
                         </View>
                         <Grid>
@@ -90,11 +90,8 @@ styles = {
         paddingBottom: 15
     },
     Logo: {
-        height: 140,
-        width: 140,
-        borderRadius: 70,
-        borderColor: 'rgba(0, 0, 0, 0.2)',
-        borderWidth: 6
+        height: 160,
+        width: 160
     },
     container: {
         flex: 1,
