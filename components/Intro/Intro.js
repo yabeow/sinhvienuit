@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, Text, StyleSheet } from 'react-native';
+import { View, Image, Text, StatusBar, StyleSheet } from 'react-native';
 import AppIntro from 'react-native-app-intro';
 
 export default class extends Component {
@@ -22,6 +22,7 @@ export default class extends Component {
                 onSlideChange={this.onSlideChangeHandle}
             >
                 <View style={[styles.slide,{ backgroundColor: '#43A047' }]}>
+                    <StatusBar hidden />
                     <View style={styles.wrapImage} level={5}>
                         <Image style={styles.image} source={ require('./assets/logo-1.jpg') }/>
                     </View>
