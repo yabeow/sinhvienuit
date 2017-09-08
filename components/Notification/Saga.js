@@ -114,9 +114,9 @@ function* getCourseDaaNotification(action) {
 function* getCourseOepNotification(action) {
     try {
         yield put(setNotificationLoading(true));
-        yield put(getPage('OEP', '/thong-bao-nghi-hoc-hoc-bu?page=1', false, getNotificationResult()));
+        yield put(getPage('OEP', '/thong-bao-nghi-hoc-hoc-bu?page=0', false, getNotificationResult()));
         let data = yield take(GET_NOTIFICATION_RESULT);
-        if (data.endPoint !== '/thong-bao-nghi-hoc-hoc-bu?page=1') return;
+        if (data.endPoint !== '/thong-bao-nghi-hoc-hoc-bu?page=0') return;
         //Request xảy ra lỗi.
         if (data.error) {
             yield put(setNotificationLoading(false));
