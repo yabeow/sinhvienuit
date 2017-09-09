@@ -179,7 +179,10 @@ function* getPageSaga(action) {
         }
     }
     catch (e) {
-        //ERROR HERE
+        action.callback.endPoint = action.endPoint;
+        action.callback.data = false;
+        action.callback.error = e.toString();
+        return yield put(action.callback);
     }
 }
 
