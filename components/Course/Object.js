@@ -80,8 +80,15 @@ export class Course extends InitCourse {
     //Thời gian kết thúc môn học trong tuần hiện tại.
     getCurrentTimeEnd(format = false) {
         if (this.lessonEnd && this.dayOfWeek) {
-            let currentTimeEnd = getCurrentMonday();
-            currentTimeEnd.setDate(currentTimeEnd.getDate() + (this.dayOfWeek - 2));
+            let currentTime = new Date();
+            let currentTimeEnd;
+            if (this.getStartTime() < currentTime) {
+                currentTimeEnd = getCurrentMonday();
+                currentTimeEnd.setDate(currentTimeEnd.getDate() + (this.dayOfWeek - 2));
+            }
+            else {
+                currentTimeEnd = new Date(this.getStartTime());
+            }
             let temp   = getCourseTimeByLesson(this.lessonEnd);
             currentTimeEnd.setHours(temp.getHours());
             currentTimeEnd.setMinutes(temp.getMinutes() + 45);
