@@ -37,8 +37,8 @@ class List extends React.Component {
     }
     render() {
         let courses = this.props.courses.sort(function(a, b) {
-            let timeA = a.getCurrentTimeStart();
-            let timeB = b.getCurrentTimeStart();
+            let timeA = a.getCurrentTimeEnd();
+            let timeB = b.getCurrentTimeEnd();
             let currentTime = new Date();
             if (timeA > currentTime) timeA -= 999999;
             if (timeB > currentTime) timeB -= 999999;
