@@ -34,7 +34,6 @@ function* getUserInformation(data = false) {
         yield put(setUserLoading(false));
     }
     catch(e) {
-        alert(e.message);
         yield put(setUserError(e.message));
     }
 }
@@ -54,7 +53,6 @@ function* getUserPicture(data = false) {
         yield put(setUserLoading(false));
     }
     catch(e) {
-        alert(e.message);
         yield put(setUserError(e.message));
     }
     yield put(setUserLoading(false));

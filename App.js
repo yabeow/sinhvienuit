@@ -48,7 +48,6 @@ export default class extends React.Component {
                     let initialStore = JSON.parse(value);
                     //Đưa dữ liệu vào các object.
                     if (typeof initialStore !== 'undefined') {
-                        initialStore.firstTime = true;
                         //Login
                         let login = {};
                         if (typeof initialStore.login !== 'undefined') {

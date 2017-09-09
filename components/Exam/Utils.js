@@ -33,7 +33,7 @@ export function parseExamFromHtml(data) {
         return returnArray;
     }
     catch(e) {
-        alert(e.toString());
+        //CATCH ERROR HERE
     }
 }
 export function getExamTime(number) {
