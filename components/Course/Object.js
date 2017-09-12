@@ -51,7 +51,9 @@ export class Course extends InitCourse {
     }
     getLessonEnd(format = false) {
         if (format) {
-            return getTimeFormat(getCourseTimeByLesson(this.lessonEnd), format);
+            let lessonEnd = getCourseTimeByLesson(this.lessonEnd);
+            lessonEnd.setMinutes(lessonEnd.getMinutes() + 45);
+            return getTimeFormat(lessonEnd, format);
         }
         return this.lessonEnd;
     }
@@ -64,8 +66,16 @@ export class Course extends InitCourse {
     //Thời gian bắt đầu môn học trong tuần hiện tại.
     getCurrentTimeStart(format = false) {
         if (this.lessonStart && this.dayOfWeek) {
-            let currentTimeStart = getCurrentMonday();
-            currentTimeStart.setDate(currentTimeStart.getDate() + (this.dayOfWeek - 2));
+            let currentTime = new Date();
+            let startTime = new Date(this.startTime);
+            let currentTimeStart;
+            if (startTime < currentTime) {
+                currentTimeStart = getCurrentMonday();
+                currentTimeStart.setDate(currentTimeStart.getDate() + (this.dayOfWeek - 2));
+            }
+            else {
+                currentTimeStart = new Date(this.getStartTime());
+            }
             let temp   = getCourseTimeByLesson(this.lessonStart);
             currentTimeStart.setHours(temp.getHours());
             currentTimeStart.setMinutes(temp.getMinutes());
@@ -81,8 +91,9 @@ export class Course extends InitCourse {
     getCurrentTimeEnd(format = false) {
         if (this.lessonEnd && this.dayOfWeek) {
             let currentTime = new Date();
+            let startTime = new Date(this.startTime);
             let currentTimeEnd;
-            if (this.getStartTime() < currentTime) {
+            if (startTime < currentTime) {
                 currentTimeEnd = getCurrentMonday();
                 currentTimeEnd.setDate(currentTimeEnd.getDate() + (this.dayOfWeek - 2));
             }
