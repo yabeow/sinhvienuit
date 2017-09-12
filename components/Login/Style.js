@@ -16,7 +16,7 @@ export default {
         justifyContent: 'center',
         alignItems: 'center',
         padding: 45,
-        backgroundColor: 'rgba(0, 0, 0, 0.3)'
+        backgroundColor: 'rgba(0, 0, 0, 0.4)'
     },
     Logo: {
         width:  160,
@@ -32,5 +32,6 @@ export default {
         color: 'white',
         backgroundColor: 'transparent',
         lineHeight: 30,
+        fontSize: 17
     },
 }
