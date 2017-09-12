@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, RefreshControl } from 'react-native';
 import { Container, Header, Left, Button, Icon, Body, Title, Right, View, Toast } from 'native-base';
-import { backAction } from '../../../../config/config';
+import { backAction, ANDROID_PULL_TO_REFRESH_COLOR } from '../../../../config/config';
 import ListItem from './Item';
 import EmptyList from '../../../EmptyList';
 
@@ -63,8 +63,6 @@ class List extends React.Component {
                         ListEmptyComponent = { <EmptyList/> }
                         data={ courses }
                         horizontal={ false }
-                        refreshing={ this.props.refreshing }
-                        onRefresh={ () => this.props.onRefresh() }
                         keyExtractor={ course => course.getCode() + course.getDayOfWeek() + course.getLessonStart()  }
                         renderItem={ ({item}) =>
                             <ListItem
@@ -72,6 +70,13 @@ class List extends React.Component {
                                 navigation={ this.props.navigation }
                                 numberNotifications={ this.props.numberOfCourseNotificationsList[item.getCode()] }
                                 numberDeadlines={ this.props.numberOfDeadlinesList[item.getCode()] }
+                            />
+                        }
+                        refreshControl={
+                            <RefreshControl
+                                refreshing={ this.props.refreshing }
+                                onRefresh={ () => this.props.onRefresh() }
+                                colors={ ANDROID_PULL_TO_REFRESH_COLOR }
                             />
                         }
                     />

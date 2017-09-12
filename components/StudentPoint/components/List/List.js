@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react';
-import { FlatList, ScrollView } from 'react-native';
+import { FlatList, RefreshControl } from 'react-native';
 import { Container } from 'native-base';
 import StudentPoint from './Item';
 import FinalPoint from '../Final';
 import EmptyList from '../../../EmptyList';
+import { ANDROID_PULL_TO_REFRESH_COLOR } from '../../../../config/config';
 
 class List extends React.Component {
     constructor(props) {
@@ -17,10 +18,15 @@ class List extends React.Component {
                         ListHeaderComponent = { <FinalPoint/> }
                         ListEmptyComponent = { <EmptyList/> }
                         data={ this.props.studentPoints }
-                        refreshing={ this.props.refreshing }
-                        onRefresh={ () => this.props.onRefresh() }
                         keyExtractor={ item => item.getId() }
                         renderItem={ ({item}) => <StudentPoint studentPoint={ item }/> }
+                        refreshControl={
+                            <RefreshControl
+                                refreshing={ this.props.refreshing }
+                                onRefresh={ () => this.props.onRefresh() }
+                                colors={ ANDROID_PULL_TO_REFRESH_COLOR }
+                            />
+                        }
                     />
                 </Container>
             )

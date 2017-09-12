@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, RefreshControl } from 'react-native';
 import { View } from 'native-base';
 import Notification from './Item';
 import EmptyList from '../../../EmptyList';
+import { ANDROID_PULL_TO_REFRESH_COLOR } from '../../../../config/config';
 
 class List extends React.Component {
     constructor(props) {
@@ -14,10 +15,15 @@ class List extends React.Component {
                 <FlatList
                     ListEmptyComponent = { <EmptyList/> }
                     data={ this.props.notifications }
-                    refreshing={ this.props.refreshing }
-                    onRefresh={ () => this.props.onRefresh() }
                     keyExtractor={ item => item.getLink() }
                     renderItem={ ({item}) => <Notification notification={ item }/> }
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={ this.props.refreshing }
+                            onRefresh={ () => this.props.onRefresh() }
+                            colors={ ANDROID_PULL_TO_REFRESH_COLOR }
+                        />
+                    }
                 />
             )
         }
