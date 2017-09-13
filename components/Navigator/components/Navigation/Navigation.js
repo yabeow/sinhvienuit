@@ -35,7 +35,7 @@ export default class extends React.Component {
                             <Left>
                                 <Icon active name="apps" style={{ color: "#777", fontSize: 26, width: 20 }} />
                                 <Text style={ itemStyles.Dashboard.textColor }>
-                                    Dashboard
+                                    Trang chủ
                                 </Text>
                             </Left>
                         </ListItem>
@@ -64,7 +64,7 @@ export default class extends React.Component {
                     <View style={ itemStyles.Course.backgroundColor }>
                         <ListItem button noBorder onPress={() => this.props.navigation.navigate("Course")}>
                             <Left>
-                                <Icon active name="calculator" style={{ color: "#777", fontSize: 26, width: 20 }} />
+                                <Icon active name="calendar" style={{ color: "#777", fontSize: 26, width: 20 }} />
                                 <Text style={{ ...Styles.textWithBadge, ...itemStyles.Course.textColor }}>
                                     Môn học
                                 </Text>

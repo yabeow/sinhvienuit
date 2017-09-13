@@ -15,6 +15,7 @@ export function parseListDeadlineIdFromHtml(html) {
     return returnArray;
 }
 export function parseDeadlineFromHtml(html) {
+    let id = betweenTwoSubString(html, '<a title="Assignment" href="', '"');
     let code = betweenTwoSubString(html, 'https://courses.uit.edu.vn/course/view.php?id=', '</li>');
     code = betweenTwoSubString(code, '>', '</a>').trim();
     let title = betweenTwoSubString(html, '<h2>', '</h2>').trim();
@@ -24,11 +25,11 @@ export function parseDeadlineFromHtml(html) {
     time = betweenTwoSubString(time, '">', '</td>');
     time = Date.parse(time);
     let status;
-    if (html.contains("overdue")) {
+    if (html.includes("overdue")) {
         //Deadline is overdue, so sad :(
         status =  -1;
     }
-    else if (html.contains("submissionstatussubmitted")) {
+    else if (html.includes("submissionstatussubmitted")) {
         //Yeah yeah, not a deadline anymore!
         status =  1;
     }
@@ -38,6 +39,7 @@ export function parseDeadlineFromHtml(html) {
     }
     if (code && title && time) {
         return new Deadline({
+            id: id,
             code: code,
             title: title,
             content: content,

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import userScreen from './User';
 import { logout } from '../Login/Action';
-import { getUserInformation, setUserError } from './Action';
+import { getUser, setUserError } from './Action';
 function mapStateToProps(state) {
     return {
         user: state.user,
@@ -12,7 +12,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         logout: bindActionCreators(logout, dispatch),
-        getUserInformation: bindActionCreators(getUserInformation, dispatch),
+        getUser: bindActionCreators(getUser, dispatch),
         setUserError: bindActionCreators(setUserError, dispatch)
     }
 

@@ -10,22 +10,28 @@ export default {
         flexDirection: 'column',
     },
     Container: {
-        backgroundColor: '#F5FCFF',
         flex: 1,
         height: null,
         width: null,
         justifyContent: 'center',
         alignItems: 'center',
         padding: 45,
+        backgroundColor: 'rgba(0, 0, 0, 0.4)'
     },
     Logo: {
-        width:  180,
-        height: 123
+        width:  160,
+        height: 160
     },
     LogoView: {
-        padding: 20,
+        paddingBottom: 2,
     },
     Button: {
-        padding: 10,
+        paddingTop: 10,
+    },
+    Text: {
+        color: 'white',
+        backgroundColor: 'transparent',
+        lineHeight: 30,
+        fontSize: 17
     },
 }

@@ -6,7 +6,7 @@ import { getCourse } from '../Course/Action';
 import { getDeadline } from '../Deadline/Action';
 import { getNotification } from '../Notification/Action';
 import { getStudentPoint } from '../StudentPoint/Action';
-import { getUserInformation } from '../User/Action';
+import { getUser } from '../User/Action';
 import loginScreen from './Login';
 
 function mapStateToProps(state) {
@@ -28,7 +28,7 @@ function mapDispatchToProps(dispatch) {
         getDeadline: bindActionCreators(getDeadline, dispatch),
         getNotification: bindActionCreators(getNotification, dispatch),
         getStudentPoint: bindActionCreators(getStudentPoint, dispatch),
-        getUserInformation: bindActionCreators(getUserInformation, dispatch)
+        getUser: bindActionCreators(getUser, dispatch)
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(loginScreen)

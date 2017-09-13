@@ -34,5 +34,5 @@ export function parseDrlFormBuildId(html) {
 }
 //Kiểm tra html xem đã đăng nhập hay chưa.
 export function checkLoggedIn(html) {
-    return !(html.contains("Đăng Nhập") || html.contains('Đăng nhập') || html.contains("Truy cập bị từ chối"));
+    return !(html.includes("Đăng Nhập") || html.includes('Đăng nhập') || html.includes("Truy cập bị từ chối"));
 }

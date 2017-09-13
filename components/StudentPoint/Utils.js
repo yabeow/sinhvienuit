@@ -12,7 +12,7 @@ export function parseFinalStudentPointFromHtml(html) {
         return false;
     }
     catch(e) {
-
+        //ERROR HERE
     }
 }
 
@@ -52,6 +52,7 @@ export function parseStudentPointFromHtml(html) {
         return returnArray;
     }
     catch(e) {
-        alert(e.toString())
+        //alert(e.toString())
+        //ERROR HERE
     }
 }

@@ -1,4 +1,4 @@
-import { put, take, takeLatest } from 'redux-saga/effects';
+import { put, take, takeLatest, takeEvery } from 'redux-saga/effects';
 import {
     addPoint,
     setFinalPoint,
@@ -12,19 +12,21 @@ from './Action';
 import { getPage } from '../Login/Action';
 import { parseStudentPointFromHtml, parseFinalStudentPointFromHtml } from './Utils';
 
-function* getPointInformation() {
+function* getPointInformation(data = false) {
     try {
-        yield put(setPointLoading(true));
-        yield put(getPage('DRL', '/sinhvien/renluyensinhvien/diemrenluyen', true, getPointResult()));
-        let data = yield take(GET_POINT_RESULT);
-        if (data.endPoint !== '/sinhvien/renluyensinhvien/diemrenluyen') return;
+        if (typeof data.endPoint === 'undefined') {
+            yield put(setPointLoading(true));
+            return yield put(getPage('DRL', '/sinhvien/renluyensinhvien/diemrenluyen', true, getPointResult()));
+        }
         //Xảy ra lỗi khi request.
         if (data.error !== false) {
             yield put(setPointLoading(false));
             return yield put(setPointError(data.error));
         }
         let finalPoint = parseFinalStudentPointFromHtml(data.data);
-        yield put(setFinalPoint(finalPoint));
+        if (finalPoint) {
+            yield put(setFinalPoint(finalPoint));
+        }
         let listPoints = parseStudentPointFromHtml(data.data);
         for(let point of listPoints) {
             yield put(addPoint(point));
@@ -38,4 +40,5 @@ function* getPointInformation() {
 
 export default function* () {
     yield takeLatest(GET_STUDENT_POINT, getPointInformation);
+    yield takeEvery(GET_POINT_RESULT, getPointInformation);
 }

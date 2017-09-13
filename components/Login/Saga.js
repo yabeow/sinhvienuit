@@ -18,10 +18,11 @@ function* loginSaga(action) {
                 return false;
             }
             response = yield apply(response, response.text);
-            if (response.contains("loginform")) {
+            if (response.includes("loginform")) {
                 yield put(setLoginError(errors.credentialsError));
                 return false;
             }
+            return true;
         }
         //Đăng nhập vào drl.uit.edu.vn
         else if (action.source === "DRL") {
@@ -178,7 +179,10 @@ function* getPageSaga(action) {
         }
     }
     catch (e) {
-        //ERROR HERE
+        action.callback.endPoint = action.endPoint;
+        action.callback.data = false;
+        action.callback.error = e.toString();
+        return yield put(action.callback);
     }
 }
 

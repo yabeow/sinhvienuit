@@ -71,7 +71,8 @@ export function parseOepGeneralNotificationFromHtml(html) {
         return returnArray;
     }
     catch(e) {
-        alert(e.toString());
+        //alert(e.toString());
+        //ERROR HERE
     }
 }
 
