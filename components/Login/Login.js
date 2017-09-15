@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
-import styles from './Style';
-import { Image, View, TouchableOpacity, Linking } from 'react-native';
+import { Image, View, TouchableOpacity, Linking, KeyboardAvoidingView, Animated, Keyboard } from 'react-native';
 import { Root, Container, Spinner, Button, Text, Toast, Icon, Item, Input } from 'native-base';
 import { FORGOT_PASSWORD_RESET_PAGE } from '../../config/config';
+import styles from './Style';
+import { LOGO_SIZE_DEFAULT, LOGO_SIZE_SMALL } from './Style';
 import bgSrc from '../../assets/background-uit.png';
 
 class LoginForm extends React.Component {
@@ -12,8 +13,14 @@ class LoginForm extends React.Component {
             username: false,
             password: false,
             errorUsername: false,
-            errorPassword: false
-        }
+            errorPassword: false,
+            showTitle: true
+        };
+        this.imageSize = new Animated.Value(LOGO_SIZE_DEFAULT);
+    }
+    componentWillMount () {
+        this.keyboardWillShowSub = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow);
+        this.keyboardWillHideSub = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
     }
     componentWillReceiveProps(nextProps) {
         if (nextProps.error) {
@@ -34,7 +41,26 @@ class LoginForm extends React.Component {
         this.props.getNotification();
         this.props.getStudentPoint();
         this.props.getUser();
+
+        //Remove listener
+        this.keyboardWillShowSub.remove();
+        this.keyboardWillHideSub.remove();
     }
+    keyboardWillShow = (event) => {
+        this.setState({ showTitle: false });
+        Animated.timing(this.imageSize, {
+            duration: event.duration,
+            toValue: LOGO_SIZE_SMALL,
+        }).start();
+    };
+
+    keyboardWillHide = (event) => {
+        this.setState({ showTitle: true });
+        Animated.timing(this.imageSize, {
+            duration: event.duration,
+            toValue: LOGO_SIZE_DEFAULT,
+        }).start();
+    };
     Login() {
         if (this.state.username && this.state.password) {
             this.setState({ errorUsername: false });
@@ -58,25 +84,37 @@ class LoginForm extends React.Component {
         return (
             <Image style={{ flex: 1, width: null, height: null, resizeMode: 'cover', }} source={bgSrc}>
                 <Container style = { styles.Container }>
-                    <View style={ styles.LogoView }>
-                        <Image style={ styles.Logo } source={ require('../../assets/logo.png') }/>
-                    </View>
-                    <Text style={{ color: 'white', textShadowColor:'grey', textShadowOffset: { height: 2, width: 2 }, fontSize: 25, fontWeight: 'bold', top: 10, paddingBottom: 40 }}>SINH VIÊN UIT</Text>
-                    <Item style={{ backgroundColor: 'white' }} regular label="Username" error={ this.state.errorUsername }>
-                        <Icon active name='person' style={{ color: 'grey' }}/>
-                        <Input placeholder='Mã số sinh viên' onChangeText={ (username) => this.setState({ username }) }/>
-                    </Item>
-                    <Item style={{ backgroundColor: 'white' }} regular label="Password" error={ this.state.errorPassword }>
-                        <Icon active name='lock' style={{ color: 'grey' }}/>
-                        <Input placeholder='Mật khẩu chứng thực' secureTextEntry onChangeText={ (password) => this.setState({password}) }/>
-                    </Item>
-                    <View style={{ ...styles.Button }}>
-                        <Button title="Đăng nhập" onPress={ this.Login.bind(this) } disabled={(this.props.loading === true) ? true : null}>
-                            {(this.props.loading === true) ? <Spinner color='white'/> : null}
-                            <Text style={{ textAlign: 'center' }}> Đăng nhập </Text>
-                        </Button>
-                    </View>
-                    <View style={{ top: 40, justifyContent: 'center', alignItems: 'center' }}>
+                    <KeyboardAvoidingView style = { styles.FormView } behavior="padding">
+                        <View style={ styles.LogoView }>
+                            <Animated.Image style={{ height: this.imageSize, width: this.imageSize }} source={ require('../../assets/logo.png') }/>
+                        </View>
+                        {
+                            (this.state.showTitle === true) &&
+                            <Text style={{
+                                color: 'white',
+                                textShadowColor: 'grey',
+                                textShadowOffset: {height: 2, width: 2},
+                                fontSize: 25,
+                                fontWeight: 'bold',
+                                paddingBottom: 30
+                            }}>SINH VIÊN UIT</Text>
+                        }
+                        <Item style={{ backgroundColor: 'white' }} regular label="Username" error={ this.state.errorUsername }>
+                            <Icon active name='person' style={{ color: 'grey' }}/>
+                            <Input placeholder='Mã số sinh viên' onChangeText={ (username) => this.setState({ username }) }/>
+                        </Item>
+                        <Item style={{ backgroundColor: 'white' }} regular label="Password" error={ this.state.errorPassword }>
+                            <Icon active name='lock' style={{ color: 'grey' }}/>
+                            <Input placeholder='Mật khẩu chứng thực' secureTextEntry onChangeText={ (password) => this.setState({password}) }/>
+                        </Item>
+                        <View style={{ ...styles.Button }}>
+                            <Button title="Đăng nhập" onPress={ this.Login.bind(this) } disabled={(this.props.loading === true) ? true : null}>
+                                {(this.props.loading === true) ? <Spinner color='white'/> : null}
+                                <Text style={{ textAlign: 'center' }}> Đăng nhập </Text>
+                            </Button>
+                        </View>
+                    </KeyboardAvoidingView>
+                    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                         <TouchableOpacity onPress={ () => Linking.openURL() }>
                             <Text style={ styles.Text }>Chính sách & Điều khoản</Text>
                         </TouchableOpacity>

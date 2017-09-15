@@ -1,3 +1,6 @@
+export const LOGO_SIZE_DEFAULT = 150;
+export const LOGO_SIZE_SMALL = 100;
+
 export default {
     VCenter: {
         flex: 1,
@@ -15,15 +18,18 @@ export default {
         width: null,
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 45,
+        padding: 30,
         backgroundColor: 'rgba(0, 0, 0, 0.4)'
     },
-    Logo: {
-        width:  160,
-        height: 160
+    FormView: {
+        flex: 1,
+        height: null,
+        width: null,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     LogoView: {
-        paddingBottom: 2,
+        paddingBottom: 10,
     },
     Button: {
         paddingTop: 10,
@@ -32,6 +38,6 @@ export default {
         color: 'white',
         backgroundColor: 'transparent',
         lineHeight: 30,
-        fontSize: 17
+        fontSize: 16
     },
 }
