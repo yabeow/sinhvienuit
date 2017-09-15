@@ -53,7 +53,7 @@ class Item extends React.Component {
                     <Body>
                     </Body>
                     <Right>
-                        <Button rounded small onPress={ () => Linking.openURL(this.props.notification.getLink()) } success>
+                        <Button small onPress={ () => Linking.openURL(this.props.notification.getLink()) } success>
                             <Icon name="exit"/>
                             <Text>Xem</Text>
                         </Button>

@@ -27,7 +27,6 @@ class Item extends React.Component {
                     <Body/>
                     <Right>
                         <Button
-                            rounded
                             small
                             onPress={ () => Linking.openURL(this.props.studentPoint.getLink()) }
                             primary

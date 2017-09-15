@@ -26,7 +26,7 @@ class Deadline extends React.Component {
                     </Left>
                     <Content/>
                     <Right>
-                        <Button rounded small onPress={ () => Linking.openURL(this.props.deadline.getLink()) } success>
+                        <Button small onPress={ () => Linking.openURL(this.props.deadline.getLink()) } success>
                             <Icon name="exit"/>
                             <Text>Xem</Text>
                         </Button>
