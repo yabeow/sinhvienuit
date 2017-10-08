@@ -88,30 +88,21 @@ class LoginForm extends React.Component {
                         <View style={ styles.LogoView }>
                             <Animated.Image style={{ height: this.imageSize, width: this.imageSize }} source={ require('../../assets/logo.png') }/>
                         </View>
-                        {
-                            (this.state.showTitle === true) &&
-                            <Text style={{
-                                color: 'white',
-                                textShadowColor: 'grey',
-                                textShadowOffset: {height: 2, width: 2},
-                                fontSize: 25,
-                                fontWeight: 'bold',
-                                paddingBottom: 30
-                            }}>SINH VIÊN UIT</Text>
-                        }
-                        <Item style={{ backgroundColor: 'white' }} regular label="Username" error={ this.state.errorUsername }>
-                            <Icon active name='person' style={{ color: 'grey' }}/>
-                            <Input placeholder='Mã số sinh viên' onChangeText={ (username) => this.setState({ username }) }/>
+                        <Item style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }} rounded label="Username" error={ this.state.errorUsername }>
+                            <Icon active name='person' style={{ color: 'white' }}/>
+                            <Input keyboardType='numeric' placeholderTextColor={'white'} style={{ color: 'white' }} placeholder='Mã số sinh viên' onChangeText={ (username) => this.setState({ username }) }/>
                         </Item>
-                        <Item style={{ backgroundColor: 'white' }} regular label="Password" error={ this.state.errorPassword }>
-                            <Icon active name='lock' style={{ color: 'grey' }}/>
-                            <Input placeholder='Mật khẩu chứng thực' secureTextEntry onChangeText={ (password) => this.setState({password}) }/>
+                        <Item style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)', top: 5 }} rounded label="Password" error={ this.state.errorPassword }>
+                            <Icon active name='lock' style={{ color: 'white' }}/>
+                            <Input placeholderTextColor={'white'} style={{ color: 'white' }} placeholder='Mật khẩu chứng thực' secureTextEntry onChangeText={ (password) => this.setState({password}) }/>
                         </Item>
                         <View style={{ ...styles.Button }}>
-                            <Button title="Đăng nhập" onPress={ this.Login.bind(this) } disabled={(this.props.loading === true) ? true : null}>
-                                {(this.props.loading === true) ? <Spinner color='white'/> : null}
-                                <Text style={{ textAlign: 'center' }}> Đăng nhập </Text>
-                            </Button>
+                            {
+                                (this.props.loading === true) ? <Spinner color='white'/> : 
+                                <Button bordered light title="Đăng nhập" onPress={ this.Login.bind(this) } disabled={(this.props.loading === true) ? true : null}>
+                                    <Text style={{ textAlign: 'center' }}> Đăng nhập </Text>
+                                </Button>
+                            }
                         </View>
                     </KeyboardAvoidingView>
                     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
