@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Image, View, TouchableOpacity, Linking, KeyboardAvoidingView, Animated, Keyboard } from 'react-native';
+import { Image, View, TouchableOpacity, Linking, KeyboardAvoidingView, Animated, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { Root, Container, Spinner, Button, Text, Toast, Icon, Item, Input } from 'native-base';
 import { FORGOT_PASSWORD_RESET_PAGE } from '../../config/config';
 import styles from './Style';
@@ -83,8 +83,9 @@ class LoginForm extends React.Component {
     render() {
         return (
             <Image style={{ flex: 1, width: null, height: null, resizeMode: 'cover', }} source={bgSrc}>
-                <Container style = { styles.Container }>
-                    <KeyboardAvoidingView style = { styles.FormView } behavior="padding">
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                <Container style={ styles.Container }>
+                    <KeyboardAvoidingView style={ styles.FormView } behavior="padding">
                         <View style={ styles.LogoView }>
                             <Animated.Image style={{ height: this.imageSize, width: this.imageSize }} source={ require('../../assets/logo.png') }/>
                         </View>
@@ -114,6 +115,7 @@ class LoginForm extends React.Component {
                         </TouchableOpacity>
                     </View>
                 </Container>
+                </TouchableWithoutFeedback>
             </Image>
         );
     }
