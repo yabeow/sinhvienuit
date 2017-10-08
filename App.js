@@ -199,7 +199,7 @@ export default class extends React.Component {
                         <Container>
                             <StatusBar
                                 backgroundColor={ styles.statusBarColor }
-                                barStyle={ styles.iosStatusbar }
+                                barStyle="light-content"
                             />
                             <RootScreen />
                         </Container>
