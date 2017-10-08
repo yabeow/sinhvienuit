@@ -20,7 +20,7 @@ export class LoginReducer extends Login {
     }
     LOGOUT() {
         //Clear cookies
-        Cookie.clearAll((err, res) => {});
+        Cookie.clearAll();
         return this.set('loggedIn', false);
     }
 }

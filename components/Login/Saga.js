@@ -153,7 +153,7 @@ function* getPageSaga(action) {
                 //Nếu yêu cầu đăng nhập nhưng chưa đăng nhập.
                 if (checkLoggedIn(response) === false) {
                     //Xóa toàn bộ cookie.
-                    Cookie.clearAll((err, res) => {});
+                    Cookie.clearAll();
                     let username = yield select(state => state.login.username);
                     let password = yield select(state => state.login.password);
                     let loggedIn = yield call(loginSaga, login(action.source, username, password));
