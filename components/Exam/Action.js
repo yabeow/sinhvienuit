@@ -5,38 +5,38 @@ export const SET_EXAM_ERROR = 'SET_EXAM_ERROR';
 export const SET_EXAM_LOADING = 'SET_EXAM_LOADING';
 
 export function getExam() {
-    return {
-        type: GET_EXAM
-    }
+  return {
+    type: GET_EXAM,
+  };
 }
 
-//Hàm nhận dữ liệu trả về từ hàm fetch.
-export function getExamResult(endPoint: false, data: false, error: false) {
-    return {
-        type: GET_EXAM_RESULT,
-        endPoint: endPoint,
-        data: data,
-        error: error
-    }
+// Hàm nhận dữ liệu trả về từ hàm fetch.
+export function getExamResult(endPoint = false, data = false, error = false) {
+  return {
+    type: GET_EXAM_RESULT,
+    endPoint,
+    data,
+    error,
+  };
 }
 
 export function addExam(exam) {
-    return {
-        type: ADD_EXAM,
-        exam: exam
-    }
+  return {
+    type: ADD_EXAM,
+    exam,
+  };
 }
 
 export function setExamError(error) {
-    return {
-        type: SET_EXAM_ERROR,
-        error: error
-    }
+  return {
+    type: SET_EXAM_ERROR,
+    error,
+  };
 }
 
 export function setExamLoading(loading) {
-    return {
-        type: SET_EXAM_LOADING,
-        loading: loading
-    }
+  return {
+    type: SET_EXAM_LOADING,
+    loading,
+  };
 }

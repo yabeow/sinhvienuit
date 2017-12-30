@@ -1,9 +1,10 @@
-const { Record, List } = require('immutable');
 import { getTimeFormat } from '../../utils';
 import {
-    DAA_COURSE_NOTIFICATION_LINK_TEMPLATE,
-    OEP_COURSE_NOTIFICATION_LINK_TEMPLATE
+  DAA_COURSE_NOTIFICATION_LINK_TEMPLATE,
+  OEP_COURSE_NOTIFICATION_LINK_TEMPLATE,
 } from '../../config/config';
+
+const { Record, List } = require('immutable');
 /*
     source: Nguồn thông báo. VD: DAA, OEP,...
     id: Id thông báo.
@@ -14,36 +15,33 @@ import {
     isNotified: Người dùng đọc thông báo hay chưa?
  */
 const InitGeneralNotification = Record({
-    source: false,
-    id: false,
-    title: false,
-    link: false,
-    content: false,
-    createTime: false,
-    isNotified: false
+  source: '',
+  id: false,
+  title: '',
+  link: '',
+  content: '',
+  createTime: false,
+  isNotified: false,
 });
 export class GeneralNotification extends InitGeneralNotification {
-    constructor(data) {
-        super(data);
-    }
-    getSource() {
-        return this.source;
-    }
-    getId() {
-        return this.id;
-    }
-    getTitle() {
-        return this.title;
-    }
-    getLink() {
-        return this.link;
-    }
-    getContent() {
-        return this.content;
-    }
-    getCreateTime(format = false) {
-        return getTimeFormat(this.createTime, format);
-    }
+  getSource() {
+    return this.source;
+  }
+  getId() {
+    return this.id;
+  }
+  getTitle() {
+    return this.title;
+  }
+  getLink() {
+    return this.link;
+  }
+  getContent() {
+    return this.content;
+  }
+  getCreateTime(format = false) {
+    return getTimeFormat(this.createTime, format);
+  }
 }
 
 /*
@@ -58,55 +56,53 @@ export class GeneralNotification extends InitGeneralNotification {
     createTime: Giờ đăng.
  */
 const InitCourseNotification = Record({
-    type: false,
-    source: false,
-    id: false,
-    code: false,
-    title: false,
-    startTime: false,
-    endTime: false,
-    room: false,
-    createTime: false
+  type: '',
+  source: '',
+  id: false,
+  code: '',
+  title: '',
+  startTime: false,
+  endTime: false,
+  room: '',
+  createTime: false,
 });
 export class CourseNotification extends InitCourseNotification {
-    constructor(data) {
-        super(data);
+  getType() {
+    return this.type;
+  }
+  getSource() {
+    return this.source;
+  }
+  getId() {
+    return this.id;
+  }
+  getCode() {
+    return this.code;
+  }
+  getTitle() {
+    return this.title;
+  }
+  getStartTime(format = false) {
+    return getTimeFormat(this.startTime, format);
+  }
+  getEndTime(format = false) {
+    return getTimeFormat(this.endTime, format);
+  }
+  getRoom() {
+    return this.room;
+  }
+  getCreateTime(format = false) {
+    return getTimeFormat(this.createTime, format);
+  }
+  getLink() {
+    if (this.source === 'DAA') {
+      return DAA_COURSE_NOTIFICATION_LINK_TEMPLATE + this.id;
     }
-    getType() {
-        return this.type;
+    if (this.source === 'OEP') {
+      return OEP_COURSE_NOTIFICATION_LINK_TEMPLATE + this.id;
     }
-    getSource() {
-        return this.source;
-    }
-    getId() {
-        return this.id;
-    }
-    getCode() {
-        return this.code;
-    }
-    getTitle() {
-        return this.title;
-    }
-    getStartTime(format = false) {
-        return getTimeFormat(this.startTime, format);
-    }
-    getEndTime(format = false) {
-        return getTimeFormat(this.endTime, format);
-    }
-    getRoom() {
-        return this.room;
-    }
-    getCreateTime(format = false) {
-        return getTimeFormat(this.createTime, format);
-    }
-    getLink() {
-        if (this.source === "DAA") {
-            return DAA_COURSE_NOTIFICATION_LINK_TEMPLATE + this.id;
-        }
-        if (this.source === "OEP") {
-            return OEP_COURSE_NOTIFICATION_LINK_TEMPLATE + this.id;
-        }
-    }
+    return '';
+  }
 }
 
 /*
@@ -116,73 +112,65 @@ export class CourseNotification extends InitCourseNotification {
     error: Chứa thông tin lỗi.
  */
 const InitListNotification = Record({
-    listGeneralNotifications: List(),
-    listCourseNotifications: List(),
-    loading: false,
-    error: false
+  listGeneralNotifications: List(),
+  listCourseNotifications: List(),
+  loading: false,
+  error: '',
 });
 export default class ListNotifications extends InitListNotification {
-    constructor(data) {
-        super(data);
+  getAllNotifications() {
+    return this.listGeneralNotifications.merge(this.listCourseNotifications).toArray();
+  }
+  getGeneralNotifications() {
+    return this.listGeneralNotifications.toArray();
+  }
+  getCourseNotifications(code = false) {
+    if (code) {
+      return this.listCourseNotifications.filter(item => item.getCode() === code).toArray();
     }
-    getAllNotifications() {
-        return this.listGeneralNotifications.merge(this.listCourseNotifications).toArray();
+    return this.listCourseNotifications.toArray();
+  }
+  // Trả về số lượng thông báo nghỉ/bù chưa học.
+  getNumberOfCoursesNotifications(code = false, data = false) {
+    let count = 0;
+    let countData;
+    if (data) {
+      countData = data;
+    } else {
+      countData = this.listCourseNotifications;
     }
-    getGeneralNotifications() {
-        return this.listGeneralNotifications.toArray();
-    }
-    getCourseNotifications(code = false) {
+    const currentTime = new Date();
+    countData.forEach((item) => {
+      if (item.getEndTime() > currentTime) {
         if (code) {
-            return this.listCourseNotifications.filter(function (item) {
-                return item.getCode() === code;
-            }).toArray();
+          if (item.getCode() === code) {
+            count += 1;
+          }
+        } else {
+          count += 1;
         }
-        return this.listCourseNotifications.toArray();
-    }
-    //Trả về số lượng thông báo nghỉ/bù chưa học.
-    getNumberOfCoursesNotifications(code = false, data = false) {
-        let count     = 0;
-        let countData;
-        if (data) {
-            countData = data;
+      }
+    });
+    return count;
+  }
+  getNumberOfCourseNotificationsList() {
+    const returnList = {};
+    const currentTime = new Date();
+    this.listCourseNotifications.forEach((item) => {
+      if (item.getEndTime() >= currentTime) {
+        if (typeof returnList[item.getCode()] !== 'undefined') {
+          returnList[item.getCode()] += 1;
+        } else {
+          returnList[item.getCode()] = 1;
         }
-        else {
-            countData = this.listCourseNotifications;
-        }
-        let currentTime = new Date();
-        countData.forEach(function(item) {
-            if (item.getEndTime() > currentTime) {
-                if (code) {
-                    if (item.getCode() === code) {
-                        count++;
-                    }
-                }
-                else {
-                    count++;
-                }
-            }
-        });
-        return count;
-    }
-    getNumberOfCourseNotificationsList() {
-        let returnList = {};
-        let currentTime = new Date();
-        this.listCourseNotifications.map(function(item) {
-           if (item.getEndTime() >= currentTime) {
-               if (returnList.hasOwnProperty(item.getCode())) {
-                   returnList[item.getCode()]++;
-               }
-               else {
-                   returnList[item.getCode()] = 1;
-               }
-           }
-        });
-        return returnList;
-    }
-    getLoading() {
-        return this.loading;
-    }
-    getError() {
-        return this.error;
-    }
+      }
+    });
+    return returnList;
+  }
+  getLoading() {
+    return this.loading;
+  }
+  getError() {
+    return this.error;
+  }
 }

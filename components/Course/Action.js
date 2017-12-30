@@ -6,52 +6,52 @@ export const SET_COURSE_LOADING = 'SET_COURSE_LOADING';
 export const GET_COURSE_RESULT = 'GET_COURSE_RESULT';
 export const SET_COURSE_ERROR = 'SET_COURSE_ERROR';
 
-//Thêm một môn học
+// Thêm một môn học
 export function addCourse(course) {
-    return {
-        type: ADD_COURSE,
-        course: course
-    }
+  return {
+    type: ADD_COURSE,
+    course,
+  };
 }
-//Xóa một môn hoc dựa theo mã.
+// Xóa một môn hoc dựa theo mã.
 export function removeCourse(code) {
-    return {
-        type: REMOVE_COURSE,
-        code: code
-    }
+  return {
+    type: REMOVE_COURSE,
+    code,
+  };
 }
-//Xóa tất cả các môn học.
+// Xóa tất cả các môn học.
 export function removeAllCourses() {
-    return {
-        type: REMOVE_ALL_COURSES
-    }
+  return {
+    type: REMOVE_ALL_COURSES,
+  };
 }
-//Hàm fetch dữ liệu môn học.
+// Hàm fetch dữ liệu môn học.
 export function getCourse() {
-    return {
-        type: GET_COURSE
-    }
+  return {
+    type: GET_COURSE,
+  };
 }
-//Set loading.
+// Set loading.
 export function setCourseLoading(loading) {
-    return {
-        type: SET_COURSE_LOADING,
-        loading: loading
-    }
+  return {
+    type: SET_COURSE_LOADING,
+    loading,
+  };
 }
-//Hàm nhận dữ liệu trả về từ hàm fetch.
-export function getCourseResult(endPoint: false, data: false, error: false) {
-    return {
-        type: GET_COURSE_RESULT,
-        endPoint: endPoint,
-        data: data,
-        error: error
-    }
+// Hàm nhận dữ liệu trả về từ hàm fetch.
+export function getCourseResult(endPoint = false, data = false, error = false) {
+  return {
+    type: GET_COURSE_RESULT,
+    endPoint,
+    data,
+    error,
+  };
 }
-//Set lỗi.
+// Set lỗi.
 export function setCourseError(value) {
-    return {
-        type: SET_COURSE_ERROR,
-        error: value
-    }
+  return {
+    type: SET_COURSE_ERROR,
+    error: value,
+  };
 }
