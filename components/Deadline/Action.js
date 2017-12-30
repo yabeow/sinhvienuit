@@ -7,60 +7,60 @@ export const SET_DEADLINE_LOADING = 'SET_DEADLINE_LOADING';
 export const GET_DEADLINE_RESULT = 'GET_DEADLINE_RESULT';
 export const SET_DEADLINE_ERROR = 'SET_DEADLINE_ERROR';
 
-//Hàm fetch deadline.
+// Hàm fetch deadline.
 export function getDeadline() {
-    return {
-        type: GET_DEADLINE
-    }
+  return {
+    type: GET_DEADLINE,
+  };
 }
 export function getDeadlineInformation(id) {
-    return {
-        type: GET_DEADLINE_INFORMATION,
-        id: id
-    }
+  return {
+    type: GET_DEADLINE_INFORMATION,
+    id,
+  };
 }
-//Thêm một deadline.
+// Thêm một deadline.
 export function addDeadline(deadline) {
-    return {
-        type: ADD_DEADLINE,
-        deadline: deadline
-    }
+  return {
+    type: ADD_DEADLINE,
+    deadline,
+  };
 }
-//Kiểm tra trạng thái của deadline.
+// Kiểm tra trạng thái của deadline.
 export function getDeadlineStatus(id) {
-    return {
-        type: GET_DEADLINE_STATUS,
-        id: id
-    }
+  return {
+    type: GET_DEADLINE_STATUS,
+    id,
+  };
 }
-//Set trạng thái cho deadline.
+// Set trạng thái cho deadline.
 export function setDeadlineStatus(id, status) {
-    return {
-        type: SET_DEADLINE_STATUS,
-        id: id,
-        status: status
-    }
+  return {
+    type: SET_DEADLINE_STATUS,
+    id,
+    status,
+  };
 }
-//Set loading.
+// Set loading.
 export function setDeadlineLoading(loading = false) {
-    return {
-        type: SET_DEADLINE_LOADING,
-        loading: loading
-    }
+  return {
+    type: SET_DEADLINE_LOADING,
+    loading,
+  };
 }
-//Hàm nhận dữ liệu trả về từ hàm fetch.
+// Hàm nhận dữ liệu trả về từ hàm fetch.
 export function getDeadlineResult(endPoint = false, data = false, error = false) {
-    return {
-        type: GET_DEADLINE_RESULT,
-        endPoint: endPoint,
-        data: data,
-        error: error
-    }
+  return {
+    type: GET_DEADLINE_RESULT,
+    endPoint,
+    data,
+    error,
+  };
 }
-//Set error.
+// Set error.
 export function setDeadlineError(error = false) {
-    return {
-        type: SET_DEADLINE_ERROR,
-        error: error
-    }
+  return {
+    type: SET_DEADLINE_ERROR,
+    error,
+  };
 }

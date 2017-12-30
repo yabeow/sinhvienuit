@@ -1,33 +1,39 @@
 {
-	"name": "SinhVienUIT",
-	"version": "0.1.0",
-	"private": true,
-	"scripts": {
-		"start": "node node_modules/react-native/local-cli/cli.js start",
-		"test": "jest"
-	},
-	"dependencies": {
-		"html-entities": "^1.2.1",
-		"immutable": "^3.8.1",
-		"moment": "^2.18.1",
-		"native-base": "^2.2.1",
-		"react": "16.0.0-alpha.12",
-		"react-native": "0.46.3",
-		"react-native-app-intro": "^1.1.5",
-		"react-native-cookies": "^3.1.0",
-		"react-native-loading-spinner-overlay": "^0.5.1",
-		"react-navigation": "^1.0.0-beta.11",
-		"react-redux": "^5.0.5",
-		"redux": "^3.7.2",
-		"redux-saga": "^0.15.4"
-	},
-	"devDependencies": {
-		"babel-jest": "20.0.3",
-		"babel-preset-react-native": "2.0.0",
-		"jest": "20.0.4",
-		"react-test-renderer": "16.0.0-alpha.12"
-	},
-	"jest": {
-		"preset": "react-native"
-	}
+  "name": "SinhVienUIT",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "color": "^2.0.1",
+    "html-entities": "^1.2.1",
+    "immutable": "^3.8.1",
+    "moment": "^2.18.1",
+    "native-base": "^2.2.1",
+    "react": "16.0.0-alpha.12",
+    "react-native": "0.46.3",
+    "react-native-app-intro": "^1.1.5",
+    "react-native-cookies": "^3.1.0",
+    "react-native-loading-spinner-overlay": "^0.5.1",
+    "react-navigation": "^1.0.0-beta.11",
+    "react-redux": "^5.0.5",
+    "redux": "^3.7.2",
+    "redux-devtools-extension": "^2.13.2",
+    "redux-saga": "^0.15.4"
+  },
+  "devDependencies": {
+    "babel-jest": "20.0.3",
+    "babel-preset-react-native": "2.0.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.5.1",
+    "jest": "20.0.4",
+    "react-test-renderer": "16.0.0-alpha.12"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
 }

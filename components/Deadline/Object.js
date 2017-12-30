@@ -1,7 +1,7 @@
-const { Record, List } = require('immutable');
 import { getTimeFormat } from '../../utils';
 import { MOODLE_HOMEPAGE, MOODLE_DEADLINE_LINK_TEMPLATE } from '../../config/config';
 
+const { Record, List } = require('immutable');
 /*
     id: Id deadline.
     code: Mã môn học có deadline.
@@ -12,104 +12,96 @@ import { MOODLE_HOMEPAGE, MOODLE_DEADLINE_LINK_TEMPLATE } from '../../config/con
  */
 
 const InitDeadline = Record({
-    id: false,
-    code: false,
-    title: false,
-    content: false,
-    time: false,
-    status: false
+  id: false,
+  code: '',
+  title: '',
+  content: '',
+  time: false,
+  status: false,
 });
 export class Deadline extends InitDeadline {
-    constructor(data) {
-        super(data);
+  getId() {
+    return this.id;
+  }
+  getCode() {
+    return this.code;
+  }
+  getLink() {
+    return MOODLE_HOMEPAGE + MOODLE_DEADLINE_LINK_TEMPLATE + this.id;
+  }
+  getTitle() {
+    return this.title;
+  }
+  getTime(format = false) {
+    if (format) {
+      return getTimeFormat(this.time, format);
     }
-    getId() {
-        return this.id;
-    }
-    getCode() {
-        return this.code;
-    }
-    getLink() {
-        return MOODLE_HOMEPAGE + MOODLE_DEADLINE_LINK_TEMPLATE + this.id;
-    }
-    getTitle() {
-        return this.title;
-    }
-    getTime(format = false) {
-        if (format) {
-            return getTimeFormat(this.time, format);
-        }
-        return this.time;
-    }
-    getStatus() {
-        return this.status;
-    }
+    return this.time;
+  }
+  getStatus() {
+    return this.status;
+  }
 }
 const InitDeadlineList = Record({
-    listDeadlines: List(),
-    loading: false,
-    error: false
+  listDeadlines: List(),
+  loading: false,
+  error: '',
 });
 export default class DeadlineList extends InitDeadlineList {
-    constructor(data) {
-        super(data);
+  getAllDeadlines() {
+    return this.listDeadlines.toArray();
+  }
+  getDeadlines(code) {
+    if (code) {
+      return this.listDeadlines.filter(item => item.getCode() === code).toArray();
     }
-    getDeadlines(code) {
+    return this.listDeadlines.toArray();
+  }
+  getListId() {
+    const returnList = {};
+    this.listDeadlines.forEach((item) => {
+      returnList[item.getId()] = true;
+    });
+    return returnList;
+  }
+  getNumberOfDeadlines(code = false, data = false) {
+    let count = 0;
+    let countData;
+    if (data) {
+      countData = data;
+    } else {
+      countData = this.listDeadlines;
+    }
+    countData.forEach((item) => {
+      if (item.status === 0) {
         if (code) {
-            return this.listDeadlines.filter(function(item) {
-                return item.getCode() === code;
-            }).toArray();
+          if (code === item.getCode()) {
+            count += 1;
+          }
+        } else {
+          count += 1;
         }
-        return this.listDeadlines.toArray();
-    }
-    getListId() {
-        let returnList = {};
-        this.listDeadlines.forEach(function(item) {
-            returnList[item.getId()] = true;
-        });
-        return returnList;
-    }
-    getNumberOfDeadlines(code = false, data = false) {
-        let count = 0;
-        let countData;
-        if (data) {
-            countData = data;
+      }
+    });
+    return count;
+  }
+  getNumberOfDeadlinesList() {
+    const returnList = {};
+    this.listDeadlines.map((item) => {
+      if (item.status === 0) {
+        if (returnList.hasOwnProperty(item.getCode())) {
+          returnList[item.getCode()] += 1;
+        } else {
+          returnList[item.getCode()] = 1;
         }
-        else {
-            countData = this.listDeadlines;
-        }
-        countData.forEach(function(item) {
-            if (item.status === 0) {
-                if (code) {
-                    if (code === item.getCode()) {
-                        count++;
-                    }
-                }
-                else {
-                    count++;
-                }
-            }
-        });
-        return count;
-    }
-    getNumberOfDeadlinesList() {
-        let returnList = {};
-        this.listDeadlines.map(function(item) {
-            if (item.status === 0) {
-                if (returnList.hasOwnProperty(item.getCode())) {
-                    returnList[item.getCode()]++;
-                }
-                else {
-                    returnList[item.getCode()] = 1;
-                }
-            }
-        });
-        return returnList;
-    }
-    getLoading() {
-        return this.loading;
-    }
-    getError() {
-        return this.error;
-    }
+      }
+    });
+    return returnList;
+  }
+  getLoading() {
+    return this.loading;
+  }
+  getError() {
+    return this.error;
+  }
 }

@@ -6,27 +6,24 @@ const { Record } = require('immutable');
     loggedIn: Đánh dấu đăng nhập hay chưa?
  */
 const InitLogin = Record({
-    username: false,
-    password: false,
-    loading: false,
-    error: false,
-    loggedIn: false
+  username: '',
+  password: '',
+  loading: false,
+  error: '',
+  loggedIn: false,
 });
 
 export default class Login extends InitLogin {
-    constructor(data) {
-        super(data);
-    }
-    getUsername() {
-        return this.username;
-    }
-    getPassword() {
-        return this.password;
-    }
-    getLoading() {
-        return this.password;
-    }
-    getLoggedIn() {
-        return this.loggedIn;
-    }
+  getUsername() {
+    return this.username;
+  }
+  getPassword() {
+    return this.password;
+  }
+  getLoading() {
+    return this.password;
+  }
+  getLoggedIn() {
+    return this.loggedIn;
+  }
 }
