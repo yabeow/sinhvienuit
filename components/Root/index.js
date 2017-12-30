@@ -1,6 +1,5 @@
-import React from "react";
-import { connect } from "react-redux";
-import rootScreen from "./Root";
+import { connect } from 'react-redux';
+import rootScreen from './Root';
 
 function mapStateToProps(state) {
   return {

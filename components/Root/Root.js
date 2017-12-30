@@ -1,16 +1,22 @@
-import React from "react";
-import Intro from "../Intro";
-import Login from "../Login";
-import Navigator from "../Navigator";
+import React, { PropTypes } from 'react';
+import Intro from '../Intro';
+import Login from '../Login';
+import Navigator from '../Navigator';
 
-export default class extends React.Component {
+class Root extends React.Component {
   render() {
-    return this.props.firstTime === true ? (
-      <Intro />
-    ) : this.props.loggedIn === true ? (
-      <Navigator />
-    ) : (
-      <Login />
-    );
+    if (this.props.firstTime === true) {
+      return <Intro />;
+    } else if (this.props.loggedIn === true) {
+      return <Navigator />;
+    }
+    return <Login />;
   }
 }
+
+Root.propTypes = {
+  firstTime: PropTypes.bool.isRequired,
+  loggedIn: PropTypes.bool.isRequired,
+};
+
+export default Root;
