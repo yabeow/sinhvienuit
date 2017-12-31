@@ -16,6 +16,7 @@ import { Col, Row, Grid } from 'react-native-easy-grid';
 import MenuItem from './MenuItem';
 import logoSrc from '../../assets/logo.png';
 import bgImage from '../../assets/background-uit.png';
+import { VERSION_NUMBER } from '../../config/config';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -25,6 +26,7 @@ export default class HomeScreen extends React.Component {
     super(props);
   }
   render() {
+    const { navigation } = this.props;
     return (
       <Image style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }} source={bgImage}>
         <Container
@@ -37,18 +39,18 @@ export default class HomeScreen extends React.Component {
           }}
         >
           <Content padder>
-            <View style={styles.LogoView}>
+            <TouchableOpacity onPress={() => navigation.navigate('About')} style={styles.LogoView}>
               <Image style={styles.Logo} source={logoSrc} />
-            </View>
+            </TouchableOpacity>
             <Grid>
               <Row>
                 <Col>
-                  <TouchableOpacity onPress={() => this.props.navigation.navigate('Notification')}>
+                  <TouchableOpacity onPress={() => navigation.navigate('Notification')}>
                     <MenuItem backgroundColor="#2196F3" icon="text" text="Thông báo" />
                   </TouchableOpacity>
                 </Col>
                 <Col>
-                  <TouchableOpacity onPress={() => this.props.navigation.navigate('Course')}>
+                  <TouchableOpacity onPress={() => navigation.navigate('Course')}>
                     <MenuItem
                       backgroundColor="#673AB7"
                       icon="calendar"
@@ -61,7 +63,7 @@ export default class HomeScreen extends React.Component {
               </Row>
               <Row>
                 <Col>
-                  <TouchableOpacity onPress={() => this.props.navigation.navigate('Deadline')}>
+                  <TouchableOpacity onPress={() => navigation.navigate('Deadline')}>
                     <MenuItem
                       backgroundColor="#E91E63"
                       icon="list-box"
@@ -72,7 +74,7 @@ export default class HomeScreen extends React.Component {
                   </TouchableOpacity>
                 </Col>
                 <Col>
-                  <TouchableOpacity onPress={() => this.props.navigation.navigate('StudentPoint')}>
+                  <TouchableOpacity onPress={() => navigation.navigate('StudentPoint')}>
                     <MenuItem
                       backgroundColor="#4CAF50"
                       icon="body"
@@ -85,17 +87,23 @@ export default class HomeScreen extends React.Component {
               </Row>
               <Row>
                 <Col>
-                  <TouchableOpacity onPress={() => this.props.navigation.navigate('Exam')}>
+                  <TouchableOpacity onPress={() => navigation.navigate('Exam')}>
                     <MenuItem backgroundColor="#607D8B" icon="school" text="Lịch thi" />
                   </TouchableOpacity>
                 </Col>
                 <Col>
-                  <TouchableOpacity onPress={() => this.props.navigation.navigate('User')}>
+                  <TouchableOpacity onPress={() => navigation.navigate('User')}>
                     <MenuItem backgroundColor="#009688" icon="contact" text="Tài khoản" />
                   </TouchableOpacity>
                 </Col>
               </Row>
             </Grid>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('About')}
+              style={styles.versionView}
+            >
+              <Text style={{ color: 'white' }}>v{VERSION_NUMBER}</Text>
+            </TouchableOpacity>
           </Content>
         </Container>
       </Image>
@@ -115,5 +123,11 @@ styles = StyleSheet.create({
   container: {
     flex: 1,
     margin: 15,
+  },
+  versionView: {
+    marginTop: 10,
+    flexDirection: 'row',
+    alignSelf: 'center',
+    alignItems: 'center',
   },
 });
