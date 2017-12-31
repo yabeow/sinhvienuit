@@ -19,7 +19,7 @@ import {
 } from 'native-base';
 import { backAction } from '../../config/config';
 import Spinner from 'react-native-loading-spinner-overlay';
-import bgImage from '../../assets/background-profile.jpg';
+import bgImage from '../../assets/background-uit.png';
 
 class User extends React.Component {
   constructor(props) {
@@ -107,17 +107,21 @@ class User extends React.Component {
               )}
             </View>
             <Card>
-              <CardItem>
-                <Text>Họ tên: {this.props.user.getName()}</Text>
+              <CardItem style={styles.cardView}>
+                <Text>Họ tên</Text>
+                <Text>{this.props.user.getName()}</Text>
               </CardItem>
-              <CardItem>
-                <Text>Ngày sinh: {this.props.user.getBirthDay()}</Text>
+              <CardItem style={styles.cardView}>
+                <Text>Ngày sinh</Text>
+                <Text>{this.props.user.getBirthDay()}</Text>
               </CardItem>
-              <CardItem>
-                <Text>Khoa: {this.props.user.getFaculty()}</Text>
+              <CardItem style={styles.cardView}>
+                <Text>Khoa</Text>
+                <Text>{this.props.user.getFaculty()}</Text>
               </CardItem>
-              <CardItem>
-                <Text>Hệ đào tạo: {this.props.user.getTrainType()}</Text>
+              <CardItem style={styles.cardView}>
+                <Text>Hệ đào tạo</Text>
+                <Text>{this.props.user.getTrainType()}</Text>
               </CardItem>
             </Card>
             <Card>
@@ -167,6 +171,7 @@ const styles = {
     flex: 1,
     margin: 15,
   },
+  cardView: { flexDirection: 'row', justifyContent: 'space-between' },
 };
 User.propTypes = {
   user: PropTypes.object.isRequired,
