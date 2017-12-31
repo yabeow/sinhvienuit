@@ -16,8 +16,6 @@ export default StyleSheet.create({
   },
   Container: {
     flex: 1,
-    height: null,
-    width: null,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 45,
@@ -28,9 +26,12 @@ export default StyleSheet.create({
     height: 160,
   },
   LogoView: {
-    paddingBottom: 2,
+    flex: 0,
+    paddingBottom: 10,
   },
   Button: {
+    alignItems: 'center',
+    justifyContent: 'center',
     paddingTop: 10,
   },
   Text: {

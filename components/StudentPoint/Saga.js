@@ -27,7 +27,6 @@ function* getPointInformation(data = false) {
       yield put(setFinalPoint(finalPoint));
     }
     const listPoints = parseStudentPointFromHtml(data.data);
-    console.log(listPoints);
     yield all(listPoints.map(item => put(addPoint(item))));
   } catch (e) {
     yield put(setPointError(e.message));

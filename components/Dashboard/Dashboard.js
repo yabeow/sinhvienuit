@@ -14,6 +14,7 @@ import {
 } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import MenuItem from './MenuItem';
+import logoSrc from '../../assets/logo.png';
 import bgImage from '../../assets/background-uit.png';
 
 export default class HomeScreen extends React.Component {
@@ -37,20 +38,7 @@ export default class HomeScreen extends React.Component {
         >
           <Content padder>
             <View style={styles.LogoView}>
-              <Image style={styles.Logo} source={require('../../assets/logo.png')} />
-              <Text
-                style={{
-                  color: 'white',
-                  textShadowColor: 'grey',
-                  textShadowOffset: { height: 2, width: 2 },
-                  fontSize: 25,
-                  fontWeight: 'bold',
-                  top: 10,
-                  paddingBottom: 30,
-                }}
-              >
-                SINH VIÊN UIT
-              </Text>
+              <Image style={styles.Logo} source={logoSrc} />
             </View>
             <Grid>
               <Row>
