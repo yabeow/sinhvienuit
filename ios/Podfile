@@ -6,7 +6,6 @@ def shared_pods
   # use_frameworks!
 
   # Pods for SinhVienUIT
-  pod 'ReactNativePermissions', :path => '../node_modules/react-native-permissions'
   pod 'react-native-calendar-events', :path =>'../node_modules/react-native-calendar-events'
   pod 'react-native-cookies', :path =>'../node_modules/react-native-cookies/ios'
   pod 'Yoga', :path => '../node_modules/react-native/ReactCommon/yoga'

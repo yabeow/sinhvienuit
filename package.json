@@ -20,7 +20,6 @@
     "react-native-calendar-events": "^1.4.3",
     "react-native-cookies": "^3.2.0",
     "react-native-loading-spinner-overlay": "^0.5.1",
-    "react-native-permissions": "^1.0.6",
     "react-navigation": "^1.0.0-beta.11",
     "react-redux": "^5.0.5",
     "redux": "^3.7.2",

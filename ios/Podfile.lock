@@ -38,8 +38,6 @@ PODS:
     - React/Core
   - React/RCTWebSocket (0.46.3):
     - React/Core
-  - ReactNativePermissions (1.0.6):
-    - React
   - Yoga (0.46.3.React)
 
 DEPENDENCIES:
@@ -59,7 +57,6 @@ DEPENDENCIES:
   - React/RCTText (from `../node_modules/react-native`)
   - React/RCTVibration (from `../node_modules/react-native`)
   - React/RCTWebSocket (from `../node_modules/react-native`)
-  - ReactNativePermissions (from `../node_modules/react-native-permissions`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 EXTERNAL SOURCES:
@@ -69,8 +66,6 @@ EXTERNAL SOURCES:
     :path: ../node_modules/react-native-calendar-events
   react-native-cookies:
     :path: ../node_modules/react-native-cookies/ios
-  ReactNativePermissions:
-    :path: ../node_modules/react-native-permissions
   Yoga:
     :path: ../node_modules/react-native/ReactCommon/yoga
 
@@ -78,9 +73,8 @@ SPEC CHECKSUMS:
   React: c6559d70350c38f4cde7f66e3f483d6cce815ae3
   react-native-calendar-events: 8862eb7e31fd124ae3a26b12e2d9daba9eccd355
   react-native-cookies: 5e7888e2176e281137be32ea7838c443e5cc6548
-  ReactNativePermissions: bf462424ca7823d1b8e6cb463184d6e7f151971b
   Yoga: 6f09f11a4ab92e5afb4869268167f8c01c6ae906
 
-PODFILE CHECKSUM: e6ed70696337b5e64d7726ff3d617e3f730695e0
+PODFILE CHECKSUM: 7d6b38510da2b07da6b5fc167e19f0d179546050
 
 COCOAPODS: 1.3.1
