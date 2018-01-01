@@ -1,5 +1,5 @@
 import React from 'react';
-import { AsyncStorage, StatusBar } from 'react-native';
+import { AsyncStorage, StatusBar, ImageBackground, View } from 'react-native';
 import { Container, Root } from 'native-base';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
@@ -17,6 +17,7 @@ import jsonToObject from './utils/jsonToObject';
 import { APP_STATE_SAVE_KEY } from './config/config';
 // Style
 import styles from './Style';
+import bgImage from './assets/background-uit.png';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -77,11 +78,24 @@ export default class extends React.Component {
   render() {
     if (this.state.isStoreLoading) {
       return (
-        <Spinner
-          visible={this.state.isStoreLoading}
-          textContent="Loading..."
-          textStyle={{ color: '#FFF' }}
-        />
+        <ImageBackground
+          style={{ flex: 1 }}
+          imageStyle={{ resizeMode: 'cover', width: null, height: null }}
+          source={bgImage}
+        >
+          <View
+            style={{
+              flex: 1,
+              backgroundColor: 'rgba(0, 0, 0, 0.2)',
+            }}
+          >
+            <Spinner
+              visible={this.state.isStoreLoading}
+              textContent="Loading..."
+              textStyle={{ color: '#FFF' }}
+            />
+          </View>
+        </ImageBackground>
       );
     }
     // Đăng kí hàm handleAppStateChange vào sự kiện thay đổi state của store.
