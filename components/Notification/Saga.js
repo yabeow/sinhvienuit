@@ -111,7 +111,7 @@ function* getCourseOepNotification(data = false) {
   try {
     if (typeof data.endPoint === 'undefined') {
       yield put(setNotificationLoading(true));
-      yield put(getPage('OEP', '/thong-bao-nghi-hoc-hoc-bu?page=3', false, getNotificationResult()));
+      yield put(getPage('OEP', '/thong-bao-nghi-hoc-hoc-bu?page=0', false, getNotificationResult()));
     }
     // Request xảy ra lỗi.
     if (data.error) {
@@ -160,7 +160,7 @@ function* watchRequests(data) {
         return yield fork(getGeneralOepNotification, data);
       case '/thong-bao-nghi-bu':
         return yield fork(getCourseDaaNotification, data);
-      case '/thong-bao-nghi-hoc-hoc-bu?page=3':
+      case '/thong-bao-nghi-hoc-hoc-bu?page=0':
         return yield fork(getCourseOepNotification, data);
       default:
         return false;
