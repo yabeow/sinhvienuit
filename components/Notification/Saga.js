@@ -10,6 +10,8 @@ import {
   setNotificationError,
   addGeneralNotification,
   addCourseNotification,
+  ADD_COURSE_NOTIFICATION_SAGA,
+  addCourseNotificationSaga,
 } from './Action';
 import {
   parseDaaGeneralNotificationFromHtml,
@@ -17,6 +19,8 @@ import {
   parseDaaCourseNotificationFromHtml,
   parseOepCourseNotificationFromHtml,
 } from './Utils';
+
+import { addCalendarEvent, getCalendarEvents } from '../../utils';
 
 // Fetch tất cả thông báo.
 function* getNotification() {
@@ -92,7 +96,7 @@ function* getCourseDaaNotification(data = false) {
     const listCoursesCode = yield select(state => state.courses.getListOfCoursesCode());
     yield all(notifications.map((item) => {
       if (typeof listCoursesCode[item.getCode()] !== 'undefined') {
-        return put(addCourseNotification(item));
+        return put(addCourseNotificationSaga(item));
       }
       return () => {};
     }));
@@ -107,7 +111,7 @@ function* getCourseOepNotification(data = false) {
   try {
     if (typeof data.endPoint === 'undefined') {
       yield put(setNotificationLoading(true));
-      yield put(getPage('OEP', '/thong-bao-nghi-hoc-hoc-bu?page=0', false, getNotificationResult()));
+      yield put(getPage('OEP', '/thong-bao-nghi-hoc-hoc-bu?page=3', false, getNotificationResult()));
     }
     // Request xảy ra lỗi.
     if (data.error) {
@@ -118,7 +122,7 @@ function* getCourseOepNotification(data = false) {
     const listCoursesCode = yield select(state => state.courses.getListOfCoursesCode());
     yield all(notifications.map((item) => {
       if (typeof listCoursesCode[item.getCode()] !== 'undefined') {
-        return put(addCourseNotification(item));
+        return put(addCourseNotificationSaga(item));
       }
       return () => {};
     }));
@@ -126,6 +130,25 @@ function* getCourseOepNotification(data = false) {
     yield put(setNotificationError(e.message));
   }
   return yield put(setNotificationLoading(false));
+}
+
+function* sagaAddCourseNotification(action) {
+  try {
+    let { notification } = action;
+    const event = notification.getEvent();
+    console.log(event);
+    const listDeviceEvent = yield call(getCalendarEvents, event.startDate, event.endDate);
+    const index = listDeviceEvent.findIndex(item => item.title === event.title && item.localtion === event.localtion);
+    if (index === -1) {
+      const eventId = yield call(addCalendarEvent, event);
+      notification = notification.set('eventId', eventId);
+    } else {
+      notification = notification.set('eventId', listDeviceEvent[index].id);
+    }
+    yield put(addCourseNotification(notification));
+  } catch (e) {
+    yield put(setNotificationError(e.message));
+  }
 }
 
 function* watchRequests(data) {
@@ -137,7 +160,7 @@ function* watchRequests(data) {
         return yield fork(getGeneralOepNotification, data);
       case '/thong-bao-nghi-bu':
         return yield fork(getCourseDaaNotification, data);
-      case '/thong-bao-nghi-hoc-hoc-bu?page=0':
+      case '/thong-bao-nghi-hoc-hoc-bu?page=3':
         return yield fork(getCourseOepNotification, data);
       default:
         return false;
@@ -151,4 +174,5 @@ export default function* () {
   yield takeLatest(GET_GENERAL_NOTIFICATION, getGeneralNotification);
   yield takeLatest(GET_COURSE_NOTIFICATION, getCourseNotification);
   yield takeEvery(GET_NOTIFICATION_RESULT, watchRequests);
+  yield takeEvery(ADD_COURSE_NOTIFICATION_SAGA, sagaAddCourseNotification);
 }

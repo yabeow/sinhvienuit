@@ -42,8 +42,9 @@ function* sagaAddExam(action) {
     if (index === -1) {
       const eventId = yield call(addCalendarEvent, event);
       exam = exam.set('eventId', eventId);
+    } else {
+      exam = exam.set('eventId', listDeviceEvent[index].id);
     }
-    exam = exam.set('eventId', listDeviceEvent[index].id);
     yield put(addExam(exam));
   } catch (e) {
     yield put(setExamError(e.message));

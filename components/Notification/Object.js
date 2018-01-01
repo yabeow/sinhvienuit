@@ -65,6 +65,7 @@ const InitCourseNotification = Record({
   endTime: false,
   room: '',
   createTime: false,
+  eventId: '',
 });
 export class CourseNotification extends InitCourseNotification {
   getType() {
@@ -102,6 +103,21 @@ export class CourseNotification extends InitCourseNotification {
       return OEP_COURSE_NOTIFICATION_LINK_TEMPLATE + this.id;
     }
     return '';
+  }
+  getEventId() {
+    return this.eventId;
+  }
+  getEvent() {
+    let title = this.getTitle();
+    title = title.replace('Thông báo ', '');
+    title = title.charAt(0).toUpperCase() + title.slice(1);
+    return {
+      title,
+      location: this.getRoom(),
+      startDate: this.getStartTime('YYYY-MM-DD[T]HH:mm:ss.sss[Z]'),
+      endDate: this.getEndTime('YYYY-MM-DD[T]HH:mm:ss.sss[Z]'),
+      url: this.getLink(),
+    };
   }
 }
 
