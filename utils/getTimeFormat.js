@@ -5,7 +5,7 @@ require('../config/moment-time');
 // Hàm trả về ngày giờ theo format.
 export default function (time, format) {
   if (format) {
-    const moment = Moment(time);
+    const moment = Moment.utc(time);
     switch (format) {
       case 'calendar':
         return moment.calendar();
