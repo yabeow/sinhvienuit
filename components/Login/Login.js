@@ -12,7 +12,7 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import { Root, Container, Spinner, Button, Text, Toast, Icon, Item, Input } from 'native-base';
-import { FORGOT_PASSWORD_RESET_PAGE } from '../../config/config';
+import { FORGOT_PASSWORD_RESET_PAGE, POLICY_PAGE } from '../../config/config';
 import styles from './Style';
 import { LOGO_SIZE_DEFAULT, LOGO_SIZE_SMALL } from './Style';
 import bgSrc from '../../assets/background-uit.png';
@@ -167,7 +167,7 @@ class LoginForm extends React.Component {
               )}
             </View>
             <View style={{ top: 40, justifyContent: 'center', alignItems: 'center' }}>
-              <TouchableOpacity onPress={() => Linking.openURL()}>
+              <TouchableOpacity onPress={() => Linking.openURL(POLICY_PAGE)}>
                 <Text style={styles.Text}>Chính sách & Điều khoản</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => Linking.openURL(FORGOT_PASSWORD_RESET_PAGE)}>
