@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Alert, Image } from 'react-native';
+import { Alert, Image, ImageBackground } from 'react-native';
 import {
   Header,
   Title,
@@ -91,7 +91,11 @@ class User extends React.Component {
           textContent={'Loading...'}
           textStyle={{ color: '#FFF' }}
         />
-        <Image style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }} source={bgImage}>
+        <ImageBackground
+          style={{ flex: 1 }}
+          imageStyle={{ width: null, height: null, resizeMode: 'cover' }}
+          source={bgImage}
+        >
           <Content style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }} padder>
             <View
               style={{
@@ -149,7 +153,7 @@ class User extends React.Component {
               </ListItem>
             </Card>
           </Content>
-        </Image>
+        </ImageBackground>
       </Container>
     );
   }

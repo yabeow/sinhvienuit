@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import {
   Platform,
   Image,
+  ImageBackground,
   View,
   TouchableOpacity,
   Linking,
@@ -108,9 +109,11 @@ class LoginForm extends React.Component {
   }
   render() {
     return (
-      <Image
+      <ImageBackground
         style={{
           flex: 1,
+        }}
+        imageStyle={{
           width: null,
           height: null,
           resizeMode: 'cover',
@@ -173,7 +176,7 @@ class LoginForm extends React.Component {
             </View>
           </Container>
         </TouchableWithoutFeedback>
-      </Image>
+      </ImageBackground>
     );
   }
 }

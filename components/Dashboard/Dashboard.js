@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { Image, ImageBackground, TouchableOpacity, StyleSheet } from 'react-native';
 import {
   Button,
   Container,
@@ -28,7 +28,11 @@ export default class HomeScreen extends React.Component {
   render() {
     const { navigation } = this.props;
     return (
-      <Image style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }} source={bgImage}>
+      <ImageBackground
+        style={{ flex: 1 }}
+        imageStyle={{ width: null, height: null, resizeMode: 'cover' }}
+        source={bgImage}
+      >
         <Container
           style={{
             flex: 1,
@@ -106,7 +110,7 @@ export default class HomeScreen extends React.Component {
             </TouchableOpacity>
           </Content>
         </Container>
-      </Image>
+      </ImageBackground>
     );
   }
 }
