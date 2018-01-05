@@ -83,11 +83,11 @@ export class CourseNotification extends InitCourseNotification {
   getTitle() {
     return this.title;
   }
-  getStartTime(format = false) {
-    return getTimeFormat(this.startTime, format);
+  getStartTime(format = false, utc = false) {
+    return getTimeFormat(this.startTime, format, utc);
   }
-  getEndTime(format = false) {
-    return getTimeFormat(this.endTime, format);
+  getEndTime(format = false, utc = false) {
+    return getTimeFormat(this.endTime, format, utc);
   }
   getRoom() {
     return this.room;
@@ -114,8 +114,8 @@ export class CourseNotification extends InitCourseNotification {
     return {
       title,
       location: this.getRoom(),
-      startDate: this.getStartTime('YYYY-MM-DD[T]HH:mm:ss.sss[Z]'),
-      endDate: this.getEndTime('YYYY-MM-DD[T]HH:mm:ss.sss[Z]'),
+      startDate: this.getStartTime('YYYY-MM-DD[T]HH:mm:ss.sss[Z]', true),
+      endDate: this.getEndTime('YYYY-MM-DD[T]HH:mm:ss.sss[Z]', true),
       url: this.getLink(),
     };
   }

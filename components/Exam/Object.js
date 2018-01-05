@@ -12,12 +12,12 @@ export class Exam extends InitExam {
   getCode() {
     return this.code;
   }
-  getTime(format = false) {
-    return getTimeFormat(this.time, format);
+  getTime(format = false, utc = false) {
+    return getTimeFormat(this.time, format, utc);
   }
-  getEndTime(format = false) {
+  getEndTime(format = false, utc = false) {
     // Vì không có thông tin nên mặc định thời gian thì là 1h.
-    return getTimeFormat(this.time.setHours(this.time.getHours() + 1), format);
+    return getTimeFormat(this.time.setHours(this.time.getHours() + 1), format, utc);
   }
   getRoom() {
     return this.room;
@@ -29,8 +29,8 @@ export class Exam extends InitExam {
     return {
       title: `Thi môn ${this.getCode()}`,
       location: this.getRoom(),
-      startDate: this.getTime('YYYY-MM-DD[T]HH:mm:ss.sss[Z]'),
-      endDate: this.getEndTime('YYYY-MM-DD[T]HH:mm:ss.sss[Z]'),
+      startDate: this.getTime('YYYY-MM-DD[T]HH:mm:ss.sss[Z]', true),
+      endDate: this.getEndTime('YYYY-MM-DD[T]HH:mm:ss.sss[Z]', true),
     };
   }
 }
