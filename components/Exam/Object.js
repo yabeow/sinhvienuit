@@ -1,4 +1,5 @@
 import { getTimeFormat } from '../../utils';
+import { lang } from 'moment';
 
 const { Record, List } = require('immutable');
 
@@ -9,6 +10,14 @@ const InitExam = new Record({
   eventId: '',
 });
 export class Exam extends InitExam {
+  constructor(data) {
+    const dataFix = data;
+    // Convert time from string to datetime.
+    if (typeof data.time === 'string') {
+      dataFix.time = new Date(Date.parse(dataFix.time));
+    }
+    super(dataFix);
+  }
   getCode() {
     return this.code;
   }

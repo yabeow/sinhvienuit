@@ -24,6 +24,13 @@ const InitGeneralNotification = Record({
   isNotified: false,
 });
 export class GeneralNotification extends InitGeneralNotification {
+  constructor(data) {
+    const fixData = data;
+    if (typeof fixData.createTime === 'string') {
+      fixData.createTime = new Date(Date.parse(fixData.createTime));
+    }
+    super(fixData);
+  }
   getSource() {
     return this.source;
   }
@@ -68,6 +75,19 @@ const InitCourseNotification = Record({
   eventId: '',
 });
 export class CourseNotification extends InitCourseNotification {
+  constructor(data) {
+    const fixData = data;
+    if (typeof fixData.startTime === 'string') {
+      fixData.startTime = new Date(Date.parse(fixData.startTime));
+    }
+    if (typeof fixData.endTime === 'string') {
+      fixData.endTime = new Date(Date.parse(fixData.endTime));
+    }
+    if (typeof fixData.createTime === 'string') {
+      fixData.createTime = new Date(Date.parse(fixData.createTime));
+    }
+    super(fixData);
+  }
   getType() {
     return this.type;
   }

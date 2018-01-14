@@ -23,11 +23,11 @@ class Exam extends React.Component {
             <Text>{this.props.exam.getCode()}</Text>
           </Badge>
           {this.props.exam.getTime() < new Date() ? (
-            <Badge>
+            <Badge success>
               <Text>Đã thi</Text>
             </Badge>
           ) : (
-            <Badge>
+            <Badge warning>
               <Text>Chưa thi</Text>
             </Badge>
           )}

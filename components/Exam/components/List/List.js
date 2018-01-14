@@ -7,11 +7,14 @@ import { ANDROID_PULL_TO_REFRESH_COLOR } from '../../../../config/config';
 
 class List extends React.Component {
   render() {
-    const { exams } = this.props;
+    let { exams } = this.props;
     // Sắp xếp theo thứ tự thời gian còn lại tăng dần.
-    exams.sort((a, b) => {
-      const timeA = a.getTime();
-      const timeB = b.getTime();
+    const currentTime = new Date().getTime();
+    exams = exams.sort((a, b) => {
+      let timeA = a.getTime().getTime();
+      let timeB = b.getTime().getTime();
+      if (timeA > currentTime) timeA -= 9999999999;
+      if (timeB > currentTime) timeB -= 9999999999;
       if (timeA < timeB) return -1;
       if (timeA > timeB) return 1;
       return 0;
@@ -23,7 +26,7 @@ class List extends React.Component {
       return (
         <FlatList
           ListEmptyComponent={<EmptyList />}
-          data={this.props.exams}
+          data={exams}
           horizontal={false}
           keyExtractor={item => item.getCode() + item.getTime()}
           renderItem={({ item }) => <Exam exam={item} />}
@@ -38,9 +41,7 @@ class List extends React.Component {
       );
     }
     return (
-      <View>
-        {this.props.exams.map(item => <Exam exam={item} key={item.getCode() + item.getTime()} />)}
-      </View>
+      <View>{exams.map(item => <Exam exam={item} key={item.getCode() + item.getTime()} />)}</View>
     );
   }
 }

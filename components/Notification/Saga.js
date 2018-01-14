@@ -136,7 +136,6 @@ function* sagaAddCourseNotification(action) {
   try {
     let { notification } = action;
     const event = notification.getEvent();
-    console.log(event);
     const listDeviceEvent = yield call(getCalendarEvents, event.startDate, event.endDate);
     const index = listDeviceEvent.findIndex(item => item.title === event.title && item.localtion === event.localtion);
     if (index === -1) {

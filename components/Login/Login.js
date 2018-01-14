@@ -47,7 +47,7 @@ class LoginForm extends React.Component {
         type: 'warning',
         duration: 10000,
       });
-      this.props.setLoginError(false);
+      this.props.setLoginError('');
     }
   }
   componentWillUnmount() {
