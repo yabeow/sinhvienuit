@@ -53,9 +53,6 @@ class LoginForm extends React.Component {
   componentWillUnmount() {
     //Fetch dữ liệu sau khi đăng nhập.
     this.props.getCourse();
-    this.props.getDeadline();
-    this.props.getNotification();
-    this.props.getStudentPoint();
     this.props.getUser();
 
     //Remove listener
@@ -195,8 +192,5 @@ LoginForm.propTypes = {
   setPassword: PropTypes.func.isRequired,
   getUser: PropTypes.func.isRequired,
   getCourse: PropTypes.func.isRequired,
-  getDeadline: PropTypes.func.isRequired,
-  getNotification: PropTypes.func.isRequired,
-  getStudentPoint: PropTypes.func.isRequired,
 };
 export default LoginForm;

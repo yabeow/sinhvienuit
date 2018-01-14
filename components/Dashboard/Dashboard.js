@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Image, ImageBackground, TouchableOpacity, StyleSheet } from 'react-native';
 import {
   Button,
@@ -18,12 +18,16 @@ import logoSrc from '../../assets/logo.png';
 import bgImage from '../../assets/background-uit.png';
 import { VERSION_NUMBER } from '../../config/config';
 
-export default class HomeScreen extends React.Component {
+class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
   constructor(props) {
     super(props);
+    this.props.getDeadline();
+    this.props.getNotification();
+    this.props.getExam();
+    this.props.getStudentPoint();
   }
   render() {
     const { navigation } = this.props;
@@ -114,7 +118,17 @@ export default class HomeScreen extends React.Component {
     );
   }
 }
-styles = StyleSheet.create({
+
+HomeScreen.propTypes = {
+  getExam: PropTypes.func.isRequired,
+  getDeadline: PropTypes.func.isRequired,
+  getNotification: PropTypes.func.isRequired,
+  getStudentPoint: PropTypes.func.isRequired,
+};
+
+export default HomeScreen;
+
+const styles = StyleSheet.create({
   LogoView: {
     justifyContent: 'center',
     alignItems: 'center',
