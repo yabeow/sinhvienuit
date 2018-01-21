@@ -29,6 +29,12 @@ export class Course extends InitCourse {
   getCode() {
     return this.code;
   }
+  // Môn lý thuyết: 1, môn thực hành: 2
+  getType() {
+    const regex = /\.\d$/;
+    if (regex.test(this.getCode())) return 2;
+    return 1;
+  }
   getName() {
     return this.name;
   }
@@ -41,38 +47,35 @@ export class Course extends InitCourse {
   getDayOfWeek() {
     return this.dayOfWeek;
   }
-  getLessonStart(format = false) {
+  getLessonStart(format = false, utc = false) {
     if (format) {
-      return getTimeFormat(getCourseTimeByLesson(this.lessonStart), format);
+      return getTimeFormat(getCourseTimeByLesson(this.lessonStart), format, utc);
     }
     return this.lessonStart;
   }
-  getLessonEnd(format = false) {
+  getLessonEnd(format = false, utc = false) {
     if (format) {
       const lessonEnd = getCourseTimeByLesson(this.lessonEnd);
       lessonEnd.setMinutes(lessonEnd.getMinutes() + 45);
-      return getTimeFormat(lessonEnd, format);
+      return getTimeFormat(lessonEnd, format, utc);
     }
     return this.lessonEnd;
   }
-  getStartTime(format = false) {
-    return getTimeFormat(this.startTime, format);
+  getStartTime(format = false, utc = false) {
+    return getTimeFormat(this.startTime, format, utc);
   }
-  getEndTime(format = false) {
-    return getTimeFormat(this.endTime, format);
+  getEndTime(format = false, utc = false) {
+    return getTimeFormat(this.endTime, format, utc);
   }
   // Thời gian bắt đầu môn học trong tuần hiện tại.
-  getCurrentTimeStart(format = false) {
+  getCurrentTimeStart(format = false, utc = false) {
     if (this.lessonStart && this.dayOfWeek) {
-      const currentTime = new Date();
       const startTime = new Date(this.startTime);
-      let currentTimeStart;
-      if (startTime < currentTime) {
-        currentTimeStart = getCurrentMonday();
-        currentTimeStart.setDate(currentTimeStart.getDate() + (this.dayOfWeek - 2));
-      } else {
-        currentTimeStart = new Date(this.getStartTime());
-      }
+      const currentTimeStart = getCurrentMonday();
+      currentTimeStart.setDate(currentTimeStart.getDate() + (this.dayOfWeek - 2));
+      do {
+        currentTimeStart.setDate(currentTimeStart.getDate() + 7);
+      } while (currentTimeStart < startTime);
       const temp = getCourseTimeByLesson(this.lessonStart);
       currentTimeStart.setHours(temp.getHours());
       currentTimeStart.setMinutes(temp.getMinutes());
@@ -80,22 +83,19 @@ export class Course extends InitCourse {
       if (currentTimeStart < now) {
         currentTimeStart.setDate(currentTimeStart.getDate() + 7);
       }
-      return getTimeFormat(currentTimeStart, format);
+      return getTimeFormat(currentTimeStart, format, utc);
     }
     return false;
   }
   // Thời gian kết thúc môn học trong tuần hiện tại.
-  getCurrentTimeEnd(format = false) {
+  getCurrentTimeEnd(format = false, utc = false) {
     if (this.lessonEnd && this.dayOfWeek) {
-      const currentTime = new Date();
       const startTime = new Date(this.startTime);
-      let currentTimeEnd;
-      if (startTime < currentTime) {
-        currentTimeEnd = getCurrentMonday();
-        currentTimeEnd.setDate(currentTimeEnd.getDate() + (this.dayOfWeek - 2));
-      } else {
-        currentTimeEnd = new Date(this.getStartTime());
-      }
+      const currentTimeEnd = getCurrentMonday();
+      currentTimeEnd.setDate(currentTimeEnd.getDate() + (this.dayOfWeek - 2));
+      do {
+        currentTimeEnd.setDate(currentTimeEnd.getDate() + 7);
+      } while (currentTimeEnd < startTime);
       const temp = getCourseTimeByLesson(this.lessonEnd);
       currentTimeEnd.setHours(temp.getHours());
       currentTimeEnd.setMinutes(temp.getMinutes() + 45);
@@ -103,9 +103,27 @@ export class Course extends InitCourse {
       if (currentTimeEnd < now) {
         currentTimeEnd.setDate(currentTimeEnd.getDate() + 7);
       }
-      return getTimeFormat(currentTimeEnd, format);
+      return getTimeFormat(currentTimeEnd, format, utc);
     }
     return false;
+  }
+
+  getEvent(weekNumber = 0) {
+    const dayNumber = weekNumber * 7;
+    const startTime = this.getCurrentTimeStart();
+    startTime.setDate(startTime.getDate() + dayNumber);
+    const endTime = this.getCurrentTimeEnd();
+    endTime.setDate(endTime.getDate() + dayNumber);
+    let title = `${this.getName()} (${this.getCode()})`;
+    if (this.getType() === 2) {
+      title = `Thực hành môn ${title}`;
+    } else title = `Học môn ${title}`;
+    return {
+      title,
+      location: this.getRoom(),
+      startDate: getTimeFormat(startTime.toISOString(), 'YYYY-MM-DD[T]HH:mm:ss.sss[Z]', true),
+      endDate: getTimeFormat(endTime.toISOString(), 'YYYY-MM-DD[T]HH:mm:ss.sss[Z]', true),
+    };
   }
 }
 

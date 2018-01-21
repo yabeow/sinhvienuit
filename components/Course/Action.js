@@ -1,4 +1,6 @@
 export const ADD_COURSE = 'ADD_COURSE';
+export const ADD_COURSE_CALENDAR = 'ADD_COURSE_CALENDAR';
+export const ADD_LIST_COURSE_CALENDAR = 'ADD_LIST_COURSE_CALENDAR';
 export const REMOVE_COURSE = 'REMOVE_COURSE';
 export const REMOVE_ALL_COURSES = 'REMOVE_ALL_COURSES';
 export const GET_COURSE = 'GET_COURSE';
@@ -11,6 +13,20 @@ export function addCourse(course) {
   return {
     type: ADD_COURSE,
     course,
+  };
+}
+// Thêm một môn học vào Lịch
+export function addCourseCalendar(course = {}) {
+  return {
+    type: ADD_COURSE_CALENDAR,
+    course,
+  };
+}
+// Thêm một danh sách môn học vào Lịch
+export function addListCourseCalendar(listCourses = []) {
+  return {
+    type: ADD_LIST_COURSE_CALENDAR,
+    listCourses,
   };
 }
 // Xóa một môn hoc dựa theo mã.
