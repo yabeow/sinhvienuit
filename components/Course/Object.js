@@ -118,11 +118,16 @@ export class Course extends InitCourse {
     if (this.getType() === 2) {
       title = `Thực hành môn ${title}`;
     } else title = `Học môn ${title}`;
+    let notes = `Tiết bắt đầu: ${this.getLessonStart()}${'\n'}Tiết kết thúc: ${this.getLessonEnd()}`;
+    if (this.getTeacher()) {
+      notes = `${notes} ${'\n'}Giảng viên: ${this.getTeacher()}`;
+    }
     return {
       title,
       location: this.getRoom(),
       startDate: getTimeFormat(startTime.toISOString(), 'YYYY-MM-DD[T]HH:mm:ss.sss[Z]', true),
       endDate: getTimeFormat(endTime.toISOString(), 'YYYY-MM-DD[T]HH:mm:ss.sss[Z]', true),
+      notes,
     };
   }
 }
