@@ -55,13 +55,15 @@ export default class HomeScreen extends React.Component {
               <Body>
                 <Text>
                   Sinh viên UIT là một ứng dụng mã nguồn mở và phi lợi nhuận được tạo ra nhằm mục
-                  đích hỗ trợ các sinh viên ĐH CNTT - ĐHQG TP.HCM trong việc học tập và sinh hoạt
+                  đích hỗ trợ các sinh viên ĐH CNTT - ĐHQG TP.HCM(*) trong việc học tập và sinh hoạt
                   tại trường.
                 </Text>
                 <Text />
                 <Text>Tác giả: Bùi Đại Gia - SV khóa 2016 ngành An toàn thông tin.</Text>
                 <Text />
                 <Text>"Một món quà dành cho Trâu, heo, chó, mèo và chuột".</Text>
+                <Text />
+                <Text style={{ fontSize: 12 }}>(*) Ứng dụng là một sản phẩm độc lập, không chính thức. Mọi bản quyền về thương hiệu và hình ảnh thuộc về trường ĐH Công nghệ thông tin - ĐHQG TP.HCM.</Text>
               </Body>
             </CardItem>
             <CardItem style={styles.buttonContainer}>
