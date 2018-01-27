@@ -7,7 +7,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "babel-eslint": "^8.1.2",
     "color": "^2.0.1",
     "eslint": "^4.14.0",
     "html-entities": "^1.2.1",
@@ -27,6 +26,7 @@
     "redux-saga": "^0.15.4"
   },
   "devDependencies": {
+    "babel-eslint": "^8.2.1",
     "babel-jest": "20.0.3",
     "babel-preset-react-native": "2.0.0",
     "eslint-config-airbnb": "^16.1.0",

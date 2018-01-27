@@ -1,4 +1,5 @@
 module.exports = {
+  parser: 'babel-eslint',
   extends: 'airbnb',
   rules: {
     'no-use-before-define': ['error', { functions: false, classes: false, variables: false }],
