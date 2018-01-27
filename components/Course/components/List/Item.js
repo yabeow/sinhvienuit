@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { CardItem, Right, Text, Card, Icon } from 'native-base';
+import { CardItem, Right, Text, Card, Icon, Badge, View } from 'native-base';
 import CountNotification from './CountNotification';
 
 class Item extends React.Component {
@@ -11,8 +11,21 @@ class Item extends React.Component {
         onPress={() => navigation.navigate('CourseDetails', { course: this.props.course })}
       >
         <Card>
-          <CardItem>
-            <Text>{course.getName()}</Text>
+          <CardItem style={{ flex: 1, justifyContent: 'space-between' }}>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                flexWrap: 'wrap',
+              }}
+            >
+              {course.getType() === 2 && (
+                <Badge info style={{ marginRight: 5 }}>
+                  <Text>Thực hành</Text>
+                </Badge>
+              )}
+              <Text>{course.getName()}</Text>
+            </View>
             <Right>
               <Icon name="arrow-forward" />
             </Right>
