@@ -46,6 +46,7 @@ class List extends React.Component {
     }
   }
   render() {
+    const { addListCourseCalendar } = this.props;
     let courses = this.props.courses.sort(function(a, b) {
       let timeA = a.getCurrentTimeEnd();
       let timeB = b.getCurrentTimeEnd();
@@ -66,7 +67,11 @@ class List extends React.Component {
           <Body>
             <Title>Môn học</Title>
           </Body>
-          <Right />
+          <Right>
+            <Button onPress={() => addListCourseCalendar(this.props.courses)} transparent>
+              <Icon name="calendar" />
+            </Button>
+          </Right>
         </Header>
         <View padder style={{ flex: 1 }}>
           <FlatList
