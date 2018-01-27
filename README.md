@@ -10,6 +10,8 @@ $ cd sinhvienuit
 
 $ npm install (hoặc yarn install)
 
+$ cd ./ios && pod install
+
 $ react-native run-android hoặc react-native run-ios
 
 ```

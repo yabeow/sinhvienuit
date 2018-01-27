@@ -19,7 +19,7 @@ function* loginSaga(action) {
     if (action.source === 'MOODLE') {
       const postData = `username=${encodeURIComponent(action.username)}&password=${encodeURIComponent(action.password)}`;
       response = yield call(request, action.source, '/login/index.php', postData);
-      if (response.status < 200 && response.status > 300) {
+      if (response.status < 200 || response.status > 300) {
         yield put(setLoginError(errors.networkError));
         return false;
       }
@@ -34,7 +34,7 @@ function* loginSaga(action) {
       // Lấy form_build_id.
       response = yield call(request, action.source, '');
       // Kiểm tra lỗi mạng.
-      if (response.status < 200 && response.status > 300) {
+      if (response.status < 200 || response.status > 300) {
         yield put(setLoginError(errors.networkError));
         return false;
       }
@@ -60,7 +60,7 @@ function* loginSaga(action) {
       // Request đăng nhập.
       response = yield call(request, action.source, '', postData);
       // Kiểm tra lỗi mạng.
-      if (response.status < 200 && response.status > 300) {
+      if (response.status < 200 || response.status > 300) {
         yield put(setLoginError(errors.networkError));
         return false;
       }
@@ -80,7 +80,7 @@ function* loginSaga(action) {
       response = yield call(request, action.source, '');
     } else response = yield call(request, action.source, '/home');
     // Kiểm tra lỗi mạng.
-    if (response.status < 200 && response.status > 300) {
+    if (response.status < 200 || response.status > 300) {
       yield put(setLoginLoading(false));
       yield put(setLoginError(errors.networkError));
       return false;
@@ -113,7 +113,7 @@ function* loginSaga(action) {
     // Request đăng nhập.
     response = yield call(request, action.source, '', postData);
     // Kiểm tra lỗi mạng.
-    if (response.status < 200 && response.status > 300) {
+    if (response.status < 200 || response.status > 300) {
       yield put(setLoginLoading(false));
       yield put(setLoginError(errors.networkError));
       return false;
@@ -142,7 +142,7 @@ function* getPageSaga(action) {
     let response;
     callback.error = false;
     response = yield call(request, action.source, action.endPoint);
-    if (response.status < 200 && response.status > 300) {
+    if (response.status < 200 || response.status > 300) {
       // Lỗi mạng?
       callback.error = errors.networkError;
     } else {
@@ -158,7 +158,7 @@ function* getPageSaga(action) {
           if (loggedIn === true) {
             // Request lại sau khi đã đăng nhập.
             response = yield call(request, action.source, action.endPoint);
-            if (response.status < 200 && response.status > 300) {
+            if (response.status < 200 || response.status > 300) {
               // Lỗi mạng?
               callback.error = errors.networkError;
             } else {
