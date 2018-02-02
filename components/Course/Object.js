@@ -71,12 +71,11 @@ export class Course extends InitCourse {
   getCurrentTimeStart(format = false, utc = false) {
     if (this.lessonStart && this.dayOfWeek) {
       const startTime = new Date(this.startTime);
-      const currentTime = new Date();
       const currentTimeStart = getCurrentMonday();
       currentTimeStart.setDate(currentTimeStart.getDate() + (this.dayOfWeek - 2));
       do {
         currentTimeStart.setDate(currentTimeStart.getDate() + 7);
-      } while (currentTimeStart < startTime || currentTimeStart < currentTime);
+      } while (currentTimeStart < startTime);
       const temp = getCourseTimeByLesson(this.lessonStart);
       currentTimeStart.setHours(temp.getHours());
       currentTimeStart.setMinutes(temp.getMinutes());
@@ -92,12 +91,11 @@ export class Course extends InitCourse {
   getCurrentTimeEnd(format = false, utc = false) {
     if (this.lessonEnd && this.dayOfWeek) {
       const startTime = new Date(this.startTime);
-      const currentTime = new Date();
       const currentTimeEnd = getCurrentMonday();
       currentTimeEnd.setDate(currentTimeEnd.getDate() + (this.dayOfWeek - 2));
       do {
         currentTimeEnd.setDate(currentTimeEnd.getDate() + 7);
-      } while (currentTimeEnd < startTime || currentTimeEnd < currentTime);
+      } while (currentTimeEnd < startTime);
       const temp = getCourseTimeByLesson(this.lessonEnd);
       currentTimeEnd.setHours(temp.getHours());
       currentTimeEnd.setMinutes(temp.getMinutes() + 45);

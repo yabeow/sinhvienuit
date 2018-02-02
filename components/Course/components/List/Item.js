@@ -15,8 +15,8 @@ class Item extends React.Component {
             <View
               style={{
                 flexDirection: 'row',
-                alignItems: 'center',
                 flexWrap: 'wrap',
+                alignItems: 'center',
               }}
             >
               {course.getType() === 2 && (
@@ -24,7 +24,7 @@ class Item extends React.Component {
                   <Text>Thực hành</Text>
                 </Badge>
               )}
-              <Text>{course.getName()}</Text>
+              <Text style={{ flex: 1, flexWrap: 'wrap' }}>{course.getName()}</Text>
             </View>
             <Right>
               <Icon name="arrow-forward" />
