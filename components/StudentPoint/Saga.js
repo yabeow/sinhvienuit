@@ -22,7 +22,6 @@ function* getPointInformation(data = false) {
       yield put(setPointLoading(false));
       return yield put(setPointError(data.error));
     }
-    console.log(data.data);
     const finalPoint = parseFinalStudentPointFromHtml(data.data);
     if (finalPoint) {
       yield put(setFinalPoint(finalPoint));
