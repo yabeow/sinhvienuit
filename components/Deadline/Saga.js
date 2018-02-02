@@ -38,6 +38,7 @@ function* getListDeadline(data = false) {
   } catch (e) {
     yield put(setDeadlineError(e.message));
   }
+  yield put(setDeadlineLoading(false));
   return undefined;
 }
 
@@ -60,6 +61,7 @@ function* getSingleDeadline(data = false) {
   } catch (e) {
     yield put(setDeadlineError(e.message));
   }
+  yield put(setDeadlineLoading(false));
   return undefined;
 }
 

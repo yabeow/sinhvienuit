@@ -13,7 +13,7 @@ export class ExamListReducer extends ListExam {
   }
   // Gán lỗi.
   SET_EXAM_ERROR({ error }) {
-    return this.set('error', error);
+    return this.set('error', error).set('loading', false);
   }
 }
 

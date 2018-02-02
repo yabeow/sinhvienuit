@@ -15,7 +15,7 @@ const InitUser = Record({
   trainType: false,
   picture: false,
   loading: false,
-  error: false,
+  error: '',
 });
 export default class User extends InitUser {
   getName() {

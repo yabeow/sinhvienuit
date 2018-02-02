@@ -21,7 +21,7 @@ export class PointListReducer extends PointList {
   }
   // Set lỗi.
   SET_POINT_ERROR({ error }) {
-    return this.set('error', error);
+    return this.set('error', error).set('loading', false);
   }
 }
 export default reducerFromClass(PointListReducer);

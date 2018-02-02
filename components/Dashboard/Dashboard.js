@@ -1,17 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Image, ImageBackground, TouchableOpacity, StyleSheet } from 'react-native';
-import {
-  Button,
-  Container,
-  Icon,
-  Content,
-  Header,
-  Title,
-  Text,
-  Left,
-  Right,
-  View,
-} from 'native-base';
+import { Container, Content, Text } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import MenuItem from './MenuItem';
 import logoSrc from '../../assets/logo.png';
@@ -124,6 +113,7 @@ HomeScreen.propTypes = {
   getDeadline: PropTypes.func.isRequired,
   getNotification: PropTypes.func.isRequired,
   getStudentPoint: PropTypes.func.isRequired,
+  navigation: PropTypes.object.isRequired,
 };
 
 export default HomeScreen;

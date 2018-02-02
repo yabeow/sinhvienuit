@@ -34,7 +34,7 @@ export class CourseListReducer extends CourseList {
   }
   // Gán lỗi.
   SET_COURSE_ERROR({ error }) {
-    return this.set('error', error);
+    return this.set('error', error).set('loading', false);
   }
 }
 export default reducerFromClass(CourseListReducer);

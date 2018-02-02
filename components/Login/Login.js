@@ -1,20 +1,17 @@
 import React, { PropTypes } from 'react';
 import {
   Platform,
-  Image,
   ImageBackground,
   View,
   TouchableOpacity,
   Linking,
-  KeyboardAvoidingView,
   Animated,
   Keyboard,
   TouchableWithoutFeedback,
 } from 'react-native';
-import { Root, Container, Spinner, Button, Text, Toast, Icon, Item, Input } from 'native-base';
+import { Container, Spinner, Button, Text, Toast, Icon, Item, Input } from 'native-base';
 import { FORGOT_PASSWORD_RESET_PAGE, POLICY_PAGE } from '../../config/config';
-import styles from './Style';
-import { LOGO_SIZE_DEFAULT, LOGO_SIZE_SMALL } from './Style';
+import styles, { LOGO_SIZE_DEFAULT, LOGO_SIZE_SMALL } from './Style';
 import bgSrc from '../../assets/background-uit.png';
 import logoImg from '../../assets/logo.png';
 
@@ -51,38 +48,38 @@ class LoginForm extends React.Component {
     }
   }
   componentWillUnmount() {
-    //Fetch dữ liệu sau khi đăng nhập.
+    // Fetch dữ liệu sau khi đăng nhập.
     this.props.getCourse();
     this.props.getUser();
 
-    //Remove listener
+    // Remove listener
     this.keyboardWillShowSub.remove();
     this.keyboardWillHideSub.remove();
   }
-  keyboardWillShow = event => {
+  keyboardWillShow = (event) => {
     Animated.timing(this.imageSize, {
       duration: event.duration,
       toValue: LOGO_SIZE_SMALL,
     }).start();
   };
 
-  keyboardWillHide = event => {
+  keyboardWillHide = (event) => {
     Animated.timing(this.imageSize, {
       duration: event.duration,
       toValue: LOGO_SIZE_DEFAULT,
     }).start();
   };
 
-  keyboardDidShow = event => {
+  keyboardDidShow = (event) => {
     Animated.timing(this.imageSize, {
       duration: event.duration,
       toValue: LOGO_SIZE_SMALL,
     }).start();
   };
 
-  keyboardDidHide = event => {
+  keyboardDidHide = (event) => {
     Animated.timing(this.imageSize, {
-      duration: 1000,
+      duration: event.duration,
       toValue: LOGO_SIZE_DEFAULT,
     }).start();
   };
@@ -94,11 +91,11 @@ class LoginForm extends React.Component {
       this.props.setPassword(this.state.password);
       this.props.login('DAA', this.state.username, this.state.password);
     } else {
-      //Lỗi username
+      // Lỗi username
       if (!this.state.username) {
         this.setState({ errorUsername: true });
       }
-      //Lỗi password
+      // Lỗi password
       if (!this.state.password) {
         this.setState({ errorPassword: true });
       }

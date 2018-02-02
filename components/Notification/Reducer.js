@@ -24,7 +24,7 @@ export class NotificationListReducer extends ListNotification {
   }
   // Set lỗi.
   SET_NOTIFICATION_ERROR({ error }) {
-    return this.set('error', error);
+    return this.set('error', error).set('loading', false);
   }
 }
 export default reducerFromClass(NotificationListReducer);
