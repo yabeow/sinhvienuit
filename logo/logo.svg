@@ -28,9 +28,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.27358956"
-     inkscape:cx="-73.295659"
-     inkscape:cy="850.16092"
+     inkscape:zoom="0.5"
+     inkscape:cx="637.15508"
+     inkscape:cy="537.86242"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -67,26 +67,26 @@
        inkscape:export-ydpi="130.048" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:86.38729095px;line-height:0.80000001;font-family:sans-serif;letter-spacing:0.1785835px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:2.19204211"
-       x="23.036745"
-       y="109.25483"
+       style="font-style:normal;font-weight:normal;font-size:91.76007843px;line-height:0.80000001;font-family:sans-serif;letter-spacing:0.18969037px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:2.32837486"
+       x="48.164326"
+       y="106.98137"
        id="text837"
-       transform="scale(1.0471419,0.95498041)"><tspan
+       transform="scale(1.0308578,0.97006591)"><tspan
          sodipodi:role="line"
-         id="tspan835"
-         x="23.036745"
-         y="109.25483"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:69.81371307px;line-height:0.80000001;font-family:'Baron Neue';-inkscape-font-specification:'Baron Neue Bold';letter-spacing:1.0798409px;fill:#ffffff;stroke-width:2.19204211">Thong</tspan><tspan
+         x="48.164326"
+         y="106.98137"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:82.43808746px;line-height:0.80000001;font-family:'Baron Neue';-inkscape-font-specification:'Baron Neue Bold';letter-spacing:1.14700091px;fill:#ffffff;stroke-width:2.32837486"
+         id="tspan839">SINH</tspan><tspan
          sodipodi:role="line"
-         x="23.036745"
-         y="178.36467"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:69.81371307px;line-height:0.80000001;font-family:'Baron Neue';-inkscape-font-specification:'Baron Neue Bold';letter-spacing:1.0798409px;fill:#ffffff;stroke-width:2.19204211"
-         id="tspan839">bao</tspan><tspan
+         x="48.164326"
+         y="180.38943"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:82.43808746px;line-height:0.80000001;font-family:'Baron Neue';-inkscape-font-specification:'Baron Neue Bold';letter-spacing:1.14700091px;fill:#ffffff;stroke-width:2.32837486"
+         id="tspan18">VIEN</tspan><tspan
          sodipodi:role="line"
-         x="23.036745"
-         y="247.4745"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:69.81371307px;line-height:0.80000001;font-family:'Baron Neue';-inkscape-font-specification:'Baron Neue Bold';letter-spacing:1.0798409px;fill:#ffffff;stroke-width:2.19204211"
-         id="tspan841">UIT</tspan></text>
+         x="48.164326"
+         y="253.7975"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:82.43808746px;line-height:0.80000001;font-family:'Baron Neue';-inkscape-font-specification:'Baron Neue Bold';letter-spacing:1.14700091px;fill:#ffffff;stroke-width:2.32837486"
+         id="tspan841">CNTT</tspan></text>
     <flowRoot
        xml:space="preserve"
        id="flowRoot21"
@@ -97,5 +97,5 @@
            height="343.58035"
            x="303.37415"
            y="541.73041" /></flowRegion><flowPara
-         id="flowPara27"></flowPara></flowRoot>  </g>
+         id="flowPara27" /></flowRoot>  </g>
 </svg>
