@@ -15,10 +15,10 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.92.2 5c3e80d, 2017-08-06"
-   sodipodi:docname="sinhvienuit-logo-app.svg"
-   inkscape:export-filename="/Users/yabeow/Pictures/Logo/sinhvienuit-logo-app.png"
-   inkscape:export-xdpi="130.048"
-   inkscape:export-ydpi="130.048">
+   sodipodi:docname="logo.svg"
+   inkscape:export-filename="/Users/yabeow/WebstormProjects/sinhvienuit/logo/logo-1024x1024.png"
+   inkscape:export-xdpi="86.698669"
+   inkscape:export-ydpi="86.698669">
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -28,9 +28,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.35"
-     inkscape:cx="840.41619"
-     inkscape:cy="509.77141"
+     inkscape:zoom="0.27358956"
+     inkscape:cx="-73.295659"
+     inkscape:cy="850.16092"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -47,7 +47,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -57,7 +57,7 @@
      id="layer1"
      transform="translate(0,3)">
     <rect
-       style="display:inline;opacity:0.83;fill:#288edd;fill-opacity:1;stroke-width:0.26458332"
+       style="display:inline;opacity:0.82999998;fill:#288edd;fill-opacity:1;stroke-width:0.26458332"
        id="rect2585"
        width="300"
        height="300"
@@ -67,25 +67,35 @@
        inkscape:export-ydpi="130.048" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:87.30524445px;line-height:0.89999998;font-family:sans-serif;letter-spacing:0.18048115px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:2.21533489"
-       x="42.622402"
-       y="106.3296"
+       style="font-style:normal;font-weight:normal;font-size:86.38729095px;line-height:0.80000001;font-family:sans-serif;letter-spacing:0.1785835px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:2.19204211"
+       x="23.036745"
+       y="109.25483"
        id="text837"
-       transform="scale(1.0557828,0.94716451)"><tspan
+       transform="scale(1.0471419,0.95498041)"><tspan
          sodipodi:role="line"
          id="tspan835"
-         x="42.622402"
-         y="106.3296"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:87.30524445px;line-height:0.89999998;font-family:'Baron Neue';-inkscape-font-specification:'Baron Neue';letter-spacing:1.09131539px;fill:#ffffff;stroke-width:2.21533489">SINH</tspan><tspan
+         x="23.036745"
+         y="109.25483"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:69.81371307px;line-height:0.80000001;font-family:'Baron Neue';-inkscape-font-specification:'Baron Neue Bold';letter-spacing:1.0798409px;fill:#ffffff;stroke-width:2.19204211">Thong</tspan><tspan
          sodipodi:role="line"
-         x="42.622402"
-         y="185.75691"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:87.30524445px;line-height:0.89999998;font-family:'Baron Neue';-inkscape-font-specification:'Baron Neue';letter-spacing:1.09131539px;fill:#ffffff;stroke-width:2.21533489"
-         id="tspan839">VIEN</tspan><tspan
+         x="23.036745"
+         y="178.36467"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:69.81371307px;line-height:0.80000001;font-family:'Baron Neue';-inkscape-font-specification:'Baron Neue Bold';letter-spacing:1.0798409px;fill:#ffffff;stroke-width:2.19204211"
+         id="tspan839">bao</tspan><tspan
          sodipodi:role="line"
-         x="42.622402"
-         y="265.1842"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:87.30524445px;line-height:0.89999998;font-family:'Baron Neue';-inkscape-font-specification:'Baron Neue';letter-spacing:1.09131539px;fill:#ffffff;stroke-width:2.21533489"
+         x="23.036745"
+         y="247.4745"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:69.81371307px;line-height:0.80000001;font-family:'Baron Neue';-inkscape-font-specification:'Baron Neue Bold';letter-spacing:1.0798409px;fill:#ffffff;stroke-width:2.19204211"
          id="tspan841">UIT</tspan></text>
-  </g>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot21"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:0.5;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"><flowRegion
+         id="flowRegion23"><rect
+           id="rect25"
+           width="237.58217"
+           height="343.58035"
+           x="303.37415"
+           y="541.73041" /></flowRegion><flowPara
+         id="flowPara27"></flowPara></flowRoot>  </g>
 </svg>

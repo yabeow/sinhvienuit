@@ -28,6 +28,8 @@
 		90D81F97D64142A5B79FD6B8 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 65B3E7C0445B4DF2934968B7 /* Ionicons.ttf */; };
 		A6C6E65D2CF7A89D4B60FB9D /* libPods-SinhVienUIT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 836C8099842370FD1A8BE3C7 /* libPods-SinhVienUIT.a */; };
 		B224F06AAD474D1388413EC1 /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E73E1F6710B146FBB31C693C /* rubicon-icon-font.ttf */; };
+		D20AB3052024057600D2F7F3 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D20AB3042024057600D2F7F3 /* Launch Screen.storyboard */; };
+		D20AB3072024065400D2F7F3 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = D20AB3062024065400D2F7F3 /* logo.png */; };
 		EEFB8024F4E343D68AF04E85 /* Roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5EDC4EE8575946F789ECDDC6 /* Roboto_medium.ttf */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +75,8 @@
 		836C8099842370FD1A8BE3C7 /* libPods-SinhVienUIT.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SinhVienUIT.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACAA33720961449BBE331E8E /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/native-base/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		BA20BCB5122243588506361E /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/native-base/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		D20AB3042024057600D2F7F3 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = "Launch Screen.storyboard"; path = "SinhVienUIT/Launch Screen.storyboard"; sourceTree = "<group>"; };
+		D20AB3062024065400D2F7F3 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = ../assets/logo.png; sourceTree = "<group>"; };
 		D5B6BBA1DAF94506B0CA2014 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/native-base/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		D65E440BF95F7EBE0A0BFE0C /* Pods-SinhVienUIT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SinhVienUIT.release.xcconfig"; path = "Pods/Target Support Files/Pods-SinhVienUIT/Pods-SinhVienUIT.release.xcconfig"; sourceTree = "<group>"; };
 		D673EC47E9F049EBBC36DA14 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/native-base/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
@@ -148,6 +152,7 @@
 		4708D4925A3A4167B5A15391 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D20AB3062024065400D2F7F3 /* logo.png */,
 				3991AA7FDE4F497C9357F03E /* Entypo.ttf */,
 				D673EC47E9F049EBBC36DA14 /* EvilIcons.ttf */,
 				ACAA33720961449BBE331E8E /* FontAwesome.ttf */,
@@ -183,6 +188,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				D20AB3042024057600D2F7F3 /* Launch Screen.storyboard */,
 				13B07FAE1A68108700A75B9A /* SinhVienUIT */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* SinhVienUITTests */,
@@ -366,10 +372,12 @@
 				190D365C99F7473CA3ED2A46 /* FontAwesome.ttf in Resources */,
 				3015CCEA92B14B659B2B6F00 /* Foundation.ttf in Resources */,
 				90D81F97D64142A5B79FD6B8 /* Ionicons.ttf in Resources */,
+				D20AB3052024057600D2F7F3 /* Launch Screen.storyboard in Resources */,
 				6245FB8F7015417C9FC84108 /* MaterialIcons.ttf in Resources */,
 				416256CE81594A1B9C7F8968 /* Octicons.ttf in Resources */,
 				EEFB8024F4E343D68AF04E85 /* Roboto_medium.ttf in Resources */,
 				2117C844D2B445F0ABBA4B96 /* Roboto.ttf in Resources */,
+				D20AB3072024065400D2F7F3 /* logo.png in Resources */,
 				B224F06AAD474D1388413EC1 /* rubicon-icon-font.ttf in Resources */,
 				83D5A16FADC34588B994BBB5 /* SimpleLineIcons.ttf in Resources */,
 				82A411CAF40A441A9E2D5E9D /* Zocial.ttf in Resources */,
@@ -634,7 +642,6 @@
 			baseConfigurationReference = 1373B1A5883224616BAB314F /* Pods-SinhVienUIT.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = PCH45T392Y;
@@ -660,7 +667,6 @@
 			baseConfigurationReference = D65E440BF95F7EBE0A0BFE0C /* Pods-SinhVienUIT.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = PCH45T392Y;
 				HEADER_SEARCH_PATHS = (

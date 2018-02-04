@@ -46,7 +46,7 @@ export default class HomeScreen extends React.Component {
               <Left>
                 <Thumbnail square style={{ backgroundColor: '#2196F3' }} source={logoSrc} />
                 <Body>
-                  <Text>Sinh viên UIT</Text>
+                  <Text>Thông báo UIT</Text>
                   <Text note>v{VERSION_NUMBER}</Text>
                 </Body>
               </Left>
@@ -54,7 +54,7 @@ export default class HomeScreen extends React.Component {
             <CardItem>
               <Body>
                 <Text>
-                  Sinh viên UIT là một ứng dụng mã nguồn mở và phi lợi nhuận được tạo ra nhằm mục
+                  Thông báo UIT là một ứng dụng mã nguồn mở và phi lợi nhuận được tạo ra nhằm mục
                   đích hỗ trợ các sinh viên ĐH CNTT - ĐHQG TP.HCM(*) trong việc học tập và sinh hoạt
                   tại trường.
                 </Text>

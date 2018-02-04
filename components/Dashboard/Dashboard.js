@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
   },
   Logo: {
     height: 160,
-    width: 160,
+    width: 220,
   },
   container: {
     flex: 1,
