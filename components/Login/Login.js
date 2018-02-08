@@ -77,9 +77,9 @@ class LoginForm extends React.Component {
     }).start();
   };
 
-  keyboardDidHide = (event) => {
+  keyboardDidHide = () => {
     Animated.timing(this.imageSize, {
-      duration: event.duration,
+      duration: 1000,
       toValue: LOGO_SIZE_DEFAULT,
     }).start();
   };
@@ -151,14 +151,14 @@ class LoginForm extends React.Component {
               {this.props.loading === true ? (
                 <Spinner color="white" />
               ) : (
-                <Button
-                  title="Đăng nhập"
-                  onPress={() => this.Login()}
-                  disabled={this.props.loading === true ? true : null}
-                >
-                  <Text style={{ textAlign: 'center' }}> Đăng nhập </Text>
-                </Button>
-              )}
+                  <Button
+                    title="Đăng nhập"
+                    onPress={() => this.Login()}
+                    disabled={this.props.loading === true ? true : null}
+                  >
+                    <Text style={{ textAlign: 'center' }}> Đăng nhập </Text>
+                  </Button>
+                )}
             </View>
             <View style={{ top: 40, justifyContent: 'center', alignItems: 'center' }}>
               <TouchableOpacity onPress={() => Linking.openURL(POLICY_PAGE)}>
