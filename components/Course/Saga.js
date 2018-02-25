@@ -1,4 +1,4 @@
-import { select, put, call, all, take, takeLatest, takeEvery } from 'redux-saga/effects';
+import { put, call, all, take, takeLatest, takeEvery } from 'redux-saga/effects';
 import {
   setCourseLoading,
   addCourse,
@@ -22,7 +22,6 @@ function* getCourse() {
     if (data.endPoint !== '/ajax-block/tkb/ajax') return;
     // Xảy ra lỗi khi request.
     if (data.error !== false) {
-      yield put(setCourseLoading(false));
       throw data.error;
     }
     data.data = JSON.parse(data.data);
@@ -30,8 +29,9 @@ function* getCourse() {
     yield all(courses.map(course => put(addCourse(course))));
   } catch (e) {
     yield put(setCourseError(e.message));
+  } finally {
+    yield put(setCourseLoading(false));
   }
-  yield put(setCourseLoading(false));
 }
 
 function* addCourseCalendarSaga({ course }) {

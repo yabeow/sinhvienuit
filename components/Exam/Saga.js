@@ -21,7 +21,6 @@ function* getExam() {
     if (data.endPoint !== '/ajax-block/lichthi/ajax') return;
     // Xảy ra lỗi khi request.
     if (data.error !== false) {
-      yield put(setExamLoading(false));
       throw data.error;
     }
     data.data = JSON.parse(data.data);
@@ -29,8 +28,9 @@ function* getExam() {
     yield all(exams.map(exam => put(addExamSaga(exam))));
   } catch (e) {
     yield put(setExamError(e.message));
+  } finally {
+    yield put(setExamLoading(false));
   }
-  yield put(setExamLoading(false));
 }
 
 function* sagaAddExam(action) {

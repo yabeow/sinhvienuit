@@ -43,15 +43,16 @@ function* getGeneralDaaNotification(data = false) {
     }
     // Request xảy ra lỗi.
     if (data.error) {
-      yield put(setNotificationLoading(false));
       return yield put(setNotificationError(data.error));
     }
     const notifications = parseDaaGeneralNotificationFromHtml(data.data);
     yield all(notifications.map(item => put(addGeneralNotification(item))));
   } catch (e) {
     yield put(setNotificationError(e.message));
+  } finally {
+    yield put(setNotificationLoading(false));
   }
-  return yield put(setNotificationLoading(false));
+  return undefined;
 }
 
 // Fetch thông báo chung từ OEP.
@@ -63,15 +64,15 @@ function* getGeneralOepNotification(data = false) {
     }
     // Request xảy ra lỗi.
     if (data.error) {
-      yield put(setNotificationLoading(false));
       return yield put(setNotificationError(data.error));
     }
     const notifications = parseOepGeneralNotificationFromHtml(data.data);
     yield all(notifications.map(item => put(addGeneralNotification(item))));
   } catch (e) {
     yield put(setNotificationError(e.message));
+  } finally {
+    yield put(setNotificationLoading(false));
   }
-  return yield put(setNotificationLoading(false));
 }
 
 // Fetch thông báo môn học.
@@ -89,7 +90,6 @@ function* getCourseDaaNotification(data = false) {
     }
     // Request xảy ra lỗi.
     if (data.error) {
-      yield put(setNotificationLoading(false));
       return yield put(setNotificationError(data.error));
     }
     const notifications = parseDaaCourseNotificationFromHtml(data.data);
@@ -102,8 +102,10 @@ function* getCourseDaaNotification(data = false) {
     }));
   } catch (e) {
     yield put(setNotificationError(e.message));
+  } finally {
+    yield put(setNotificationLoading(false));
   }
-  return yield put(setNotificationLoading(false));
+  return undefined;
 }
 
 // Fetch thông báo môn học từ OEP.
@@ -115,7 +117,6 @@ function* getCourseOepNotification(data = false) {
     }
     // Request xảy ra lỗi.
     if (data.error) {
-      yield put(setNotificationLoading(false));
       return yield put(setNotificationError(data.error));
     }
     const notifications = parseOepCourseNotificationFromHtml(data.data);
@@ -128,8 +129,10 @@ function* getCourseOepNotification(data = false) {
     }));
   } catch (e) {
     yield put(setNotificationError(e.message));
+  } finally {
+    yield put(setNotificationLoading(false));
   }
-  return yield put(setNotificationLoading(false));
+  return undefined;
 }
 
 function* sagaAddCourseNotification(action) {

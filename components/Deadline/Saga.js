@@ -21,12 +21,11 @@ function* getListDeadline(data = false) {
     }
     // Xảy ra lỗi khi request.
     if (data.error !== false) {
-      yield put(setDeadlineLoading(false));
       return yield put(setDeadlineError(data.error));
     }
     const listId = parseListDeadlineIdFromHtml(data.data);
     if (listId.length === 0) {
-      return yield put(setDeadlineLoading(false));
+      return undefined;
     }
     const listDeadlines = yield select(state => state.deadlines.getListId());
     yield all(listId.map((item) => {
@@ -37,8 +36,9 @@ function* getListDeadline(data = false) {
     }));
   } catch (e) {
     yield put(setDeadlineError(e.message));
+  } finally {
+    yield put(setDeadlineLoading(false));
   }
-  yield put(setDeadlineLoading(false));
   return undefined;
 }
 
@@ -50,18 +50,17 @@ function* getSingleDeadline(data = false) {
       return yield put(getPage('MOODLE', deadlineLink, true, getDeadlineResult()));
     }
     if (data.error !== false) {
-      yield put(setDeadlineLoading(false));
       return yield put(setDeadlineError(data.error));
     }
     const deadline = parseDeadlineFromHtml(data.data);
     if (deadline) {
       yield put(addDeadline(deadline));
     }
-    return yield put(setDeadlineLoading(false));
   } catch (e) {
     yield put(setDeadlineError(e.message));
+  } finally {
+    yield put(setDeadlineLoading(false));
   }
-  yield put(setDeadlineLoading(false));
   return undefined;
 }
 

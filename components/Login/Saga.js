@@ -81,7 +81,6 @@ function* loginSaga(action) {
     } else response = yield call(request, action.source, '/home');
     // Kiểm tra lỗi mạng.
     if (response.status < 200 || response.status > 500) {
-      yield put(setLoginLoading(false));
       yield put(setLoginError(errors.networkError));
       return false;
     }
@@ -95,12 +94,10 @@ function* loginSaga(action) {
     if (formBuildId === false) {
       // Đã đăng nhập?
       if (checkLoggedIn(response)) {
-        yield put(setLoginLoading(false));
         yield put(setLoggedIn(true));
         return true;
       }
       // Lỗi mạng?
-      yield put(setLoginLoading(false));
       yield put(setLoginError(errors.networkError));
       return false;
     }
@@ -114,14 +111,12 @@ function* loginSaga(action) {
     response = yield call(request, action.source, '', postData);
     // Kiểm tra lỗi mạng.
     if (response.status < 200 || response.status > 500) {
-      yield put(setLoginLoading(false));
       yield put(setLoginError(errors.networkError));
       return false;
     }
     response = yield apply(response, response.text);
     // Kiểm tra đăng nhập thành công.
     if (checkLoggedIn(response) === false) {
-      yield put(setLoginLoading(false));
       yield put(setLoginError(errors.credentialsError));
       return false;
     }
@@ -130,8 +125,10 @@ function* loginSaga(action) {
     return true;
   } catch (e) {
     yield put(setLoginError(e.message));
+  } finally {
+    yield put(setLoginLoading(false));
   }
-  return yield put(setLoginLoading(false));
+  return undefined;
 }
 
 // Hàm fetch dữ liệu và trả kết quả về các action.

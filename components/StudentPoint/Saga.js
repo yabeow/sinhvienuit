@@ -19,7 +19,6 @@ function* getPointInformation(data = false) {
     }
     // Xảy ra lỗi khi request.
     if (data.error !== false) {
-      yield put(setPointLoading(false));
       return yield put(setPointError(data.error));
     }
     const finalPoint = parseFinalStudentPointFromHtml(data.data);
@@ -30,8 +29,10 @@ function* getPointInformation(data = false) {
     yield all(listPoints.map(item => put(addPoint(item))));
   } catch (e) {
     yield put(setPointError(e.message));
+  } finally {
+    yield put(setPointLoading(false));
   }
-  return yield put(setPointLoading(false));
+  return undefined;
 }
 
 export default function* () {

@@ -17,19 +17,20 @@ import {
   Card,
   CardItem,
 } from 'native-base';
-import { backAction } from '../../config/config';
 import Spinner from 'react-native-loading-spinner-overlay';
+import { backAction } from '../../config/config';
 import bgImage from '../../assets/background-uit.png';
+import noAvatar from '../../assets/noavatar.jpg';
 
 class User extends React.Component {
+  static navigationOptions = {
+    header: null,
+  };
   constructor(props) {
     super(props);
     this.logout = this.logout.bind(this);
     this.updateInformation = this.updateInformation.bind(this);
   }
-  static navigationOptions = {
-    header: null,
-  };
   componentWillReceiveProps(nextProps) {
     if (nextProps.user.getError()) {
       Toast.show({
@@ -40,16 +41,14 @@ class User extends React.Component {
         duration: 10000,
       });
       this.props.setUserError(false);
-    } else {
-      if (nextProps.user.getLoading() === false && this.props.user.getLoading() === true) {
-        Toast.show({
-          text: 'Cập nhật thông tin thành công',
-          position: 'bottom',
-          buttonText: 'Bỏ qua',
-          type: 'success',
-          duration: 10000,
-        });
-      }
+    } else if (nextProps.user.getLoading() === false && this.props.user.getLoading() === true) {
+      Toast.show({
+        text: 'Cập nhật thông tin thành công',
+        position: 'bottom',
+        buttonText: 'Bỏ qua',
+        type: 'success',
+        duration: 10000,
+      });
     }
   }
   logout() {
@@ -88,7 +87,7 @@ class User extends React.Component {
         </Header>
         <Spinner
           visible={this.props.user.getLoading()}
-          textContent={'Loading...'}
+          textContent="Loading..."
           textStyle={{ color: '#FFF' }}
         />
         <ImageBackground
@@ -107,7 +106,7 @@ class User extends React.Component {
               {this.props.user.getPicture() ? (
                 <Image style={styles.Logo} source={{ uri: this.props.user.getPicture() }} />
               ) : (
-                <Image style={styles.Logo} source={require('../../assets/noavatar.jpg')} />
+                <Image style={styles.Logo} source={noAvatar} />
               )}
             </View>
             <Card>
@@ -140,7 +139,7 @@ class User extends React.Component {
                 </Body>
                 <Right />
               </ListItem>
-              <ListItem button onPress={() => this.logout()} last icon>
+              <ListItem button onPress={() => this.logout()} icon>
                 <Left>
                   <Button onPress={() => this.logout()} danger>
                     <Icon active name="log-out" />
@@ -179,5 +178,9 @@ const styles = {
 };
 User.propTypes = {
   user: PropTypes.object.isRequired,
+  getUser: PropTypes.func.isRequired,
+  setUserError: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
+  navigation: PropTypes.object.isRequired,
 };
 export default User;
