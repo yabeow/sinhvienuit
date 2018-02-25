@@ -1,4 +1,5 @@
 import { put, call, all, take, takeLatest, takeEvery } from 'redux-saga/effects';
+import { Toast } from 'native-base';
 import {
   setCourseLoading,
   addCourse,
@@ -48,8 +49,22 @@ function* addCourseCalendarSaga({ course }) {
 function* addListCourseCalendarSaga({ listCourses }) {
   try {
     yield all(listCourses.map(item => put(addCourseCalendar(item))));
+    Toast.show({
+      text: 'Thêm lịch học vào ứng dụng Lịch thành công',
+      position: 'bottom',
+      buttonText: 'Bỏ qua',
+      type: 'success',
+      duration: 10000,
+    });
   } catch (e) {
     yield put(setCourseError(e.message));
+    Toast.show({
+      text: 'Thêm lịch học vào ứng dụng Lịch lỗi',
+      position: 'bottom',
+      buttonText: 'Bỏ qua',
+      type: 'warning',
+      duration: 10000,
+    });
   }
 }
 

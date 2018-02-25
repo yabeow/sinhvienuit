@@ -20,8 +20,8 @@ class List extends React.Component {
   static navigationOptions = {
     header: null,
   };
-  constructor(data) {
-    super(data);
+  componentDidMount() {
+    this.props.addListCourseCalendar();
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.error) {
@@ -33,28 +33,26 @@ class List extends React.Component {
         duration: 10000,
       });
       this.props.setError(false);
-    } else {
-      if (nextProps.refreshing === false && this.props.refreshing === true) {
-        Toast.show({
-          text: 'Cập nhật thông tin thành công',
-          position: 'bottom',
-          buttonText: 'Bỏ qua',
-          type: 'success',
-          duration: 10000,
-        });
-      }
+    } else if (nextProps.refreshing === false && this.props.refreshing === true) {
+      Toast.show({
+        text: 'Cập nhật thông tin thành công',
+        position: 'bottom',
+        buttonText: 'Bỏ qua',
+        type: 'success',
+        duration: 10000,
+      });
     }
   }
   render() {
     const { addListCourseCalendar } = this.props;
-    let courses = this.props.courses.sort(function(a, b) {
+    const courses = this.props.courses.sort((a, b) => {
       let timeA = a.getCurrentTimeEnd();
       let timeB = b.getCurrentTimeEnd();
-      let currentTime = new Date();
+      const currentTime = new Date();
       if (timeA > currentTime) timeA -= 999999;
       if (timeB > currentTime) timeB -= 999999;
       if (timeA > timeB) return 1;
-      else return -1;
+      return -1;
     });
     return (
       <Container>
@@ -106,14 +104,20 @@ class List extends React.Component {
 List.defaultProps = {
   refreshing: false,
   onRefresh: () => {},
+  error: '',
+  numberOfCourseNotificationsList: {},
+  numberOfDeadlinesList: {},
 };
 
 List.propTypes = {
   courses: PropTypes.array.isRequired,
-  listOfDeadLines: PropTypes.object,
+  navigation: PropTypes.object.isRequired,
   numberOfCourseNotificationsList: PropTypes.object,
   numberOfDeadlinesList: PropTypes.object,
   refreshing: PropTypes.bool,
+  setError: PropTypes.func.isRequired,
+  error: PropTypes.string,
   onRefresh: PropTypes.func,
+  addListCourseCalendar: PropTypes.func.isRequired,
 };
 export default List;
