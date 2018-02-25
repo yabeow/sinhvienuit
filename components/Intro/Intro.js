@@ -29,7 +29,7 @@ export default class extends Component {
           </View>
           <View level={25}>
             <Text style={[styles.text, { fontSize: 20, paddingTop: 10 }]}>
-              Hỗ trợ sinh viên UIT trong việc học tập và sinh hoạt tại trường
+              Hỗ trợ sinh viên trong việc học tập và sinh hoạt tại trường
             </Text>
           </View>
         </View>

@@ -46,20 +46,20 @@ class Notification extends React.Component {
   render() {
     const { notifications } = this.props;
     //Sắp xếp theo thứ tự thời gian đăng giảm dần.
-    let currentTime = new Date();
+    let currentTime = new Date().getTime();
     notifications.sort(function(a, b) {
       let timeA, timeB;
-      timeA = a.getCreateTime();
-      timeB = b.getCreateTime();
+      timeA = a.getCreateTime().getTime();
+      timeB = b.getCreateTime().getTime();
       //Ưu tiên thông báo nghỉ/bù môn học.
       if (typeof a.getCode !== 'undefined') {
         if (a.getEndTime() > currentTime) {
-          timeA = timeA - 999999;
+          timeA = timeA + 9999999999;
         }
       }
       if (typeof b.getCode !== 'undefined') {
         if (b.getEndTime() > currentTime) {
-          timeB = timeB - 999999;
+          timeB = timeB + 9999999999;
         }
       }
       if (timeA > timeB) return -1;

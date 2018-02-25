@@ -53,7 +53,7 @@ export default (json) => {
       listGeneralNotifications: new List(listGeneralNotificationsObj),
       listCourseNotifications: new List(listCourseNotificationsObj),
       loading: false,
-      error: false,
+      error: '',
     };
     initialStore.notifications = new NotificationListReducer(notificationsObj);
 
@@ -83,7 +83,7 @@ export default (json) => {
       listPoints: new List(listPointsObj),
       finalPoint: point,
       loading: false,
-      error: false,
+      error: '',
     };
     initialStore.studentPoints = new PointListReducer(studentPoints);
     // Lịch thi
@@ -102,7 +102,7 @@ export default (json) => {
     // Người dùng.
     let userObj = {
       loading: false,
-      error: false,
+      error: '',
     };
     if (typeof initialStore.user !== 'undefined') {
       const { user } = initialStore;

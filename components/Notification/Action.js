@@ -1,6 +1,7 @@
 export const ADD_NOTIFICATION = 'ADD_NOTIFICATION';
 export const ADD_GENERAL_NOTIFICATION = 'ADD_GENERAL_NOTIFICATION';
 export const ADD_COURSE_NOTIFICATION = 'ADD_COURSE_NOTIFICATION';
+export const ADD_COURSE_NOTIFICATION_SAGA = 'ADD_COURSE_NOTIFICATION_SAGA';
 export const REMOVE_NOTIFICATION = 'REMOVE_NOTIFICATION';
 export const GET_NOTIFICATION = 'GET_NOTIFICATION';
 export const GET_GENERAL_NOTIFICATION = 'GET_GENERAL_NOTIFICATION';
@@ -25,6 +26,12 @@ export function addGeneralNotification(notification) {
 export function addCourseNotification(notification) {
   return {
     type: ADD_COURSE_NOTIFICATION,
+    notification,
+  };
+}
+export function addCourseNotificationSaga(notification) {
+  return {
+    type: ADD_COURSE_NOTIFICATION_SAGA,
     notification,
   };
 }

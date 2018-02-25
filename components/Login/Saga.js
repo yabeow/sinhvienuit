@@ -19,7 +19,7 @@ function* loginSaga(action) {
     if (action.source === 'MOODLE') {
       const postData = `username=${encodeURIComponent(action.username)}&password=${encodeURIComponent(action.password)}`;
       response = yield call(request, action.source, '/login/index.php', postData);
-      if (response.status < 200 && response.status > 300) {
+      if (response.status < 200 || response.status > 500) {
         yield put(setLoginError(errors.networkError));
         return false;
       }
@@ -34,7 +34,7 @@ function* loginSaga(action) {
       // Lấy form_build_id.
       response = yield call(request, action.source, '');
       // Kiểm tra lỗi mạng.
-      if (response.status < 200 && response.status > 300) {
+      if (response.status < 200 || response.status > 500) {
         yield put(setLoginError(errors.networkError));
         return false;
       }
@@ -60,7 +60,7 @@ function* loginSaga(action) {
       // Request đăng nhập.
       response = yield call(request, action.source, '', postData);
       // Kiểm tra lỗi mạng.
-      if (response.status < 200 && response.status > 300) {
+      if (response.status < 200 || response.status > 500) {
         yield put(setLoginError(errors.networkError));
         return false;
       }
@@ -80,8 +80,7 @@ function* loginSaga(action) {
       response = yield call(request, action.source, '');
     } else response = yield call(request, action.source, '/home');
     // Kiểm tra lỗi mạng.
-    if (response.status < 200 && response.status > 300) {
-      yield put(setLoginLoading(false));
+    if (response.status < 200 || response.status > 500) {
       yield put(setLoginError(errors.networkError));
       return false;
     }
@@ -95,12 +94,10 @@ function* loginSaga(action) {
     if (formBuildId === false) {
       // Đã đăng nhập?
       if (checkLoggedIn(response)) {
-        yield put(setLoginLoading(false));
         yield put(setLoggedIn(true));
         return true;
       }
       // Lỗi mạng?
-      yield put(setLoginLoading(false));
       yield put(setLoginError(errors.networkError));
       return false;
     }
@@ -113,15 +110,13 @@ function* loginSaga(action) {
     // Request đăng nhập.
     response = yield call(request, action.source, '', postData);
     // Kiểm tra lỗi mạng.
-    if (response.status < 200 && response.status > 300) {
-      yield put(setLoginLoading(false));
+    if (response.status < 200 || response.status > 500) {
       yield put(setLoginError(errors.networkError));
       return false;
     }
     response = yield apply(response, response.text);
     // Kiểm tra đăng nhập thành công.
     if (checkLoggedIn(response) === false) {
-      yield put(setLoginLoading(false));
       yield put(setLoginError(errors.credentialsError));
       return false;
     }
@@ -130,8 +125,10 @@ function* loginSaga(action) {
     return true;
   } catch (e) {
     yield put(setLoginError(e.message));
+  } finally {
+    yield put(setLoginLoading(false));
   }
-  return yield put(setLoginLoading(false));
+  return undefined;
 }
 
 // Hàm fetch dữ liệu và trả kết quả về các action.
@@ -142,7 +139,7 @@ function* getPageSaga(action) {
     let response;
     callback.error = false;
     response = yield call(request, action.source, action.endPoint);
-    if (response.status < 200 && response.status > 300) {
+    if (response.status < 200 || response.status > 500) {
       // Lỗi mạng?
       callback.error = errors.networkError;
     } else {
@@ -158,22 +155,22 @@ function* getPageSaga(action) {
           if (loggedIn === true) {
             // Request lại sau khi đã đăng nhập.
             response = yield call(request, action.source, action.endPoint);
-            if (response.status < 200 && response.status > 300) {
+            if (response.status < 200 || response.status > 500) {
               // Lỗi mạng?
               callback.error = errors.networkError;
             } else {
               response = yield apply(response, response.text);
             }
           } else {
+            console.log('ERROR LOGIN');
             // Login lỗi.
           }
         }
       }
-      callback.endPoint = action.endPoint;
-      callback.data = response;
-      return yield put(callback);
     }
-    return false;
+    callback.endPoint = action.endPoint;
+    callback.data = response;
+    return yield put(callback);
   } catch (e) {
     callback.endPoint = action.endPoint;
     callback.data = false;

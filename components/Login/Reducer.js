@@ -14,7 +14,7 @@ export class LoginReducer extends Login {
     return this.set('loading', loading);
   }
   SET_LOGIN_ERROR({ error }) {
-    return this.set('error', error);
+    return this.set('error', error).set('loading', false);
   }
   SET_LOGGED_IN({ loggedIn }) {
     return this.set('loggedIn', loggedIn);

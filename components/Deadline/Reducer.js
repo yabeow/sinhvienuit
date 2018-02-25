@@ -30,7 +30,7 @@ export class DeadlineListReducer extends DeadlineList {
   }
   // Set lỗi.
   SET_DEADLINE_ERROR({ error }) {
-    return this.set('error', error);
+    return this.set('error', error).set('loading', false);
   }
 }
 export default reducerFromClass(DeadlineListReducer);

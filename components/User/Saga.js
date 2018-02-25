@@ -26,14 +26,14 @@ function* getUserInformation(data = false) {
     }
     // Request xảy ra lỗi.
     if (data.error) {
-      yield put(setUserLoading(false));
       return yield put(setUserError(data.error));
     }
     const userInformation = parseUserInformationFromHtml(data.data);
     yield put(setUserInformation(userInformation));
-    yield put(setUserLoading(false));
   } catch (e) {
     yield put(setUserError(e.message));
+  } finally {
+    yield put(setUserLoading(false));
   }
   return undefined;
 }
@@ -45,16 +45,16 @@ function* getUserPicture(data = false) {
     }
     // Request xảy ra lỗi.
     if (data.error) {
-      yield put(setUserLoading(false));
       return yield put(setUserError(data.error));
     }
     const userPicture = parserUserPictureFromHtml(data.data);
     yield put(setUserPicture(userPicture));
-    yield put(setUserLoading(false));
   } catch (e) {
     yield put(setUserError(e.message));
+  } finally {
+    yield put(setUserLoading(false));
   }
-  return yield put(setUserLoading(false));
+  return undefined;
 }
 function* watchRequests(data) {
   if (data.endPoint === '/sinhvien/bang-dieu-khien') {

@@ -2,27 +2,28 @@ import React, { PropTypes } from 'react';
 import { Linking } from 'react-native';
 import { Card, CardItem, Text, Button, Icon, Badge, Left, Right, Content } from 'native-base';
 
-class Deadline extends React.Component {
-  renderStatus = status => {
-    if (status === 1) {
-      return (
-        <Badge success>
-          <Text>Đã nộp</Text>
-        </Badge>
-      );
-    } else if (status === 0) {
-      return (
-        <Badge warning>
-          <Text>Chưa nộp</Text>
-        </Badge>
-      );
-    }
+const renderStatus = (status) => {
+  if (status === 1) {
     return (
-      <Badge danger>
-        <Text>Đã hết hạn</Text>
+      <Badge success>
+        <Text>Đã nộp</Text>
       </Badge>
     );
-  };
+  } else if (status === 0) {
+    return (
+      <Badge warning>
+        <Text>Chưa nộp</Text>
+      </Badge>
+    );
+  }
+  return (
+    <Badge danger>
+      <Text>Đã hết hạn</Text>
+    </Badge>
+  );
+};
+
+class Deadline extends React.Component {
   render() {
     const { deadline } = this.props;
     return (
@@ -37,9 +38,9 @@ class Deadline extends React.Component {
         <CardItem style={{ paddingTop: 2 }}>
           <Left>
             <Badge primary>
-              <Text>deadline.getCode()}</Text>
+              <Text>{deadline.getCode()}</Text>
             </Badge>
-            {this.renderStatus(deadline.getStatus())}
+            {renderStatus(deadline.getStatus())}
           </Left>
           <Content />
           <Right>

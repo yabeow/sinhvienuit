@@ -6,7 +6,7 @@ export class UserReducer extends User {
     return this.set('loading', loading);
   }
   SET_USER_ERROR({ error }) {
-    return this.set('error', error);
+    return this.set('error', error).set('loading', false);
   }
   SET_USER_INFORMATION({ user }) {
     let newUser = this.set('name', user.getName());

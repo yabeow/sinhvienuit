@@ -2,9 +2,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setUsername, setPassword, setLoginError, login, logout } from './Action';
 import { getCourse } from '../Course/Action';
-import { getDeadline } from '../Deadline/Action';
-import { getNotification } from '../Notification/Action';
-import { getStudentPoint } from '../StudentPoint/Action';
 import { getUser } from '../User/Action';
 import loginScreen from './Login';
 
@@ -24,9 +21,6 @@ function mapDispatchToProps(dispatch) {
     login: bindActionCreators(login, dispatch),
     logout: bindActionCreators(logout, dispatch),
     getCourse: bindActionCreators(getCourse, dispatch),
-    getDeadline: bindActionCreators(getDeadline, dispatch),
-    getNotification: bindActionCreators(getNotification, dispatch),
-    getStudentPoint: bindActionCreators(getStudentPoint, dispatch),
     getUser: bindActionCreators(getUser, dispatch),
   };
 }

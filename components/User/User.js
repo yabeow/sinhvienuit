@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Alert, Image } from 'react-native';
+import { Alert, Image, ImageBackground } from 'react-native';
 import {
   Header,
   Title,
@@ -17,19 +17,20 @@ import {
   Card,
   CardItem,
 } from 'native-base';
-import { backAction } from '../../config/config';
 import Spinner from 'react-native-loading-spinner-overlay';
-import bgImage from '../../assets/background-profile.jpg';
+import { backAction } from '../../config/config';
+import bgImage from '../../assets/background-uit.png';
+import noAvatar from '../../assets/noavatar.jpg';
 
 class User extends React.Component {
+  static navigationOptions = {
+    header: null,
+  };
   constructor(props) {
     super(props);
     this.logout = this.logout.bind(this);
     this.updateInformation = this.updateInformation.bind(this);
   }
-  static navigationOptions = {
-    header: null,
-  };
   componentWillReceiveProps(nextProps) {
     if (nextProps.user.getError()) {
       Toast.show({
@@ -40,16 +41,14 @@ class User extends React.Component {
         duration: 10000,
       });
       this.props.setUserError(false);
-    } else {
-      if (nextProps.user.getLoading() === false && this.props.user.getLoading() === true) {
-        Toast.show({
-          text: 'Cập nhật thông tin thành công',
-          position: 'bottom',
-          buttonText: 'Bỏ qua',
-          type: 'success',
-          duration: 10000,
-        });
-      }
+    } else if (nextProps.user.getLoading() === false && this.props.user.getLoading() === true) {
+      Toast.show({
+        text: 'Cập nhật thông tin thành công',
+        position: 'bottom',
+        buttonText: 'Bỏ qua',
+        type: 'success',
+        duration: 10000,
+      });
     }
   }
   logout() {
@@ -88,10 +87,14 @@ class User extends React.Component {
         </Header>
         <Spinner
           visible={this.props.user.getLoading()}
-          textContent={'Loading...'}
+          textContent="Loading..."
           textStyle={{ color: '#FFF' }}
         />
-        <Image style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }} source={bgImage}>
+        <ImageBackground
+          style={{ flex: 1 }}
+          imageStyle={{ width: null, height: null, resizeMode: 'cover' }}
+          source={bgImage}
+        >
           <Content style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }} padder>
             <View
               style={{
@@ -103,21 +106,25 @@ class User extends React.Component {
               {this.props.user.getPicture() ? (
                 <Image style={styles.Logo} source={{ uri: this.props.user.getPicture() }} />
               ) : (
-                <Image style={styles.Logo} source={require('../../assets/noavatar.jpg')} />
+                <Image style={styles.Logo} source={noAvatar} />
               )}
             </View>
             <Card>
-              <CardItem>
-                <Text>Họ tên: {this.props.user.getName()}</Text>
+              <CardItem style={styles.cardView}>
+                <Text>Họ tên</Text>
+                <Text>{this.props.user.getName()}</Text>
               </CardItem>
-              <CardItem>
-                <Text>Ngày sinh: {this.props.user.getBirthDay()}</Text>
+              <CardItem style={styles.cardView}>
+                <Text>Ngày sinh</Text>
+                <Text>{this.props.user.getBirthDay()}</Text>
               </CardItem>
-              <CardItem>
-                <Text>Khoa: {this.props.user.getFaculty()}</Text>
+              <CardItem style={styles.cardView}>
+                <Text>Khoa</Text>
+                <Text>{this.props.user.getFaculty()}</Text>
               </CardItem>
-              <CardItem>
-                <Text>Hệ đào tạo: {this.props.user.getTrainType()}</Text>
+              <CardItem style={styles.cardView}>
+                <Text>Hệ đào tạo</Text>
+                <Text>{this.props.user.getTrainType()}</Text>
               </CardItem>
             </Card>
             <Card>
@@ -132,7 +139,7 @@ class User extends React.Component {
                 </Body>
                 <Right />
               </ListItem>
-              <ListItem button onPress={() => this.logout()} last icon>
+              <ListItem button onPress={() => this.logout()} icon>
                 <Left>
                   <Button onPress={() => this.logout()} danger>
                     <Icon active name="log-out" />
@@ -145,7 +152,7 @@ class User extends React.Component {
               </ListItem>
             </Card>
           </Content>
-        </Image>
+        </ImageBackground>
       </Container>
     );
   }
@@ -167,8 +174,13 @@ const styles = {
     flex: 1,
     margin: 15,
   },
+  cardView: { flexDirection: 'row', justifyContent: 'space-between' },
 };
 User.propTypes = {
   user: PropTypes.object.isRequired,
+  getUser: PropTypes.func.isRequired,
+  setUserError: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
+  navigation: PropTypes.object.isRequired,
 };
 export default User;

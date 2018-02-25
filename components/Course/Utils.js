@@ -31,7 +31,7 @@ export function parseCourseFromHtml(data) {
       const teacher = matchArray[6].trim();
       // Phòng học.
       const temp = matchArray[7].trim();
-      const room = betweenTwoSubString(temp, 'P', '<br />');
+      const room = betweenTwoSubString(temp, 'P', '<br />').trim();
       // Ngày bắt đầu.
       let startTime = betweenTwoSubString(temp, 'BĐ:', '<br />').trim();
       startTime = startTime.split('/');

@@ -24,6 +24,13 @@ const InitGeneralNotification = Record({
   isNotified: false,
 });
 export class GeneralNotification extends InitGeneralNotification {
+  constructor(data) {
+    const fixData = data;
+    if (typeof fixData.createTime === 'string') {
+      fixData.createTime = new Date(Date.parse(fixData.createTime));
+    }
+    super(fixData);
+  }
   getSource() {
     return this.source;
   }
@@ -65,8 +72,22 @@ const InitCourseNotification = Record({
   endTime: false,
   room: '',
   createTime: false,
+  eventId: '',
 });
 export class CourseNotification extends InitCourseNotification {
+  constructor(data) {
+    const fixData = data;
+    if (typeof fixData.startTime === 'string') {
+      fixData.startTime = new Date(Date.parse(fixData.startTime));
+    }
+    if (typeof fixData.endTime === 'string') {
+      fixData.endTime = new Date(Date.parse(fixData.endTime));
+    }
+    if (typeof fixData.createTime === 'string') {
+      fixData.createTime = new Date(Date.parse(fixData.createTime));
+    }
+    super(fixData);
+  }
   getType() {
     return this.type;
   }
@@ -82,11 +103,11 @@ export class CourseNotification extends InitCourseNotification {
   getTitle() {
     return this.title;
   }
-  getStartTime(format = false) {
-    return getTimeFormat(this.startTime, format);
+  getStartTime(format = false, utc = false) {
+    return getTimeFormat(this.startTime, format, utc);
   }
-  getEndTime(format = false) {
-    return getTimeFormat(this.endTime, format);
+  getEndTime(format = false, utc = false) {
+    return getTimeFormat(this.endTime, format, utc);
   }
   getRoom() {
     return this.room;
@@ -102,6 +123,21 @@ export class CourseNotification extends InitCourseNotification {
       return OEP_COURSE_NOTIFICATION_LINK_TEMPLATE + this.id;
     }
     return '';
+  }
+  getEventId() {
+    return this.eventId;
+  }
+  getEvent() {
+    let title = this.getTitle();
+    title = title.replace('Thông báo ', '');
+    title = title.charAt(0).toUpperCase() + title.slice(1);
+    return {
+      title,
+      location: this.getRoom(),
+      startDate: this.getStartTime('YYYY-MM-DD[T]HH:mm:ss.sss[Z]', true),
+      endDate: this.getEndTime('YYYY-MM-DD[T]HH:mm:ss.sss[Z]', true),
+      url: this.getLink(),
+    };
   }
 }
 

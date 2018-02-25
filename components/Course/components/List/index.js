@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import List from './List';
-import { getCourse, setCourseError } from '../../Action';
+import { getCourse, setCourseError, addListCourseCalendar } from '../../Action';
 
 function mapStateToProps(state) {
   return {
@@ -15,6 +15,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    addListCourseCalendar: bindActionCreators(addListCourseCalendar, dispatch),
     onRefresh: bindActionCreators(getCourse, dispatch),
     setError: bindActionCreators(setCourseError, dispatch),
   };

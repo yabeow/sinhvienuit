@@ -1,4 +1,5 @@
 module.exports = {
+  parser: 'babel-eslint',
   extends: 'airbnb',
   rules: {
     'no-use-before-define': ['error', { functions: false, classes: false, variables: false }],
@@ -8,7 +9,7 @@ module.exports = {
         extensions: ['.js', '.jsx'],
       },
     ],
-    'react/prefer-stateless-function': false,
-    'react/forbid-prop-types': false,
+    'react/prefer-stateless-function': 0,
+    'react/forbid-prop-types': 0,
   },
 };

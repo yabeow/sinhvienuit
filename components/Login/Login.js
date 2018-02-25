@@ -1,10 +1,19 @@
 import React, { PropTypes } from 'react';
-import { Image, View, TouchableOpacity, Linking } from 'react-native';
+import {
+  Platform,
+  ImageBackground,
+  View,
+  TouchableOpacity,
+  Linking,
+  Animated,
+  Keyboard,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import { Container, Spinner, Button, Text, Toast, Icon, Item, Input } from 'native-base';
-import { FORGOT_PASSWORD_RESET_PAGE } from '../../config/config';
+import { FORGOT_PASSWORD_RESET_PAGE, POLICY_PAGE } from '../../config/config';
+import styles, { LOGO_SIZE_DEFAULT, LOGO_SIZE_SMALL } from './Style';
 import bgSrc from '../../assets/background-uit.png';
 import logoImg from '../../assets/logo.png';
-import styles from './Style';
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -15,7 +24,16 @@ class LoginForm extends React.Component {
       errorUsername: false,
       errorPassword: false,
     };
-    this.Login = this.Login.bind(this);
+    this.imageSize = new Animated.Value(LOGO_SIZE_DEFAULT);
+  }
+  componentWillMount() {
+    if (Platform.OS === 'android') {
+      this.keyboardWillShowSub = Keyboard.addListener('keyboardDidShow', this.keyboardDidShow);
+      this.keyboardWillHideSub = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide);
+    } else {
+      this.keyboardWillShowSub = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow);
+      this.keyboardWillHideSub = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
+    }
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.error) {
@@ -32,11 +50,39 @@ class LoginForm extends React.Component {
   componentWillUnmount() {
     // Fetch dữ liệu sau khi đăng nhập.
     this.props.getCourse();
-    this.props.getDeadline();
-    this.props.getNotification();
-    this.props.getStudentPoint();
     this.props.getUser();
+
+    // Remove listener
+    this.keyboardWillShowSub.remove();
+    this.keyboardWillHideSub.remove();
   }
+  keyboardWillShow = (event) => {
+    Animated.timing(this.imageSize, {
+      duration: event.duration,
+      toValue: LOGO_SIZE_SMALL,
+    }).start();
+  };
+
+  keyboardWillHide = (event) => {
+    Animated.timing(this.imageSize, {
+      duration: event.duration,
+      toValue: LOGO_SIZE_DEFAULT,
+    }).start();
+  };
+
+  keyboardDidShow = (event) => {
+    Animated.timing(this.imageSize, {
+      duration: event.duration,
+      toValue: LOGO_SIZE_SMALL,
+    }).start();
+  };
+
+  keyboardDidHide = () => {
+    Animated.timing(this.imageSize, {
+      duration: 1000,
+      toValue: LOGO_SIZE_DEFAULT,
+    }).start();
+  };
   Login() {
     if (this.state.username && this.state.password) {
       this.setState({ errorUsername: false });
@@ -57,77 +103,74 @@ class LoginForm extends React.Component {
   }
   render() {
     return (
-      <Image
+      <ImageBackground
         style={{
           flex: 1,
+        }}
+        imageStyle={{
           width: null,
           height: null,
           resizeMode: 'cover',
         }}
         source={bgSrc}
       >
-        <Container style={styles.Container}>
-          <View style={styles.LogoView}>
-            <Image style={styles.Logo} source={logoImg} />
-          </View>
-          <Text
-            style={{
-              color: 'white',
-              textShadowColor: 'grey',
-              textShadowOffset: { height: 2, width: 2 },
-              fontSize: 25,
-              fontWeight: 'bold',
-              top: 10,
-              paddingBottom: 40,
-            }}
-          >
-            SINH VIÊN UIT
-          </Text>
-          <Item
-            style={{ backgroundColor: 'white' }}
-            regular
-            label="Username"
-            error={this.state.errorUsername}
-          >
-            <Icon active name="person" style={{ color: 'grey' }} />
-            <Input
-              placeholder="Mã số sinh viên"
-              onChangeText={username => this.setState({ username })}
-            />
-          </Item>
-          <Item
-            style={{ backgroundColor: 'white' }}
-            regular
-            label="Password"
-            error={this.state.errorPassword}
-          >
-            <Icon active name="lock" style={{ color: 'grey' }} />
-            <Input
-              placeholder="Mật khẩu chứng thực"
-              secureTextEntry
-              onChangeText={password => this.setState({ password })}
-            />
-          </Item>
-          <View style={styles.Button}>
-            <Button
-              title="Đăng nhập"
-              onPress={() => this.Login()}
-              disabled={this.props.loading === true ? true : null}
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <Container style={styles.Container}>
+            <View style={styles.LogoView}>
+              <Animated.Image
+                style={[...styles.Logo, { height: this.imageSize, width: this.imageSize }]}
+                source={logoImg}
+              />
+            </View>
+            <Item
+              style={{ backgroundColor: 'white' }}
+              regular
+              label="Username"
+              error={this.state.errorUsername}
             >
-              {this.props.loading === true ? <Spinner color="white" /> : null}
-              <Text style={{ textAlign: 'center' }}> Đăng nhập </Text>
-            </Button>
-          </View>
-          <View style={{ top: 40, justifyContent: 'center', alignItems: 'center' }}>
-            <TouchableOpacity onPress={() => Linking.openURL()}>
-              <Text style={styles.Text}>Chính sách & Điều khoản</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => Linking.openURL(FORGOT_PASSWORD_RESET_PAGE)}>
-              <Text style={styles.Text}>Quên mật khẩu?</Text>
-            </TouchableOpacity>
-          </View>
-        </Container>
-      </Image>
+              <Icon active name="person" style={{ color: 'grey' }} />
+              <Input
+                placeholder="Mã số sinh viên"
+                onChangeText={username => this.setState({ username })}
+              />
+            </Item>
+            <Item
+              style={{ backgroundColor: 'white' }}
+              regular
+              label="Password"
+              error={this.state.errorPassword}
+            >
+              <Icon active name="lock" style={{ color: 'grey' }} />
+              <Input
+                placeholder="Mật khẩu chứng thực"
+                secureTextEntry
+                onChangeText={password => this.setState({ password })}
+              />
+            </Item>
+            <View style={styles.Button}>
+              {this.props.loading === true ? (
+                <Spinner color="white" />
+              ) : (
+                  <Button
+                    title="Đăng nhập"
+                    onPress={() => this.Login()}
+                    disabled={this.props.loading === true ? true : null}
+                  >
+                    <Text style={{ textAlign: 'center' }}> Đăng nhập </Text>
+                  </Button>
+                )}
+            </View>
+            <View style={{ top: 40, justifyContent: 'center', alignItems: 'center' }}>
+              <TouchableOpacity onPress={() => Linking.openURL(POLICY_PAGE)}>
+                <Text style={styles.Text}>Chính sách & Điều khoản</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => Linking.openURL(FORGOT_PASSWORD_RESET_PAGE)}>
+                <Text style={styles.Text}>Quên mật khẩu?</Text>
+              </TouchableOpacity>
+            </View>
+          </Container>
+        </TouchableWithoutFeedback>
+      </ImageBackground>
     );
   }
 }
@@ -146,8 +189,5 @@ LoginForm.propTypes = {
   setPassword: PropTypes.func.isRequired,
   getUser: PropTypes.func.isRequired,
   getCourse: PropTypes.func.isRequired,
-  getDeadline: PropTypes.func.isRequired,
-  getNotification: PropTypes.func.isRequired,
-  getStudentPoint: PropTypes.func.isRequired,
 };
 export default LoginForm;

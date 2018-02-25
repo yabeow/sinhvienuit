@@ -33,7 +33,7 @@ const InitStudentPointList = Record({
   listPoints: List(),
   finalPoint: 0,
   loading: false,
-  error: false,
+  error: '',
 });
 
 export default class StudentPointList extends InitStudentPointList {

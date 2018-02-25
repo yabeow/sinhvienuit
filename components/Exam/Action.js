@@ -1,6 +1,7 @@
 export const GET_EXAM = 'GET_EXAM';
 export const GET_EXAM_RESULT = 'GET_EXAM_RESULT';
 export const ADD_EXAM = 'ADD_EXAM';
+export const ADD_EXAM_SAGA = 'ADD_EXAM_SAGA';
 export const SET_EXAM_ERROR = 'SET_EXAM_ERROR';
 export const SET_EXAM_LOADING = 'SET_EXAM_LOADING';
 
@@ -23,6 +24,13 @@ export function getExamResult(endPoint = false, data = false, error = false) {
 export function addExam(exam) {
   return {
     type: ADD_EXAM,
+    exam,
+  };
+}
+
+export function addExamSaga(exam) {
+  return {
+    type: ADD_EXAM_SAGA,
     exam,
   };
 }

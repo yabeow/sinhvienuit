@@ -7,6 +7,7 @@ import Course from '../Course';
 import StudentPoint from '../StudentPoint';
 import Exam from '../Exam';
 import User from '../User';
+import About from '../About';
 
 const RootNavigator = StackNavigator({
   Dashboard: { screen: Dashboard },
@@ -16,6 +17,7 @@ const RootNavigator = StackNavigator({
   StudentPoint: { screen: StudentPoint },
   Exam: { screen: Exam },
   User: { screen: User },
+  About: { screen: About },
 });
 
 export default class NavigatorRoot extends React.Component {
