@@ -6,14 +6,14 @@ class CountNotification extends React.Component {
     if (this.props.numberNotifications || this.props.numberDeadlines) {
       return (
         <CardItem style={{ paddingTop: 2 }}>
-          {this.props.numberNotifications && (
+          {!!this.props.numberNotifications && (
             <Left>
               <Badge info>
                 <Text>{this.props.numberNotifications} thông báo</Text>
               </Badge>
             </Left>
           )}
-          {this.props.numberDeadlines && (
+          {!!this.props.numberDeadlines && (
             <Badge warning>
               <Text>{this.props.numberDeadlines} deadline</Text>
             </Badge>
