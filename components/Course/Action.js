@@ -43,9 +43,10 @@ export function removeAllCourses() {
   };
 }
 // Hàm fetch dữ liệu môn học.
-export function getCourse() {
+export function getCourse(calendar = false) {
   return {
     type: GET_COURSE,
+    calendar,
   };
 }
 // Set loading.

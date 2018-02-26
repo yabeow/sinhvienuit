@@ -49,7 +49,7 @@ class LoginForm extends React.Component {
   }
   componentWillUnmount() {
     // Fetch dữ liệu sau khi đăng nhập.
-    this.props.getCourse();
+    this.props.getCourse(true);
     this.props.getUser();
 
     // Remove listener

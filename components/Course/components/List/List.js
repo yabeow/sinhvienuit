@@ -20,9 +20,6 @@ class List extends React.Component {
   static navigationOptions = {
     header: null,
   };
-  componentDidMount() {
-    this.props.addListCourseCalendar();
-  }
   componentWillReceiveProps(nextProps) {
     if (nextProps.error) {
       Toast.show({

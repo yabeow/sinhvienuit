@@ -1,9 +1,10 @@
-import { put, call, all, take, takeLatest, takeEvery } from 'redux-saga/effects';
+import { put, call, all, take, select, takeLatest, takeEvery } from 'redux-saga/effects';
 import { Toast } from 'native-base';
 import {
   setCourseLoading,
   addCourse,
   ADD_COURSE_CALENDAR,
+  addListCourseCalendar,
   addCourseCalendar,
   ADD_LIST_COURSE_CALENDAR,
   getCourseResult,
@@ -15,7 +16,7 @@ import { getPage } from '../Login/Action';
 import { parseCourseFromHtml } from './Utils';
 import { addCalendarEvent, getCalendarEvents } from '../../utils';
 
-function* getCourse() {
+function* getCourse({ calendar }) {
   try {
     yield put(setCourseLoading(true));
     yield put(getPage('DAA', '/ajax-block/tkb/ajax', true, getCourseResult()));
@@ -28,6 +29,10 @@ function* getCourse() {
     data.data = JSON.parse(data.data);
     const courses = parseCourseFromHtml(data.data[1].data);
     yield all(courses.map(course => put(addCourse(course))));
+    if (calendar) {
+      const listCourses = yield select(state => state.courses.getAllCourses());
+      yield put(addListCourseCalendar(listCourses));
+    }
   } catch (e) {
     yield put(setCourseError(e.message));
   } finally {
