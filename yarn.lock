@@ -3815,9 +3815,9 @@ react-native-app-intro@^1.1.5:
     assign-deep "^0.4.5"
     react-native-swiper "git+https://github.com/FuYaoDe/react-native-swiper.git"
 
-react-native-calendar-events@^1.4.1:
-  version "1.4.3"
-  resolved "https://registry.yarnpkg.com/react-native-calendar-events/-/react-native-calendar-events-1.4.3.tgz#29804e8b44d6946e69ab5a20902d9449ed315c47"
+react-native-calendar-events@1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/react-native-calendar-events/-/react-native-calendar-events-1.4.1.tgz#637c13c43c0e4baa4b6a8f36611e4c7b0d65424d"
 
 react-native-cookies@^3.2.0:
   version "3.2.0"
