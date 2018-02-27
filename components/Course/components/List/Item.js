@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { TouchableOpacity } from 'react-native';
 import { CardItem, Right, Text, Card, Icon, Badge, View } from 'native-base';
 import CountNotification from './CountNotification';

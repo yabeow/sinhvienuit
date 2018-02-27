@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Card, CardItem, Icon, Text, Badge } from 'native-base';
 import { STUDENT_POINT_RANK_NAME, STUDENT_POINT_RANK_COLOR } from '../../../../config/config';
 

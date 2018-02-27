@@ -8,7 +8,7 @@ def shared_pods
   # Pods for SinhVienUIT
   pod 'react-native-calendar-events', :path =>'../node_modules/react-native-calendar-events'
   pod 'react-native-cookies', :path =>'../node_modules/react-native-cookies/ios'
-  pod 'Yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
+  pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
   pod 'React', :path => '../node_modules/react-native', :subspecs => [
     'ART',
     'Core',

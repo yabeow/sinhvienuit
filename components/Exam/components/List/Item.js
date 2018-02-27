@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Card, CardItem, Text, Icon, Badge } from 'native-base';
 
 class Exam extends React.Component {

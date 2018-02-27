@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Content, Text, ListItem, Icon, Container, Left, Badge, View } from 'native-base';
 import Styles from '../../Style';
 

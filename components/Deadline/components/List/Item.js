@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Linking } from 'react-native';
 import { Card, CardItem, Text, Button, Icon, Badge, Left, Right, Content } from 'native-base';
 
