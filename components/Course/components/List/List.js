@@ -17,10 +17,28 @@ import { backAction, ANDROID_PULL_TO_REFRESH_COLOR } from '../../../../config/co
 import ListItem from './Item';
 import EmptyList from '../../../EmptyList';
 
+const sortCourses = courses =>
+  courses.sort((a, b) => {
+    let timeA = a.getCurrentTimeEnd();
+    let timeB = b.getCurrentTimeEnd();
+    const currentTime = new Date();
+    if (timeA > currentTime) timeA -= 999999;
+    if (timeB > currentTime) timeB -= 999999;
+    if (timeA > timeB) return 1;
+    return -1;
+  });
+
 class List extends React.Component {
   static navigationOptions = {
     header: null,
   };
+  constructor(props) {
+    super(props);
+    const { courses } = props;
+    this.state = {
+      courses: sortCourses(courses),
+    };
+  }
   componentWillReceiveProps(nextProps) {
     if (nextProps.error) {
       Toast.show({
@@ -40,18 +58,12 @@ class List extends React.Component {
         duration: 10000,
       });
     }
+    if (this.props.courses !== nextProps.courses) {
+      this.setState({ courses: sortCourses(nextProps.courses) });
+    }
   }
   render() {
     const { addListCourseCalendar } = this.props;
-    const courses = this.props.courses.sort((a, b) => {
-      let timeA = a.getCurrentTimeEnd();
-      let timeB = b.getCurrentTimeEnd();
-      const currentTime = new Date();
-      if (timeA > currentTime) timeA -= 999999;
-      if (timeB > currentTime) timeB -= 999999;
-      if (timeA > timeB) return 1;
-      return -1;
-    });
     return (
       <Container>
         <Header>
@@ -72,7 +84,7 @@ class List extends React.Component {
         <View padder style={{ flex: 1 }}>
           <FlatList
             ListEmptyComponent={<EmptyList />}
-            data={courses}
+            data={this.state.courses}
             horizontal={false}
             keyExtractor={course =>
               course.getCode() + course.getDayOfWeek() + course.getLessonStart()
