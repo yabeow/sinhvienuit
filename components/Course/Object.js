@@ -95,7 +95,7 @@ export class Course extends InitCourse {
       currentTimeEnd.setDate(currentTimeEnd.getDate() + (this.dayOfWeek - 2));
       while (currentTimeEnd < startTime) {
         currentTimeEnd.setDate(currentTimeEnd.getDate() + 7);
-      } 
+      }
       const temp = getCourseTimeByLesson(this.lessonEnd);
       currentTimeEnd.setHours(temp.getHours());
       currentTimeEnd.setMinutes(temp.getMinutes() + 45);
@@ -125,8 +125,8 @@ export class Course extends InitCourse {
     return {
       title,
       location: this.getRoom(),
-      startDate: getTimeFormat(startTime.toISOString(), 'YYYY-MM-DD[T]HH:mm:ss.sss[Z]', true),
-      endDate: getTimeFormat(endTime.toISOString(), 'YYYY-MM-DD[T]HH:mm:ss.sss[Z]', true),
+      startDate: getTimeFormat(startTime.toISOString(), 'YYYY-MM-DD[T]HH:mm:ss.[000Z]', true),
+      endDate: getTimeFormat(endTime.toISOString(), 'YYYY-MM-DD[T]HH:mm:ss.[000Z]', true),
       notes,
     };
   }

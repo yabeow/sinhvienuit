@@ -29,20 +29,20 @@ class Deadline extends React.Component {
     const { deadline } = this.props;
     return (
       <Card>
-        <CardItem bordered>
-          <Text>{deadline.getTitle()}</Text>
+        <CardItem>
+          <Badge primary>
+            <Text>{deadline.getCode()}</Text>
+          </Badge>
         </CardItem>
         <CardItem style={{ paddingTop: 2 }}>
+          <Text style={{ flex: 1, flexWrap: 'wrap' }}>{deadline.getTitle()}</Text>
+        </CardItem>
+        <CardItem style={{ paddingTop: 2 }} bordered>
           <Icon name="time" />
           <Text>Hạn chót: {deadline.getTime('calendar')}</Text>
         </CardItem>
-        <CardItem style={{ paddingTop: 2 }}>
-          <Left>
-            <Badge primary>
-              <Text>{deadline.getCode()}</Text>
-            </Badge>
-            {renderStatus(deadline.getStatus())}
-          </Left>
+        <CardItem style={{ paddingTop: 8 }}>
+          <Left>{renderStatus(deadline.getStatus())}</Left>
           <Content />
           <Right>
             <Button
