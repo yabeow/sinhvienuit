@@ -1,14 +1,13 @@
 import React from 'react';
-import { Image, TouchableOpacity, StyleSheet, Linking } from 'react-native';
+import PropTypes from 'prop-types';
+import { StyleSheet, Linking } from 'react-native';
 import {
   Button,
-  Container,
   Body,
   Card,
   CardItem,
   Thumbnail,
   Icon,
-  Content,
   Header,
   Title,
   Text,
@@ -19,13 +18,10 @@ import {
 import { backAction, VERSION_NUMBER, FACEBOOK_PAGE, GITHUB_PAGE } from '../../config/config';
 import logoSrc from '../../assets/logo.png';
 
-export default class HomeScreen extends React.Component {
+export default class About extends React.Component {
   static navigationOptions = {
     header: null,
   };
-  constructor(props) {
-    super(props);
-  }
   render() {
     return (
       <View style={styles.rootContainer}>
@@ -63,7 +59,7 @@ export default class HomeScreen extends React.Component {
                   ĐHQG TP.HCM.
                 </Text>
                 <Text />
-                <Text>"Một món quà dành cho Trâu, heo, chó, mèo và chuột".</Text>
+                <Text>&quot;Một món quà dành cho Trâu, heo, chó, mèo và chuột&quot;.</Text>
                 <Text />
                 <Text style={{ fontSize: 12 }}>
                   (*) Ứng dụng là một sản phẩm độc lập, không chính thức.
@@ -92,6 +88,10 @@ export default class HomeScreen extends React.Component {
     );
   }
 }
+
+About.propTypes = {
+  navigation: PropTypes.object.isRequired,
+};
 
 const styles = StyleSheet.create({
   rootContainer: {

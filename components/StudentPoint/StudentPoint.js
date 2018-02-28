@@ -16,9 +16,6 @@ import { backAction } from '../../config/config';
 import ListStudentPoint from './components/List';
 
 class StudentPoint extends React.Component {
-  constructor(data) {
-    super(data);
-  }
   static navigationOptions = {
     header: null,
   };
@@ -70,7 +67,10 @@ class StudentPoint extends React.Component {
 
 StudentPoint.propTypes = {
   studentPoints: PropTypes.array.isRequired,
-  refreshing: PropTypes.bool,
-  onRefresh: PropTypes.func,
+  refreshing: PropTypes.bool.isRequired,
+  error: PropTypes.bool.isRequired,
+  setError: PropTypes.func.isRequired,
+  onRefresh: PropTypes.func.isRequired,
+  navigation: PropTypes.object.isRequired,
 };
 export default StudentPoint;

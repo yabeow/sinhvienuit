@@ -73,6 +73,7 @@ function* getGeneralOepNotification(data = false) {
   } finally {
     yield put(setNotificationLoading(false));
   }
+  return undefined;
 }
 
 // Fetch thông báo môn học.
