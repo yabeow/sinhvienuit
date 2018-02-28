@@ -63,7 +63,11 @@ class List extends React.Component {
     }
   }
   render() {
-    const { addListCourseCalendar } = this.props;
+    const {
+      addListCourseCalendar,
+      numberOfCourseNotificationsList,
+      numberOfDeadlinesList,
+    } = this.props;
     return (
       <Container>
         <Header>
@@ -89,14 +93,23 @@ class List extends React.Component {
             keyExtractor={course =>
               course.getCode() + course.getDayOfWeek() + course.getLessonStart()
             }
-            renderItem={({ item }) => (
-              <ListItem
-                course={item}
-                navigation={this.props.navigation}
-                numberNotifications={this.props.numberOfCourseNotificationsList[item.getCode()]}
-                numberDeadlines={this.props.numberOfDeadlinesList[item.getCode()]}
-              />
-            )}
+            renderItem={({ item }) => {
+              try {
+                const nNoti = numberOfCourseNotificationsList[item.getCode()];
+                const nDead = numberOfDeadlinesList[item.getCode()];
+                return (
+                  <ListItem
+                    course={item}
+                    navigation={this.props.navigation}
+                    numberNotifications={nNoti}
+                    numberDeadlines={nDead}
+                  />
+                );
+              } catch (e) {
+                console.log(e);
+              }
+              return null;
+            }}
             refreshControl={
               <RefreshControl
                 refreshing={this.props.refreshing}
