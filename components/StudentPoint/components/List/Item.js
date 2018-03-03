@@ -1,30 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Linking } from 'react-native';
 import { Card, CardItem, Text, Button, Icon, Badge, Left, Right, Body } from 'native-base';
+import Navigator from '../../../Navigator/Action';
 
 class Item extends React.Component {
   render() {
+    const { studentPoint } = this.props;
     return (
       <Card>
         <CardItem>
           <Body>
-            <Text style={{ paddingTop: 2 }}>{this.props.studentPoint.getTitle()}</Text>
+            <Text style={{ paddingTop: 2 }}>{studentPoint.getTitle()}</Text>
           </Body>
         </CardItem>
         <CardItem style={{ paddingTop: 2 }}>
-          {this.props.studentPoint.getPoint() >= 0 ? (
+          {studentPoint.getPoint() >= 0 ? (
             <Left>
               <Icon style={{ color: 'green' }} name="add-circle" />
               <Badge success>
-                <Text>{this.props.studentPoint.getPoint()} điểm</Text>
+                <Text>{studentPoint.getPoint()} điểm</Text>
               </Badge>
             </Left>
           ) : (
             <Left>
               <Icon style={{ color: 'red' }} name="add-circle" />
               <Badge danger>
-                <Text>{this.props.studentPoint.getPoint()} điểm</Text>
+                <Text>{studentPoint.getPoint()} điểm</Text>
               </Badge>
             </Left>
           )}
@@ -33,7 +34,7 @@ class Item extends React.Component {
             <Button
               rounded
               small
-              onPress={() => Linking.openURL(this.props.studentPoint.getLink())}
+              onPress={() => Navigator.navigate('WebBrowser', { link: studentPoint.getLink() })}
               primary
             >
               <Icon name="exit" />
