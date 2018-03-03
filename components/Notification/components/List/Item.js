@@ -1,6 +1,7 @@
-import React, { PropTypes } from 'react';
-import { Linking } from 'react-native';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Card, CardItem, Text, Button, Icon, Badge, Left, Right, Body } from 'native-base';
+import Navigator from '../../../Navigator/Action';
 
 const renderSource = (source) => {
   if (source === 'DAA') {
@@ -79,7 +80,7 @@ class Item extends React.Component {
             <Button
               rounded
               small
-              onPress={() => Linking.openURL(this.props.notification.getLink())}
+              onPress={() => Navigator.navigate('WebBrowser', { link: notification.getLink() })}
               success
             >
               <Icon name="exit" />

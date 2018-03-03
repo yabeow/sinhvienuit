@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { CardItem, Left, Badge, Right, Text } from 'native-base';
 
 class CountNotification extends React.Component {
@@ -6,14 +7,14 @@ class CountNotification extends React.Component {
     if (this.props.numberNotifications || this.props.numberDeadlines) {
       return (
         <CardItem style={{ paddingTop: 2 }}>
-          {this.props.numberNotifications && (
+          {!!this.props.numberNotifications && (
             <Left>
               <Badge info>
                 <Text>{this.props.numberNotifications} thông báo</Text>
               </Badge>
             </Left>
           )}
-          {this.props.numberDeadlines && (
+          {!!this.props.numberDeadlines && (
             <Badge warning>
               <Text>{this.props.numberDeadlines} deadline</Text>
             </Badge>

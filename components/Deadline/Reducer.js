@@ -1,3 +1,4 @@
+import { List } from 'immutable';
 import { reducerFromClass } from '../../utils';
 import DeadlineList from './Object';
 
@@ -5,24 +6,26 @@ export class DeadlineListReducer extends DeadlineList {
   // Thêm một deadline cho môn học.
   ADD_DEADLINE({ deadline }) {
     let dup = false;
-    this.listDeadlines.map((item) => {
+    let listDeadlines = new List(this.listDeadlines.map((item) => {
       if (item.getId() === deadline.getId()) {
         dup = true;
+        return deadline;
       }
-      return false;
-    });
-    if (dup) return this;
-    const listDeadlines = this.listDeadlines.push(deadline);
+      return item;
+    }));
+    if (!dup) {
+      listDeadlines = this.listDeadlines.push(deadline);
+    }
     return this.set('listDeadlines', listDeadlines);
   }
   // Set status cho deadline.
   SET_DEADLINE_STATUS({ id, status }) {
-    this.listDeadlines.map((item) => {
+    return new DeadlineList(this.listDeadlines.map((item) => {
       if (item.getId() === id) {
         return item.set('status', status);
       }
       return item;
-    });
+    }));
   }
   // Set loading.
   SET_DEADLINE_LOADING({ loading }) {

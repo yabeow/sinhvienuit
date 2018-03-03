@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Intro from '../Intro';
 import Login from '../Login';
 import Navigator from '../Navigator';

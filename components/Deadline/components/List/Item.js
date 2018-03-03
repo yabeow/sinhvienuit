@@ -1,6 +1,7 @@
-import React, { PropTypes } from 'react';
-import { Linking } from 'react-native';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Card, CardItem, Text, Button, Icon, Badge, Left, Right, Content } from 'native-base';
+import Navigator from '../../../Navigator/Action';
 
 const renderStatus = (status) => {
   if (status === 1) {
@@ -28,26 +29,26 @@ class Deadline extends React.Component {
     const { deadline } = this.props;
     return (
       <Card>
-        <CardItem bordered>
-          <Text>{deadline.getTitle()}</Text>
+        <CardItem>
+          <Badge primary>
+            <Text>{deadline.getCode()}</Text>
+          </Badge>
         </CardItem>
         <CardItem style={{ paddingTop: 2 }}>
+          <Text style={{ flex: 1, flexWrap: 'wrap' }}>{deadline.getTitle()}</Text>
+        </CardItem>
+        <CardItem style={{ paddingTop: 2 }} bordered>
           <Icon name="time" />
           <Text>Hạn chót: {deadline.getTime('calendar')}</Text>
         </CardItem>
-        <CardItem style={{ paddingTop: 2 }}>
-          <Left>
-            <Badge primary>
-              <Text>{deadline.getCode()}</Text>
-            </Badge>
-            {renderStatus(deadline.getStatus())}
-          </Left>
+        <CardItem style={{ paddingTop: 8 }}>
+          <Left>{renderStatus(deadline.getStatus())}</Left>
           <Content />
           <Right>
             <Button
               rounded
               small
-              onPress={() => Linking.openURL(this.props.deadline.getLink())}
+              onPress={() => Navigator.navigate('WebBrowser', { link: deadline.getLink() })}
               success
             >
               <Icon name="exit" />

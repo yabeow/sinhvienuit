@@ -73,9 +73,9 @@ export class Course extends InitCourse {
       const startTime = new Date(this.startTime);
       const currentTimeStart = getCurrentMonday();
       currentTimeStart.setDate(currentTimeStart.getDate() + (this.dayOfWeek - 2));
-      do {
+      while (currentTimeStart < startTime) {
         currentTimeStart.setDate(currentTimeStart.getDate() + 7);
-      } while (currentTimeStart < startTime);
+      }
       const temp = getCourseTimeByLesson(this.lessonStart);
       currentTimeStart.setHours(temp.getHours());
       currentTimeStart.setMinutes(temp.getMinutes());
@@ -93,9 +93,9 @@ export class Course extends InitCourse {
       const startTime = new Date(this.startTime);
       const currentTimeEnd = getCurrentMonday();
       currentTimeEnd.setDate(currentTimeEnd.getDate() + (this.dayOfWeek - 2));
-      do {
+      while (currentTimeEnd < startTime) {
         currentTimeEnd.setDate(currentTimeEnd.getDate() + 7);
-      } while (currentTimeEnd < startTime);
+      }
       const temp = getCourseTimeByLesson(this.lessonEnd);
       currentTimeEnd.setHours(temp.getHours());
       currentTimeEnd.setMinutes(temp.getMinutes() + 45);
@@ -125,8 +125,8 @@ export class Course extends InitCourse {
     return {
       title,
       location: this.getRoom(),
-      startDate: getTimeFormat(startTime.toISOString(), 'YYYY-MM-DD[T]HH:mm:ss.sss[Z]', true),
-      endDate: getTimeFormat(endTime.toISOString(), 'YYYY-MM-DD[T]HH:mm:ss.sss[Z]', true),
+      startDate: getTimeFormat(startTime.toISOString(), 'YYYY-MM-DD[T]HH:mm:ss.[000Z]', true),
+      endDate: getTimeFormat(endTime.toISOString(), 'YYYY-MM-DD[T]HH:mm:ss.[000Z]', true),
       notes,
     };
   }

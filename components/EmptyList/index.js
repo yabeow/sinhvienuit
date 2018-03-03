@@ -13,7 +13,7 @@ export default class extends React.Component {
           style={{ alignSelf: 'center', flex: 1, height: 100 }}
           source={refreshImg}
         />
-        <H2 style={{ textAlign: 'center', paddingTop: 25 }}>Không có dữ liệu :(</H2>
+        <H2 style={{ textAlign: 'center', paddingTop: 25 }}>Chưa có dữ liệu :(</H2>
         <Text style={{ textAlign: 'center', paddingTop: 10 }}>Vui lòng kéo xuống để cập nhật</Text>
       </Content>
     );

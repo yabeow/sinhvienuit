@@ -53,7 +53,7 @@ export function parseStudentPointFromHtml(html) {
     });
     return returnArray;
   } catch (e) {
-    alert(e.toString());
+    console.log(e.toString());
     // ERROR HERE
   }
   return [];

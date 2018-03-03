@@ -37,7 +37,7 @@ export function parseDaaGeneralNotificationFromHtml(html) {
       })
       .filter(item => item !== undefined);
   } catch (e) {
-    alert(e.toString());
+    console.log(e.toString());
   }
   return [];
 }
@@ -87,7 +87,7 @@ export function parseOepGeneralNotificationFromHtml(html) {
       })
       .filter(item => item !== undefined);
   } catch (e) {
-    alert(e.toString());
+    console.log(e.toString());
     // ERROR HERE
   }
   return [];

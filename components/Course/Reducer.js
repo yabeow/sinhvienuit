@@ -1,3 +1,4 @@
+import { List } from 'immutable';
 import { reducerFromClass } from '../../utils';
 import CourseList from './Object';
 
@@ -5,19 +6,22 @@ export class CourseListReducer extends CourseList {
   // Thêm một môn học.
   ADD_COURSE({ course }) {
     let dup = false;
-    this.listCourses.map((item) => {
+    let listCourses = new List(this.listCourses.map((item) => {
       if (item.getCode() === course.getCode()) {
         if (item.getLessonStart() === course.getLessonStart()) {
           if (item.getDayOfWeek() === course.getDayOfWeek()) {
             // Đã có trong danh sách.
             dup = true;
+            // Update nếu có trong danh sách.
+            return course;
           }
         }
       }
-      return true;
-    });
-    if (dup) return this;
-    let listCourses = this.listCourses.push(course);
+      return item;
+    }));
+    if (!dup) {
+      listCourses = this.listCourses.push(course);
+    }
     listCourses = this.set('listCourses', listCourses);
     return listCourses;
   }

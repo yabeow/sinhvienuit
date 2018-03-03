@@ -19,6 +19,8 @@ import { APP_STATE_SAVE_KEY } from './config/config';
 import styles from './Style';
 import bgImage from './assets/background-uit.png';
 
+console.disableYellowBox = ['Warning: RTCBatchedBridge'];
+
 const sagaMiddleware = createSagaMiddleware();
 
 export default class extends React.Component {

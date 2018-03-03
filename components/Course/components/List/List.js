@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { FlatList, RefreshControl } from 'react-native';
 import {
   Container,
@@ -16,12 +17,27 @@ import { backAction, ANDROID_PULL_TO_REFRESH_COLOR } from '../../../../config/co
 import ListItem from './Item';
 import EmptyList from '../../../EmptyList';
 
+const sortCourses = courses =>
+  courses.sort((a, b) => {
+    let timeA = a.getCurrentTimeEnd();
+    let timeB = b.getCurrentTimeEnd();
+    const currentTime = new Date();
+    if (timeA > currentTime) timeA -= 999999;
+    if (timeB > currentTime) timeB -= 999999;
+    if (timeA > timeB) return 1;
+    return -1;
+  });
+
 class List extends React.Component {
   static navigationOptions = {
     header: null,
   };
-  componentDidMount() {
-    this.props.addListCourseCalendar();
+  constructor(props) {
+    super(props);
+    const { courses } = props;
+    this.state = {
+      courses: sortCourses(courses),
+    };
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.error) {
@@ -42,18 +58,16 @@ class List extends React.Component {
         duration: 10000,
       });
     }
+    if (this.props.courses !== nextProps.courses) {
+      this.setState({ courses: sortCourses(nextProps.courses) });
+    }
   }
   render() {
-    const { addListCourseCalendar } = this.props;
-    const courses = this.props.courses.sort((a, b) => {
-      let timeA = a.getCurrentTimeEnd();
-      let timeB = b.getCurrentTimeEnd();
-      const currentTime = new Date();
-      if (timeA > currentTime) timeA -= 999999;
-      if (timeB > currentTime) timeB -= 999999;
-      if (timeA > timeB) return 1;
-      return -1;
-    });
+    const {
+      addListCourseCalendar,
+      numberOfCourseNotificationsList,
+      numberOfDeadlinesList,
+    } = this.props;
     return (
       <Container>
         <Header>
@@ -74,19 +88,28 @@ class List extends React.Component {
         <View padder style={{ flex: 1 }}>
           <FlatList
             ListEmptyComponent={<EmptyList />}
-            data={courses}
+            data={this.state.courses}
             horizontal={false}
             keyExtractor={course =>
               course.getCode() + course.getDayOfWeek() + course.getLessonStart()
             }
-            renderItem={({ item }) => (
-              <ListItem
-                course={item}
-                navigation={this.props.navigation}
-                numberNotifications={this.props.numberOfCourseNotificationsList[item.getCode()]}
-                numberDeadlines={this.props.numberOfDeadlinesList[item.getCode()]}
-              />
-            )}
+            renderItem={({ item }) => {
+              try {
+                const nNoti = numberOfCourseNotificationsList[item.getCode()];
+                const nDead = numberOfDeadlinesList[item.getCode()];
+                return (
+                  <ListItem
+                    course={item}
+                    navigation={this.props.navigation}
+                    numberNotifications={nNoti}
+                    numberDeadlines={nDead}
+                  />
+                );
+              } catch (e) {
+                console.log(e);
+              }
+              return null;
+            }}
             refreshControl={
               <RefreshControl
                 refreshing={this.props.refreshing}

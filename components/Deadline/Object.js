@@ -87,9 +87,9 @@ export default class DeadlineList extends InitDeadlineList {
   }
   getNumberOfDeadlinesList() {
     const returnList = {};
-    this.listDeadlines.map((item) => {
+    this.listDeadlines.forEach((item) => {
       if (item.status === 0) {
-        if (returnList.hasOwnProperty(item.getCode())) {
+        if (Object.prototype.hasOwnProperty.call(returnList, item.getCode())) {
           returnList[item.getCode()] += 1;
         } else {
           returnList[item.getCode()] = 1;

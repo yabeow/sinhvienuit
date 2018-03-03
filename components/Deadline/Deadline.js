@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Container,
   Header,
@@ -15,9 +16,6 @@ import { backAction } from '../../config/config';
 import DeadlineList from './components/List';
 
 class Deadline extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   static navigationOptions = {
     header: null,
   };
@@ -31,16 +29,14 @@ class Deadline extends React.Component {
         duration: 10000,
       });
       this.props.setError(false);
-    } else {
-      if (nextProps.refreshing === false && this.props.refreshing === true) {
-        Toast.show({
-          text: 'Cập nhật thông tin thành công',
-          position: 'bottom',
-          buttonText: 'Bỏ qua',
-          type: 'success',
-          duration: 10000,
-        });
-      }
+    } else if (nextProps.refreshing === false && this.props.refreshing === true) {
+      Toast.show({
+        text: 'Cập nhật thông tin thành công',
+        position: 'bottom',
+        buttonText: 'Bỏ qua',
+        type: 'success',
+        duration: 10000,
+      });
     }
   }
   render() {
@@ -72,11 +68,15 @@ class Deadline extends React.Component {
 Deadline.defaultProps = {
   refreshing: false,
   onRefresh: () => {},
+  error: '',
 };
 
 Deadline.propTypes = {
   deadlines: PropTypes.array.isRequired,
+  navigation: PropTypes.object.isRequired,
   refreshing: PropTypes.bool,
   onRefresh: PropTypes.func,
+  error: PropTypes.string,
+  setError: PropTypes.func.isRequired,
 };
 export default Deadline;

@@ -20,7 +20,11 @@ export function parseListDeadlineIdFromHtml(html) {
     .filter(item => item !== undefined);
 }
 export function parseDeadlineFromHtml(html) {
-  const id = betweenTwoSubString(html, '<a title="Assignment" href="', '"');
+  const id = betweenTwoSubString(
+    html,
+    '<a title="Assignment" href="https://courses.uit.edu.vn/mod/assign/view.php?id=',
+    '"',
+  ).trim();
   let code = betweenTwoSubString(html, 'https://courses.uit.edu.vn/course/view.php?id=', '</li>');
   code = betweenTwoSubString(code, '>', '</a>').trim();
   let title = betweenTwoSubString(html, '<h2>', '</h2>').trim();

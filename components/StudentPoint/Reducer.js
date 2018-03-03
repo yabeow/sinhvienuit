@@ -1,12 +1,21 @@
+import { List } from 'immutable';
 import { reducerFromClass } from '../../utils';
 import PointList from './Object';
 
 export class PointListReducer extends PointList {
   // Thêm một hoạt động.
   ADD_POINT({ point }) {
-    const index = this.listPoints.findIndex(item => item.getId() === point.getId());
-    if (index !== -1) return this;
-    const listPoints = this.listPoints.push(point);
+    let dup = false;
+    let listPoints = new List(this.listPoints.map((item) => {
+      if (item.getId() === point.getId()) {
+        dup = true;
+        return point;
+      }
+      return item;
+    }));
+    if (!dup) {
+      listPoints = this.listPoints.push(point);
+    }
     return this.set('listPoints', listPoints);
   }
   SET_FINAL_POINT({ point }) {
