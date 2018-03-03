@@ -45,7 +45,6 @@ function* getListDeadline(data = false) {
 function* getSingleDeadline(data = false) {
   try {
     if (typeof data.endPoint === 'undefined') {
-      yield put(setDeadlineLoading(true));
       const deadlineLink = `${MOODLE_DEADLINE_LINK_TEMPLATE + data.id}&lang=en`;
       return yield put(getPage('MOODLE', deadlineLink, true, getDeadlineResult()));
     }
@@ -58,8 +57,6 @@ function* getSingleDeadline(data = false) {
     }
   } catch (e) {
     yield put(setDeadlineError(e.message));
-  } finally {
-    yield put(setDeadlineLoading(false));
   }
   return undefined;
 }

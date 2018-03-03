@@ -11,18 +11,25 @@ export class DeadlineListReducer extends DeadlineList {
       }
       return false;
     });
-    if (dup) return this;
+    if (dup) {
+      return new DeadlineList(this.listDeadlines.map((item) => {
+        if (item.getId() === deadline.getId()) {
+          return item.set('status', deadline.getStatus());
+        }
+        return item;
+      }));
+    }
     const listDeadlines = this.listDeadlines.push(deadline);
     return this.set('listDeadlines', listDeadlines);
   }
   // Set status cho deadline.
   SET_DEADLINE_STATUS({ id, status }) {
-    this.listDeadlines.map((item) => {
+    return new DeadlineList(this.listDeadlines.map((item) => {
       if (item.getId() === id) {
         return item.set('status', status);
       }
       return item;
-    });
+    }));
   }
   // Set loading.
   SET_DEADLINE_LOADING({ loading }) {

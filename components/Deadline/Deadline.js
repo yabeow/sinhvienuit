@@ -16,9 +16,6 @@ import { backAction } from '../../config/config';
 import DeadlineList from './components/List';
 
 class Deadline extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   static navigationOptions = {
     header: null,
   };
@@ -71,11 +68,15 @@ class Deadline extends React.Component {
 Deadline.defaultProps = {
   refreshing: false,
   onRefresh: () => {},
+  error: '',
 };
 
 Deadline.propTypes = {
   deadlines: PropTypes.array.isRequired,
+  navigation: PropTypes.object.isRequired,
   refreshing: PropTypes.bool,
   onRefresh: PropTypes.func,
+  error: PropTypes.string,
+  setError: PropTypes.func.isRequired,
 };
 export default Deadline;
