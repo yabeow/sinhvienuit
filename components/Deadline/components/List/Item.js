@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Linking } from 'react-native';
 import { Card, CardItem, Text, Button, Icon, Badge, Left, Right, Content } from 'native-base';
+import Navigator from '../../../Navigator/Action';
 
 const renderStatus = (status) => {
   if (status === 1) {
@@ -48,7 +48,7 @@ class Deadline extends React.Component {
             <Button
               rounded
               small
-              onPress={() => Linking.openURL(this.props.deadline.getLink())}
+              onPress={() => Navigator.navigate('WebBrowser', { link: deadline.getLink() })}
               success
             >
               <Icon name="exit" />
