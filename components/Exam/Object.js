@@ -1,5 +1,4 @@
 import { getTimeFormat } from '../../utils';
-import { lang } from 'moment';
 
 const { Record, List } = require('immutable');
 

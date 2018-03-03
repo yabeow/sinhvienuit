@@ -16,9 +16,6 @@ import { backAction } from '../../config/config';
 import ExamList from './components/List';
 
 class Exam extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   static navigationOptions = {
     header: null,
   };
@@ -71,11 +68,15 @@ class Exam extends React.Component {
 Exam.defaultProps = {
   refreshing: false,
   onRefresh: () => {},
+  error: '',
 };
 
 Exam.propTypes = {
   exams: PropTypes.array.isRequired,
   refreshing: PropTypes.bool,
   onRefresh: PropTypes.func,
+  error: PropTypes.string,
+  setError: PropTypes.func.isRequired,
+  navigation: PropTypes.object.isRequired,
 };
 export default Exam;
