@@ -1,8 +1,8 @@
-export const VERSION_NUMBER = '1.0.2';
+export const VERSION_NUMBER = '1.1.0';
 export const APP_STATE_SAVE_KEY = '@SinhVienUIT@DATA';
 export const REQUEST_TIMEOUT = 10000;
 export const ANDROID_PULL_TO_REFRESH_COLOR = ['red', 'green', 'blue'];
-export const FACEBOOK_PAGE = 'https://fb.me/sinhviencntt';
+export const FACEBOOK_PAGE = 'https://fb.me/thongbaouit';
 export const GITHUB_PAGE = 'https://github.com/yabeow/sinhvienuit';
 export const POLICY_PAGE = 'https://sinhviencntt.yabeow.com/policy.html';
 export const DAA_HOMEPAGE = 'https://daa.uit.edu.vn';
