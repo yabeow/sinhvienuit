@@ -24,8 +24,9 @@ export class Exam extends InitExam {
     return getTimeFormat(this.time, format, utc);
   }
   getEndTime(format = false, utc = false) {
+    const time = { ...this.time };
     // Vì không có thông tin nên mặc định thời gian thì là 1h.
-    return getTimeFormat(this.time.setHours(this.time.getHours() + 1), format, utc);
+    return getTimeFormat(time.setHours(time.getHours() + 1), format, utc);
   }
   getRoom() {
     return this.room;
