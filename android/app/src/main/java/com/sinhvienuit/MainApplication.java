@@ -1,4 +1,4 @@
-package com.yabeow.sinhvienuit;
+package com.yabeow.sinhviencntt;
 
 import android.app.Application;
 
