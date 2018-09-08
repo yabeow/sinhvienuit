@@ -8,7 +8,7 @@ $ git clone https://github.com/yabeow/sinhvienuit.git
 
 $ cd sinhvienuit
 
-$ npm install (hoặc yarn install)
+$ yarn install (hoặc npm install)
 
 $ cd ./ios && pod install
 
