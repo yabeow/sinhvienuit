@@ -110,7 +110,7 @@ class User extends React.Component {
                 <Image style={styles.Logo} source={noAvatar} />
               )}
             </View>
-            <Card>
+            <Card style={{ borderRadius: 8, overflow: 'hidden' }}>
               <CardItem style={styles.cardView}>
                 <Text>Họ tên</Text>
                 <Text>{this.props.user.getName()}</Text>
@@ -128,7 +128,7 @@ class User extends React.Component {
                 <Text>{this.props.user.getTrainType()}</Text>
               </CardItem>
             </Card>
-            <Card>
+            <Card style={{ borderRadius: 8, overflow: 'hidden' }}>
               <ListItem button onPress={() => this.updateInformation()} icon>
                 <Left>
                   <Button onPress={() => this.updateInformation()} info>

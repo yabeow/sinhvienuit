@@ -62,7 +62,7 @@ class Details extends React.Component {
             }
           >
             <Content padder>
-              <Card>
+              <Card style={{ borderRadius: 8, overflow: 'hidden' }}>
                 <CardItem>
                   <Icon name="code" />
                   <Text>Mã lớp: {course.getCode()}</Text>

@@ -37,10 +37,14 @@ export default class About extends React.Component {
           <Right />
         </Header>
         <View style={styles.cardContainer}>
-          <Card style={{ flex: 0 }}>
+          <Card style={{ flex: 0, borderRadius: 8, overflow: 'hidden' }}>
             <CardItem>
-              <Left>
-                <Thumbnail square style={{ backgroundColor: '#2196F3' }} source={logoSrc} />
+              <Left style={{ borderRadius: 8, overflow: 'hidden' }}>
+                <Thumbnail
+                  square
+                  style={{ backgroundColor: '#2196F3', overflow: 'hidden' }}
+                  source={logoSrc}
+                />
                 <Body>
                   <Text>Sinh viên CNTT</Text>
                   <Text note>v{VERSION_NUMBER}</Text>

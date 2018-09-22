@@ -49,7 +49,7 @@ class Item extends React.Component {
   render() {
     const { notification } = this.props;
     return (
-      <Card>
+      <Card style={{ borderRadius: 8, overflow: 'hidden' }}>
         <CardItem>
           <Body>
             <Text style={{ paddingTop: 10 }}>{notification.getTitle()}</Text>

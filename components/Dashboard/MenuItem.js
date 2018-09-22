@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 1.5,
     elevation: 3,
+    borderRadius: 8,
   },
   Icon: {
     color: 'white',

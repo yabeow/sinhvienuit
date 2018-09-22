@@ -7,7 +7,7 @@ class Item extends React.Component {
   render() {
     const { studentPoint } = this.props;
     return (
-      <Card>
+      <Card style={{ borderRadius: 8, overflow: 'hidden' }}>
         <CardItem>
           <Body>
             <Text style={{ paddingTop: 2 }}>{studentPoint.getTitle()}</Text>

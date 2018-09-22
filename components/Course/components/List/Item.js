@@ -11,7 +11,7 @@ class Item extends React.Component {
       <TouchableOpacity
         onPress={() => navigation.navigate('CourseDetails', { course: this.props.course })}
       >
-        <Card>
+        <Card style={{ borderRadius: 8, overflow: 'hidden' }}>
           <CardItem style={{ flex: 1, justifyContent: 'space-between' }}>
             <View
               style={{

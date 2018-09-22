@@ -125,7 +125,7 @@ class LoginForm extends React.Component {
             </View>
             <Item
               style={{ backgroundColor: 'white' }}
-              regular
+              rounded
               label="Username"
               error={this.state.errorUsername}
             >
@@ -137,7 +137,7 @@ class LoginForm extends React.Component {
             </Item>
             <Item
               style={{ backgroundColor: 'white' }}
-              regular
+              rounded
               label="Password"
               error={this.state.errorPassword}
             >
@@ -152,14 +152,14 @@ class LoginForm extends React.Component {
               {this.props.loading === true ? (
                 <Spinner color="white" />
               ) : (
-                  <Button
-                    title="Đăng nhập"
-                    onPress={() => this.Login()}
-                    disabled={this.props.loading === true ? true : null}
-                  >
-                    <Text style={{ textAlign: 'center' }}> Đăng nhập </Text>
-                  </Button>
-                )}
+                <Button
+                  title="Đăng nhập"
+                  onPress={() => this.Login()}
+                  disabled={this.props.loading === true ? true : null}
+                >
+                  <Text style={{ textAlign: 'center' }}> Đăng nhập </Text>
+                </Button>
+              )}
             </View>
             <View style={{ top: 40, justifyContent: 'center', alignItems: 'center' }}>
               <TouchableOpacity onPress={() => Linking.openURL(POLICY_PAGE)}>

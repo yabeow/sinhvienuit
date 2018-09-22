@@ -7,7 +7,7 @@ class Final extends React.Component {
   render() {
     const rankColor = { [STUDENT_POINT_RANK_COLOR[this.props.finalRank]]: true };
     return (
-      <Card>
+      <Card style={{ borderRadius: 8, overflow: 'hidden' }}>
         <CardItem>
           <Icon name="body" />
           <Text>Tổng điểm: </Text>

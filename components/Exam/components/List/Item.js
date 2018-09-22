@@ -5,7 +5,7 @@ import { Card, CardItem, Text, Icon, Badge } from 'native-base';
 class Exam extends React.Component {
   render() {
     return (
-      <Card>
+      <Card style={{ borderRadius: 8, overflow: 'hidden' }}>
         <CardItem>
           <Text>{this.props.exam.getCode()}</Text>
         </CardItem>

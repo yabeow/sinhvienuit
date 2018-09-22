@@ -28,7 +28,7 @@ class Deadline extends React.Component {
   render() {
     const { deadline } = this.props;
     return (
-      <Card>
+      <Card style={{ borderRadius: 8, overflow: 'hidden' }}>
         <CardItem>
           <Badge primary>
             <Text>{deadline.getCode()}</Text>
