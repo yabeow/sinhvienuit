@@ -35,6 +35,7 @@ export function checkLoggedIn(html) {
   return !(
     html.includes('Đăng Nhập') ||
     html.includes('Đăng nhập') ||
-    html.includes('Truy cập bị từ chối')
+    html.includes('Truy cập bị từ chối') ||
+    html.includes('are not logged in')
   );
 }

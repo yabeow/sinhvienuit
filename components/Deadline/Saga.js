@@ -1,4 +1,4 @@
-import { put, all, fork, select, takeLatest, takeEvery } from 'redux-saga/effects';
+import { put, all, fork, takeLatest, takeEvery } from 'redux-saga/effects';
 import {
   getDeadlineInformation,
   addDeadline,
@@ -27,13 +27,7 @@ function* getListDeadline(data = false) {
     if (listId.length === 0) {
       return undefined;
     }
-    const listDeadlines = yield select(state => state.deadlines.getListId());
-    yield all(listId.map((item) => {
-      if (typeof listDeadlines[item] === 'undefined') {
-        return put(getDeadlineInformation(item));
-      }
-      return undefined;
-    }));
+    yield listId.map(item => put(getDeadlineInformation(item)));
   } catch (e) {
     yield put(setDeadlineError(e.message));
   } finally {
