@@ -1,56 +1,86 @@
 PODS:
-  - React (0.50.4):
-    - React/Core (= 0.50.4)
-  - react-native-calendar-events (1.4.3):
+  - boost (1.59.0):
+    - boost/graph-includes (= 1.59.0)
+    - boost/math-includes (= 1.59.0)
+    - boost/numeric-includes (= 1.59.0)
+    - boost/pointer_cast-includes (= 1.59.0)
+    - boost/preprocessor-includes (= 1.59.0)
+    - boost/shared_ptr-includes (= 1.59.0)
+    - boost/string_algorithms-includes (= 1.59.0)
+  - boost-for-react-native (1.63.0)
+  - boost/graph-includes (1.59.0)
+  - boost/math-includes (1.59.0)
+  - boost/numeric-includes (1.59.0)
+  - boost/pointer_cast-includes (1.59.0)
+  - boost/preprocessor-includes (1.59.0)
+  - boost/shared_ptr-includes (1.59.0)
+  - boost/string_algorithms-includes (1.59.0)
+  - DoubleConversion (1.1.5)
+  - Folly (2016.09.26.00):
+    - boost-for-react-native
+    - DoubleConversion
+    - glog
+  - glog (0.3.4)
+  - React (0.52.3):
+    - React/Core (= 0.52.3)
+  - react-native-calendar-events (1.6.3):
     - React
   - react-native-cookies (1.0.2)
-  - React/ART (0.50.4):
+  - React/ART (0.52.3):
     - React/Core
-  - React/BatchedBridge (0.50.4):
+  - React/Core (0.52.3):
+    - yoga (= 0.52.3.React)
+  - React/CxxBridge (0.52.3):
+    - Folly (= 2016.09.26.00)
     - React/Core
-    - React/cxxreact_legacy
-  - React/Core (0.50.4):
-    - yoga (= 0.50.4.React)
-  - React/cxxreact_legacy (0.50.4):
-    - React/jschelpers_legacy
-  - React/DevSupport (0.50.4):
+    - React/cxxreact
+  - React/cxxreact (0.52.3):
+    - boost
+    - Folly (= 2016.09.26.00)
+    - React/jschelpers
+    - React/jsinspector
+  - React/DevSupport (0.52.3):
     - React/Core
     - React/RCTWebSocket
-  - React/fishhook (0.50.4)
-  - React/jschelpers_legacy (0.50.4)
-  - React/RCTActionSheet (0.50.4):
+  - React/fishhook (0.52.3)
+  - React/jschelpers (0.52.3):
+    - Folly (= 2016.09.26.00)
+    - React/PrivateDatabase
+  - React/jsinspector (0.52.3)
+  - React/PrivateDatabase (0.52.3)
+  - React/RCTActionSheet (0.52.3):
     - React/Core
-  - React/RCTAnimation (0.50.4):
+  - React/RCTAnimation (0.52.3):
     - React/Core
-  - React/RCTBlob (0.50.4):
+  - React/RCTBlob (0.52.3):
     - React/Core
-  - React/RCTGeolocation (0.50.4):
+  - React/RCTGeolocation (0.52.3):
     - React/Core
-  - React/RCTImage (0.50.4):
+  - React/RCTImage (0.52.3):
     - React/Core
     - React/RCTNetwork
-  - React/RCTLinkingIOS (0.50.4):
+  - React/RCTLinkingIOS (0.52.3):
     - React/Core
-  - React/RCTNetwork (0.50.4):
+  - React/RCTNetwork (0.52.3):
     - React/Core
-  - React/RCTSettings (0.50.4):
+  - React/RCTSettings (0.52.3):
     - React/Core
-  - React/RCTText (0.50.4):
+  - React/RCTText (0.52.3):
     - React/Core
-  - React/RCTVibration (0.50.4):
+  - React/RCTVibration (0.52.3):
     - React/Core
-  - React/RCTWebSocket (0.50.4):
+  - React/RCTWebSocket (0.52.3):
     - React/Core
     - React/fishhook
     - React/RCTBlob
-  - yoga (0.50.4.React)
+  - yoga (0.52.3.React)
 
 DEPENDENCIES:
   - react-native-calendar-events (from `../node_modules/react-native-calendar-events`)
   - react-native-cookies (from `../node_modules/react-native-cookies/ios`)
   - React/ART (from `../node_modules/react-native`)
-  - React/BatchedBridge (from `../node_modules/react-native`)
   - React/Core (from `../node_modules/react-native`)
+  - React/CxxBridge (from `../node_modules/react-native`)
   - React/DevSupport (from `../node_modules/react-native`)
   - React/RCTActionSheet (from `../node_modules/react-native`)
   - React/RCTAnimation (from `../node_modules/react-native`)
@@ -75,11 +105,16 @@ EXTERNAL SOURCES:
     :path: ../node_modules/react-native/ReactCommon/yoga
 
 SPEC CHECKSUMS:
-  React: 541ba768b9855e10cdc76f55427a5cd0653ca806
+  boost: 30a15ffb6d9aa4646dd3caffc960753f4cb4ca4e
+  boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
+  DoubleConversion: e22e0762848812a87afd67ffda3998d9ef29170c
+  Folly: 211775e49d8da0ca658aebc8eab89d642935755c
+  glog: 1de0bb937dccdc981596d3b5825ebfb765017ded
+  React: 43e97926f429d846050880666de1809e22dd5cc5
   react-native-calendar-events: fe6fbc8ed337a7423c98f2c9012b25f20444de09
   react-native-cookies: 9d73689387e78277695a1cd3ac2da5a0b3cedfee
-  yoga: 17521bbb0dd54a47c0b3ac43253e78cdac7488e0
+  yoga: 55da126afc384965b96bff46652464373b330add
 
-PODFILE CHECKSUM: 304f8f2f33f5422b63b5a0ea100390dabd215d28
+PODFILE CHECKSUM: 790afee7a062549f4917bc100c426deeb12dda7f
 
 COCOAPODS: 1.4.0
