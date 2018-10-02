@@ -22,8 +22,8 @@ const sortCourses = courses =>
     let timeA = a.getCurrentTimeEnd();
     let timeB = b.getCurrentTimeEnd();
     const currentTime = new Date();
-    if (timeA > currentTime) timeA -= 999999;
-    if (timeB > currentTime) timeB -= 999999;
+    if (timeA > currentTime) timeA -= 999999999;
+    if (timeB > currentTime) timeB -= 999999999;
     if (timeA > timeB) return 1;
     return -1;
   });

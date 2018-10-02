@@ -11,11 +11,11 @@ const sortDeadlines = deadlines =>
   deadlines.sort((a, b) => {
     let timeA = a.getTime();
     let timeB = b.getTime();
-    if (a.getStatus() === 0) {
-      timeA -= 999999;
+    if (a.getStatus() === 1) {
+      timeA += 999999999;
     }
-    if (b.getStatus() === 0) {
-      timeB -= 999999;
+    if (b.getStatus() === 1) {
+      timeB += 999999999;
     }
     if (timeA < timeB) return -1;
     if (timeA > timeB) return 1;
