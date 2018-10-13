@@ -14,7 +14,12 @@ import {
 } from './Action';
 import { getPage } from '../Login/Action';
 import { parseCourseFromHtml } from './Utils';
-import { addCalendarEvent, getCalendarEvents } from '../../utils';
+import {
+  checkCalendarPermisson,
+  requestCalendarPermisson,
+  addCalendarEvent,
+  getCalendarEvents,
+} from '../../utils';
 
 function* getCourse({ calendar }) {
   try {
@@ -53,6 +58,7 @@ function* addCourseCalendarSaga({ course }) {
 
 function* addListCourseCalendarSaga({ listCourses }) {
   try {
+    yield checkCalendarPermisson();
     yield all(listCourses.map(item => put(addCourseCalendar(item))));
     Toast.show({
       text: 'Thêm lịch học vào ứng dụng Lịch thành công',
@@ -70,6 +76,7 @@ function* addListCourseCalendarSaga({ listCourses }) {
       type: 'warning',
       duration: 10000,
     });
+    yield requestCalendarPermisson();
   }
 }
 

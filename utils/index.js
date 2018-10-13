@@ -1,4 +1,9 @@
-export { checkCalendarPermisson, addCalendarEvent, getCalendarEvents } from './calendarEvent';
+export {
+  checkCalendarPermisson,
+  requestCalendarPermisson,
+  addCalendarEvent,
+  getCalendarEvents,
+} from './calendarEvent';
 export { default as betweenTwoSubString } from './betweenTwoSubString';
 export { default as getCurrentMonday } from './getCurrentMonday';
 export { default as parseDateTimeFromString } from './parseDateTimeFromString';

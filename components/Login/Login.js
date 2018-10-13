@@ -15,6 +15,7 @@ import { FORGOT_PASSWORD_RESET_PAGE, POLICY_PAGE } from '../../config/config';
 import styles, { LOGO_SIZE_DEFAULT, LOGO_SIZE_SMALL } from './Style';
 import bgSrc from '../../assets/background-uit.png';
 import logoImg from '../../assets/logo.png';
+import { requestCalendarPermisson } from '../../utils';
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -35,6 +36,7 @@ class LoginForm extends React.Component {
       this.keyboardWillShowSub = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow);
       this.keyboardWillHideSub = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
     }
+    requestCalendarPermisson();
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.error) {
@@ -52,7 +54,6 @@ class LoginForm extends React.Component {
     // Fetch dữ liệu sau khi đăng nhập.
     this.props.getCourse(true);
     this.props.getUser();
-
     // Remove listener
     this.keyboardWillShowSub.remove();
     this.keyboardWillHideSub.remove();
