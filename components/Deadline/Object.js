@@ -1,3 +1,4 @@
+import Moment from 'moment';
 import { getTimeFormat } from '../../utils';
 import { MOODLE_HOMEPAGE, MOODLE_DEADLINE_LINK_TEMPLATE } from '../../config/config';
 
@@ -40,6 +41,19 @@ export class Deadline extends InitDeadline {
   }
   getStatus() {
     return this.status;
+  }
+  getEvent() {
+    const title = this.getTitle();
+    const time = Moment(this.getTime());
+    const preTime = Moment(this.getTime());
+    // Thông báo trước 3 tiếng
+    preTime.add(-3, 'hours');
+    return {
+      title,
+      startDate: getTimeFormat(preTime.toISOString(), 'YYYY-MM-DD[T]HH:mm:00.[000Z]', true),
+      endDate: getTimeFormat(time.toISOString(), 'YYYY-MM-DD[T]HH:mm:00.[000Z]', true),
+      url: this.getLink(),
+    };
   }
 }
 const InitDeadlineList = Record({

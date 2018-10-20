@@ -1,4 +1,4 @@
-import { put, all, fork, takeLatest, takeEvery } from 'redux-saga/effects';
+import { put, call, fork, takeLatest, takeEvery } from 'redux-saga/effects';
 import {
   getDeadlineInformation,
   addDeadline,
@@ -12,6 +12,7 @@ import {
 import { getPage } from '../Login/Action';
 import { parseListDeadlineIdFromHtml, parseDeadlineFromHtml } from './Utils';
 import { MOODLE_DEADLINE_LINK_TEMPLATE } from '../../config/config';
+import { addCalendarEvent, getCalendarEvents } from '../../utils';
 
 function* getListDeadline(data = false) {
   try {
@@ -48,6 +49,12 @@ function* getSingleDeadline(data = false) {
     const deadline = parseDeadlineFromHtml(data.data);
     if (deadline) {
       yield put(addDeadline(deadline));
+      const event = deadline.getEvent();
+      const listDeviceEvent = yield call(getCalendarEvents, event.startDate, event.endDate);
+      const index = listDeviceEvent.findIndex(item => item.title === event.title);
+      if (index === -1) {
+        yield call(addCalendarEvent, event);
+      }
     }
   } catch (e) {
     yield put(setDeadlineError(e.message));
