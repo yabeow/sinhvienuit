@@ -26,12 +26,12 @@ const sortNotifications = (notifications) => {
     // Ưu tiên thông báo nghỉ/bù môn học.
     if (typeof a.getCode !== 'undefined') {
       if (a.getEndTime() > currentTime) {
-        timeA += 9999999999;
+        timeA += 9999999999999;
       }
     }
     if (typeof b.getCode !== 'undefined') {
       if (b.getEndTime() > currentTime) {
-        timeB += 9999999999;
+        timeB += 9999999999999;
       }
     }
     if (timeA > timeB) return -1;

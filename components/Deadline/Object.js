@@ -33,13 +33,13 @@ export class Deadline extends InitDeadline {
   getTitle() {
     return this.title;
   }
-  getTime(format = false) {
-    if (format) {
-      return getTimeFormat(this.time, format);
-    }
-    return this.time;
+  getTime(format = false, utc = false) {
+    return getTimeFormat(this.time, format, utc);
   }
   getStatus() {
+    const now = Moment();
+    const time = Moment(this.getTime());
+    if (time <= now) return -1;
     return this.status;
   }
   getEvent() {
@@ -77,6 +77,9 @@ export default class DeadlineList extends InitDeadlineList {
       returnList[item.getId()] = true;
     });
     return returnList;
+  }
+  getListIdArray() {
+    return this.listDeadlines.map(item => item.getId());
   }
   getNumberOfDeadlines(code = false, data = false) {
     let count = 0;

@@ -1,4 +1,4 @@
-import { put, call, fork, takeLatest, takeEvery } from 'redux-saga/effects';
+import { put, call, fork, takeLatest, takeEvery, select } from 'redux-saga/effects';
 import {
   getDeadlineInformation,
   addDeadline,
@@ -28,7 +28,13 @@ function* getListDeadline(data = false) {
     if (listId.length === 0) {
       return undefined;
     }
-    yield listId.map(item => put(getDeadlineInformation(item)));
+    // Update old deadlines
+    const listOldDeadlines = yield select(state => state.deadlines.getListIdArray());
+
+    let listDeadliesUpdate = [...listId, ...listOldDeadlines];
+    // Remove duplicate
+    listDeadliesUpdate = listDeadliesUpdate.filter((elem, pos, arr) => arr.indexOf(elem) === pos);
+    yield listDeadliesUpdate.map(item => put(getDeadlineInformation(item)));
   } catch (e) {
     yield put(setDeadlineError(e.message));
   } finally {

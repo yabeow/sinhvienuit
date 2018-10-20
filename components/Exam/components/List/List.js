@@ -12,8 +12,8 @@ const sortExams = (exams) => {
   return exams.sort((a, b) => {
     let timeA = a.getTime().getTime();
     let timeB = b.getTime().getTime();
-    if (timeA > currentTime) timeA -= 9999999999;
-    if (timeB > currentTime) timeB -= 9999999999;
+    if (timeA > currentTime) timeA -= 9999999999999;
+    if (timeB > currentTime) timeB -= 9999999999999;
     if (timeA < timeB) return -1;
     if (timeA > timeB) return 1;
     return 0;
