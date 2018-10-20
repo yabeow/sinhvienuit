@@ -125,8 +125,8 @@ export class Course extends InitCourse {
     return {
       title,
       location: this.getRoom(),
-      startDate: getTimeFormat(startTime.toISOString(), 'YYYY-MM-DD[T]HH:mm:ss.[000Z]', true),
-      endDate: getTimeFormat(endTime.toISOString(), 'YYYY-MM-DD[T]HH:mm:ss.[000Z]', true),
+      startDate: getTimeFormat(startTime.toISOString(), 'YYYY-MM-DD[T]HH:mm:00.[000Z]', true),
+      endDate: getTimeFormat(endTime.toISOString(), 'YYYY-MM-DD[T]HH:mm:00.[000Z]', true),
       notes,
     };
   }

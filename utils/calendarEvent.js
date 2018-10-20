@@ -1,5 +1,6 @@
 import RNCalendarEvents from 'react-native-calendar-events';
 import { Alert } from 'react-native';
+import Moment from 'moment';
 
 export const checkCalendarPermisson = () =>
   new Promise((resolve, reject) => {
@@ -51,8 +52,16 @@ export const addCalendarEvent = ({
 
 export const getCalendarEvents = (startDate, endDate) =>
   checkCalendarPermisson()
-    .then(() =>
-      RNCalendarEvents.fetchAllEvents(startDate, endDate, [])
+    .then(() => {
+      let fixStartDate = Moment.utc(startDate);
+      fixStartDate = fixStartDate.add(-30, 'minutes');
+      fixStartDate = fixStartDate.format('YYYY-MM-DD[T]HH:mm:00.[000Z]');
+
+      let fixEndDate = Moment.utc(endDate);
+      fixEndDate = fixEndDate.add(30, 'minutes');
+      fixEndDate = fixEndDate.format('YYYY-MM-DD[T]HH:mm:00.[000Z]');
+      return RNCalendarEvents.fetchAllEvents(fixStartDate, fixEndDate, [])
         .then(events => events)
-        .catch(() => []))
+        .catch(() => []);
+    })
     .catch(() => []);

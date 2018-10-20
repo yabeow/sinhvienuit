@@ -134,8 +134,8 @@ export class CourseNotification extends InitCourseNotification {
     return {
       title,
       location: this.getRoom(),
-      startDate: this.getStartTime('YYYY-MM-DD[T]HH:mm:ss.sss[Z]', true),
-      endDate: this.getEndTime('YYYY-MM-DD[T]HH:mm:ss.sss[Z]', true),
+      startDate: this.getStartTime('YYYY-MM-DD[T]HH:mm:00.000[Z]', true),
+      endDate: this.getEndTime('YYYY-MM-DD[T]HH:mm:00.000[Z]', true),
       url: this.getLink(),
     };
   }

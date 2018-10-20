@@ -38,8 +38,8 @@ export class Exam extends InitExam {
     return {
       title: `Thi môn ${this.getCode()}`,
       location: this.getRoom(),
-      startDate: this.getTime('YYYY-MM-DD[T]HH:mm:ss.sss[Z]', true),
-      endDate: this.getEndTime('YYYY-MM-DD[T]HH:mm:ss.sss[Z]', true),
+      startDate: this.getTime('YYYY-MM-DD[T]HH:mm:00.000[Z]', true),
+      endDate: this.getEndTime('YYYY-MM-DD[T]HH:mm:00.000[Z]', true),
     };
   }
 }

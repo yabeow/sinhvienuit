@@ -50,7 +50,9 @@ function* addCourseCalendarSaga({ course }) {
     const event = course.getEvent();
     const listDeviceEvent = yield call(getCalendarEvents, event.startDate, event.endDate);
     const index = listDeviceEvent.findIndex(item => item.title === event.title);
-    if (index === -1) yield call(addCalendarEvent, event);
+    if (index === -1) {
+      yield call(addCalendarEvent, event);
+    }
   } catch (e) {
     yield put(setCourseError(e.message));
   }
