@@ -36,13 +36,19 @@ export const requestCalendarPermisson = () =>
   });
 
 export const addCalendarEvent = ({
-  title, location, notes, startDate, endDate,
+  title,
+  location,
+  notes,
+  description = undefined,
+  startDate,
+  endDate,
 }) =>
   checkCalendarPermisson()
     .then(() =>
       RNCalendarEvents.saveEvent(title, {
         location,
         notes,
+        description,
         startDate,
         endDate,
       })

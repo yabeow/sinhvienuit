@@ -128,6 +128,7 @@ export class Course extends InitCourse {
       startDate: getTimeFormat(startTime.toISOString(), 'YYYY-MM-DD[T]HH:mm:00.[000Z]', true),
       endDate: getTimeFormat(endTime.toISOString(), 'YYYY-MM-DD[T]HH:mm:00.[000Z]', true),
       notes,
+      description: notes,
     };
   }
 }
