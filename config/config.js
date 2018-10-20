@@ -1,4 +1,4 @@
-export const VERSION_NUMBER = '1.1.3';
+export const VERSION_NUMBER = '1.2.0';
 export const APP_STATE_SAVE_KEY = '@SinhVienUIT@DATA';
 export const REQUEST_TIMEOUT = 10000;
 export const ANDROID_PULL_TO_REFRESH_COLOR = ['red', 'green', 'blue'];
