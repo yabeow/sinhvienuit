@@ -39,7 +39,7 @@ export class Deadline extends InitDeadline {
   getStatus() {
     const now = Moment();
     const time = Moment(this.getTime());
-    if (time <= now) return -1;
+    if (time <= now && this.status === 0) return -1;
     return this.status;
   }
   getEvent() {
