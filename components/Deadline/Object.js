@@ -1,5 +1,5 @@
 import Moment from 'moment';
-import { getTimeFormat } from '../../utils';
+import { getTimeFormat, htmlEntityDecode } from '../../utils';
 import { MOODLE_HOMEPAGE, MOODLE_DEADLINE_LINK_TEMPLATE } from '../../config/config';
 
 const { Record, List } = require('immutable');
@@ -50,7 +50,7 @@ export class Deadline extends InitDeadline {
     const time = Moment(this.getTime());
     const preTime = Moment(this.getTime());
     // Strip all html tags
-    const notes = this.getContent().replace(/<{1}[^<>]{1,}>{1}/g, '');
+    const notes = htmlEntityDecode(this.getContent().replace(/<{1}[^<>]{1,}>{1}/g, ''));
     // Thông báo trước 3 tiếng
     preTime.add(-3, 'hours');
     return {

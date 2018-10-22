@@ -36,11 +36,19 @@ export function parseCourseFromHtml(data) {
       let startTime = betweenTwoSubString(temp, 'BĐ:', '<br />').trim();
       startTime = startTime.split('/');
       startTime = new Date(`20${startTime[2]}`, startTime[1] - 1, startTime[0]);
+      if (!startTime) return undefined;
       // Ngày kết thúc.
       let endTime = betweenTwoSubString(`${temp}---`, 'KT:', '---').trim();
+      if (!endTime) return undefined;
       endTime = endTime.split('/');
       endTime = new Date(`20${endTime[2]}`, endTime[1] - 1, endTime[0]);
-      if (name !== '' && typeof code !== 'undefined' && name !== 'Môn học') {
+      if (
+        name !== '' &&
+        typeof code !== 'undefined' &&
+        name !== 'Môn học' &&
+        startTime &&
+        endTime
+      ) {
         let course = {
           code,
           name,

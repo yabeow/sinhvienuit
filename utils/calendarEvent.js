@@ -17,22 +17,29 @@ export const checkCalendarPermisson = () =>
 
 export const requestCalendarPermisson = () =>
   new Promise((resolve, reject) => {
-    Alert.alert('Cho phép truy cập', 'Ứng dụng cần cấp quyền truy cập Lịch để thêm các thông báo', [
-      {
-        text: 'Đồng ý',
-        onPress: () =>
-          RNCalendarEvents.authorizeEventStore()
-            .then((status) => {
-              if (status === 'authorized') {
-                resolve();
-              } else {
-                reject();
-              }
-            })
-            .catch(error => reject(error)),
-      },
-      { text: 'Để sau', onPress: () => reject(), style: 'cancel' },
-    ]);
+    checkCalendarPermisson()
+      .then(() => resolve())
+      .catch(() =>
+        Alert.alert(
+          'Cho phép truy cập',
+          'Ứng dụng cần cấp quyền truy cập Lịch để thêm các thông báo',
+          [
+            {
+              text: 'Đồng ý',
+              onPress: () =>
+                RNCalendarEvents.authorizeEventStore()
+                  .then((status) => {
+                    if (status === 'authorized') {
+                      resolve();
+                    } else {
+                      reject();
+                    }
+                  })
+                  .catch(error => reject(error)),
+            },
+            { text: 'Để sau', onPress: () => reject(), style: 'cancel' },
+          ],
+        ));
   });
 
 export const addCalendarEvent = ({
