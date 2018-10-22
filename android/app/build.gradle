@@ -97,8 +97,8 @@ android {
         applicationId "com.yabeow.sinhviencntt"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 11
-        versionName "1.2.0"
+        versionCode 12
+        versionName "1.2.1"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
