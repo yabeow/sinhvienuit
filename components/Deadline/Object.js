@@ -33,6 +33,9 @@ export class Deadline extends InitDeadline {
   getTitle() {
     return this.title;
   }
+  getContent() {
+    return this.content;
+  }
   getTime(format = false, utc = false) {
     return getTimeFormat(this.time, format, utc);
   }
@@ -46,13 +49,17 @@ export class Deadline extends InitDeadline {
     const title = this.getTitle();
     const time = Moment(this.getTime());
     const preTime = Moment(this.getTime());
+    // Strip all html tags
+    const notes = this.getContent().replace(/<{1}[^<>]{1,}>{1}/g, '');
     // Thông báo trước 3 tiếng
     preTime.add(-3, 'hours');
     return {
-      title,
+      title: `${title} - ${this.getCode()}`,
       startDate: getTimeFormat(preTime.toISOString(), 'YYYY-MM-DD[T]HH:mm:00.[000Z]', true),
       endDate: getTimeFormat(time.toISOString(), 'YYYY-MM-DD[T]HH:mm:00.[000Z]', true),
       url: this.getLink(),
+      notes,
+      description: notes,
     };
   }
 }
